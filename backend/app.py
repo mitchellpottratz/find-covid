@@ -47,3 +47,8 @@ def after_request(response):
 if __name__ == '__main__':
     database.initialize_tables()
     server.start()
+
+
+
+
+
