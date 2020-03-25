@@ -1,11 +1,15 @@
 from flask import Flask, g
+from flask_login import LoginManager
 
 from server import Server
 from database import Database
 
 app = Flask(__name__)
 
-server = Server(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+server = Server(app, login_manager)
 database = Database([])
 
 

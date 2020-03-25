@@ -1,8 +1,9 @@
 
 class Server:
 
-    def __init__(self, app):
+    def __init__(self, app, login_manager):
         self.app = app
+        self.login_manager = login_manager
         self.DEBUG = True
         self.PORT = 8000
 
