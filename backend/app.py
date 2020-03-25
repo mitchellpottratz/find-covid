@@ -6,6 +6,9 @@ from database import Database
 
 from models import models_list
 
+# User model needs to be import seperately since its used in the load_user function
+from models.user import User 
+
 app = Flask(__name__)
 
 login_manager = LoginManager()
@@ -15,10 +18,20 @@ server = Server(app, login_manager)
 database = Database(models_list)
 
 
+# required by flask_login for loading users
+@login_manager.user_loader
+def load_user(user_id):
+    try:
+        return User.get(User.id == user_id)
+    except DoesNotExist:
+        return None
+
+
 @app.before_request
 def before_request():
     g.db = database.DATABASE
     g.db.connect()
+
 
 @app.after_request
 def after_request(response):
@@ -27,6 +40,7 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
+
 
 if __name__ == '__main__':
     database.initialize_tables()
