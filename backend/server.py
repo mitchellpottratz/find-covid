@@ -1,3 +1,5 @@
+from flask_cors import CORS
+
 import os
 from dotenv import load_dotenv
 
@@ -8,11 +10,34 @@ load_dotenv(dotenv_path)
 
 class Server:
 
-    def __init__(self, app, login_manager):
-        self.app = app
-        self.login_manager = login_manager
+    def __init__(self, app, login_manager, blueprints):
         self.DEBUG = os.environ['DEBUG']
         self.PORT = os.environ['PORT']
+
+        self.app = app
+        self.login_manager = login_manager
+        self.app.secret_key = os.environ['SECRET_KEY']
+        self.origin = self.set_origin()
+
+        self.setup_cors()
+        self.register_blueprints(blueprints)
+
+
+    def set_origin(self):
+        if self.DEBUG:
+            return 'http://localhost:3000'
+        else:
+            return os.environ['ORIGIN']
+
+
+    def setup_cors(self):
+        CORS(self.app, resources={r"/*": {"origins": "*"}})
+
+
+    def register_blueprints(self, blueprints):
+        for blueprint in blueprints:
+            self.app.register_blueprint(blueprint[0], url_prefix=blueprint[1])
+        
 
     def start(self):
         print('Debug:', self.DEBUG)

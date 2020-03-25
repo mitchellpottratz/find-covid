@@ -5,16 +5,18 @@ from server import Server
 from database import Database
 
 from models import models_list
+from resources import blueprint_list
 
 # User model needs to be import seperately since its used in the load_user function
 from models.user import User 
+
 
 app = Flask(__name__)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-server = Server(app, login_manager)
+server = Server(app, login_manager, blueprint_list)
 database = Database(models_list)
 
 
