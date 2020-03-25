@@ -5,7 +5,6 @@ from server import Server
 from database import Database
 
 from models import models_list
-print('models:', models_list)
 
 app = Flask(__name__)
 
