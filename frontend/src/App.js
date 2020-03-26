@@ -1,9 +1,14 @@
 import React from 'react';
 
+// libraries
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Provider } from 'react-redux'
 import store from './store';
 
+// custom components
+import Register from './components/authentication/Register.js';
+
+// css
 import './App.css';
 
 
@@ -16,9 +21,9 @@ class App extends React.Component {
           <Switch>
 
             {/* Registration */}
-            <Route path="/register">
-              <h1>Register</h1>
-            </Route>
+            <Route 
+              path="/register"
+              component={ Register } />
 
             {/* Home */}
             <Route path="/">
