@@ -8,6 +8,8 @@ import store from './store';
 // custom components
 import NavigationBar from './components/common/NavigationBar.js';
 import Register from './components/authentication/Register.js';
+import Login from './components/authentication/Login.js';
+
 
 // css
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -27,6 +29,11 @@ class App extends React.Component {
             <Route 
               path="/register"
               component={ Register } />
+
+            {/* Login */}
+            <Route 
+              path="/login" 
+              component={ Login } />
 
             {/* Home */}
             <Route path="/">
