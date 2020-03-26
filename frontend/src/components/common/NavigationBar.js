@@ -1,7 +1,11 @@
 import React from 'react';
 
+// redux 
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/userActions.js'
+
+// components
 import { Navbar, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 
 class NavigationBar extends React.Component {
@@ -21,4 +25,10 @@ class NavigationBar extends React.Component {
 }
 
 
-export default NavigationBar;
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn
+  }
+}
+
+export default connect(mapStateToProps, {  })(NavigationBar);
