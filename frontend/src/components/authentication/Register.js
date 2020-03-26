@@ -1,5 +1,10 @@
 import React from 'react';
 
+// redux 
+import { connect } from "react-redux";
+import { registerUser } from '../../actions/userActions.js'
+
+// components
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -131,4 +136,14 @@ class Register extends React.Component {
 }
 
 
-export default Register;
+const mapStateToProps = (state) => {
+	return {
+		isLoggedIn: state.isLoggedIn
+	}
+}
+
+
+export default connect(mapStateToProps, { registerUser })(Register);
+
+
+

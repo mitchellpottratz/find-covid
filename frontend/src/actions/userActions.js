@@ -6,7 +6,7 @@ export const registerUser = (registrationInfo) => async (dispatch) => {
     console.log('register user action called');
     console.log('registration info:', registrationInfo);
 
-    const response = await usersAPI.registerUser(registrationData);
+    const response = await usersAPI.registerUser(registrationInfo);
 
     // if the new user was registered
     if (response.status.code === 201) {
@@ -15,6 +15,6 @@ export const registerUser = (registrationInfo) => async (dispatch) => {
             payload: response.data
         });
     }
-    
+
     return response;
 }
