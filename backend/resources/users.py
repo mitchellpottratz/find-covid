@@ -3,7 +3,7 @@ from flask import request, jsonify, Blueprint
 from playhouse.shortcuts import model_to_dict
 from peewee import DoesNotExist
 from flask_bcrypt import generate_password_hash, check_password_hash
-from flask_login import login_user, login_required, current_user
+from flask_login import login_user, login_required, current_user, logout_user
 
 from models.user import User
 
@@ -136,10 +136,25 @@ def login():
         )
 
 
+# Logout Route
+@users.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+
+    return jsonify(
+        data={},
+        status={
+            'code': 200,
+            'message': 'Successfully logged out'
+        }
+    )
+
+
 # Confirm Phone Number Route
 # this is where users confirm there 
-@login_required
 @users.route('/confirm-number', methods=['PUT'])
+@login_required
 def confirm_phone_number():
     try:
         data = request.get_json()
@@ -182,8 +197,8 @@ def confirm_phone_number():
 
 # Send New Text Message Confirmation Route
 # this is where a user can request to send another email confirmation code
-@login_required
 @users.route('/new-confirmation-code', methods=['PUT'])
+@login_required
 def send_new_confirmation_code():
     current_user.sms_confirmation_code = User.generate_sms_confirmation_code()
     current_user.save()
