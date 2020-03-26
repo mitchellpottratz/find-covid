@@ -9,6 +9,7 @@ import store from './store';
 import Register from './components/authentication/Register.js';
 
 // css
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 
