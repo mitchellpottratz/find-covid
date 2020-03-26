@@ -98,7 +98,7 @@ class Register extends React.Component {
                         <Form.Label>Password</Form.Label>
                         <Form.Control 
                           required 
-                          type="text"
+                          type="password"
                           placeholder="Password" 
                           name="password"
                           value={ this.state.password }
@@ -111,7 +111,7 @@ class Register extends React.Component {
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control 
                           required 
-                          type="text"
+                          type="password"
                           placeholder="Confirm Password" 
                           name="confirmed_password"
                           value={ this.state.confirmed_password }
