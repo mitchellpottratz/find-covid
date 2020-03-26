@@ -23,6 +23,34 @@ def ping():
     )
 
 
+# Show Route
+# this route is where a user can view a case they have reported
+@cases.route('/<user_id>', methods=['GET'])
+@login_required
+def get_one_case(user_id):
+    try:
+        case = Case.get(Case.user == user_id)
+
+        case_dict = model_to_dict(case)
+        del case_dict['user']['password']
+
+        return jsonify(
+            data=case_dict,
+            status={
+                'code': 200,
+                'message': 'Successfully found users case'
+            }
+        )
+
+    except DoesNotExist:
+        return jsonify(
+            data={},
+            status={
+                'code': 404,
+                'message': 'Resource does not exist'
+            }
+        )
+
 
 # Create Route
 # this route is where a user can create a case model to report their symptoms, 
