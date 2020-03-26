@@ -23,6 +23,12 @@ class Register extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+
+  }
+
   render() {
     return (
       <Container>
@@ -34,7 +40,9 @@ class Register extends React.Component {
               <Card.Body>
                 <Card.Title>Register</Card.Title>
 
-                <Form className="py-3"> 
+                <Form 
+                  className="py-3"
+                  onSubmit={ this.handleSubmit }> 
 
                   <Row>
                     <Col md={ 6 } sm={ 12 }>
