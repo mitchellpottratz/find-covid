@@ -7,7 +7,7 @@ import { registerUser } from '../../actions/userActions.js'
 // components
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import FormButton from '../common/FormButton.js';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 
@@ -43,6 +43,20 @@ class Register extends React.Component {
   }
 
   render() {
+
+    // if the user is logged in and they have not confirmed their phone number
+    if (this.props.isLoggedIn && !this.props.phoneNumberConfirmed) {
+      return (
+        <Redirect to="/confirm-number" />
+      )
+    
+    // if the user is logged in and they have already confirmed their phone number
+    } else if (this.props.isLoggedIn && this.props.phoneNumberConfirmed) {
+      return (
+        <Redirect to="/map" />
+      )
+    }
+
     return (
       <Container>
         <Row className="py-4">
@@ -150,7 +164,8 @@ class Register extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
-		isLoggedIn: state.isLoggedIn
+    isLoggedIn: state.user.isLoggedIn,
+    phoneNumberConfirmed: state.user.userInfo.phone_number_confirmed || false
 	}
 }
 
