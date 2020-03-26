@@ -90,19 +90,17 @@ def register():
 # Confirm Phone Number Route
 # this is where users confirm there 
 @login_required
-@users.route('/confirm-number', methods=['POST'])
+@users.route('/confirm-number', methods=['PUT'])
 def confirm_phone_number():
     try:
         data = request.get_json()
         confirmation_code = data['confirmation_code']
 
         try:
-            user = User.get(User.id == current_user.id)
-            
             # if the confirmation code is correct the user is active 
-            if user.sms_confirmation_code == confirmation_code:
-                user.phone_number_confirmed = True
-                user.save()
+            if current_user.sms_confirmation_code == confirmation_code:
+                current_user.phone_number_confirmed = True
+                current_user.save()
             else:
                 print('TODO: Log this error') 
 
@@ -131,6 +129,32 @@ def confirm_phone_number():
                 'message': 'Invalid request body'
             }
         )
+
+
+# Send New Text Message Confirmation Route
+# this is where a user can request to send another email confirmation code
+@login_required
+@users.route('/new-confirmation-code', methods=['PUT'])
+def send_new_confirmation_code():
+    current_user.sms_confirmation_code = User.generate_sms_confirmation_code()
+    current_user.save()
+
+    # sends a new confirmation text message
+    current_user.send_confirmation_sms()
+
+    return jsonify(
+        data={},
+        status={
+            'code': 204,
+            'message': 'Resent phone number confirmation code'
+        }
+    )
+
+
+
+
+
+
 
     
 
