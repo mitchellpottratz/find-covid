@@ -34,6 +34,7 @@ class Register extends React.Component {
     // makes api call to register the user
     const response = await this.props.registerUser(this.state);
 
+    
   }
 
   render() {
