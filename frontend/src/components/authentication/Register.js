@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import { registerUser } from '../../actions/userActions.js'
 
 // components
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import FormButton from '../common/FormButton.js';
 import { Link, Redirect } from 'react-router-dom';
-
 
 
 class Register extends React.Component {
