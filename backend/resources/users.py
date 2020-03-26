@@ -131,6 +131,27 @@ def confirm_phone_number():
         )
 
 
+# Login Route
+@users.route('/login', methods=['POST'])
+def login():
+    try:
+        data = request.get_json()
+
+        phone_number = data['phone_number'] 
+        password = data['password']
+
+        
+
+    except KeyError:
+        return jsonify(
+            data={},
+            status={
+                'code': 422,
+                'message': 'Invalid request body'
+            }
+        )
+
+
 # Send New Text Message Confirmation Route
 # this is where a user can request to send another email confirmation code
 @login_required
