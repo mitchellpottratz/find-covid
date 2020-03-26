@@ -53,17 +53,17 @@ class Register extends React.Component {
   render() {
 
     // if the user is logged in and they have not confirmed their phone number
-    if (this.props.isLoggedIn && !this.props.phoneNumberConfirmed) {
-      return (
-        <Redirect to="/confirm-number" />
-      )
+    // if (this.props.isLoggedIn && !this.props.phoneNumberConfirmed) {
+    //   return (
+    //     <Redirect to="/confirm-number" />
+    //   )
     
-    // if the user is logged in and they have already confirmed their phone number
-    } else if (this.props.isLoggedIn && this.props.phoneNumberConfirmed) {
-      return (
-        <Redirect to="/map" />
-      )
-    }
+    // // if the user is logged in and they have already confirmed their phone number
+    // } else if (this.props.isLoggedIn && this.props.phoneNumberConfirmed) {
+    //   return (
+    //     <Redirect to="/map" />
+    //   )
+    // }
 
     return (
       <Container>

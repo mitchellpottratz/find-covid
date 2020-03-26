@@ -6,7 +6,9 @@ import { Provider } from 'react-redux'
 import store from './store';
 
 // custom components
+import NavigationBar from './components/common/NavigationBar.js';
 import Register from './components/authentication/Register.js';
+
 
 // css
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,6 +20,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={ store }>
+        <NavigationBar />
         <BrowserRouter>
           <Switch>
 
