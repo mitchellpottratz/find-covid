@@ -3,7 +3,7 @@ from flask import request, jsonify, Blueprint
 from playhouse.shortcuts import model_to_dict
 from peewee import DoesNotExist
 from flask_bcrypt import generate_password_hash
-from flask_login import login_user
+from flask_login import login_user, login_required, current_user
 
 from models.user import User
 
@@ -85,6 +85,54 @@ def register():
                 'message': 'Invalid request body'
             }
         )
+
+
+# Confirm Phone Number Route
+# this is where users confirm there 
+@login_required
+@users.route('/confirm-number', methods=['POST'])
+def confirm_phone_number():
+    try:
+        data = request.get_json()
+        confirmation_code = data['confirmation_code']
+
+        try:
+            user = User.get(User.id == current_user.id)
+            
+            # if the confirmation code is correct the user is active 
+            if user.sms_confirmation_code == confirmation_code:
+                user.phone_number_confirmed = True
+                user.save()
+            else:
+                print('TODO: Log this error') 
+
+            return jsonify(
+                data={},
+                status={
+                    'code': 204,
+                    'message': 'Successfully confirmed phone number'
+                }
+            )   
+
+        except DoesNotExist: 
+            return jsonify(
+                data={},
+                status={
+                    'code': 404,
+                    'message': 'Resource does not exist'
+                }
+            )
+
+    except KeyError:
+        return jsonify(
+            data={},
+            status={
+                'code': 422,
+                'message': 'Invalid request body'
+            }
+        )
+
+    
 
     
     
