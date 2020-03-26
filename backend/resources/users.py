@@ -87,50 +87,6 @@ def register():
         )
 
 
-# Confirm Phone Number Route
-# this is where users confirm there 
-@login_required
-@users.route('/confirm-number', methods=['PUT'])
-def confirm_phone_number():
-    try:
-        data = request.get_json()
-        confirmation_code = data['confirmation_code']
-
-        try:
-            # if the confirmation code is correct the user is active 
-            if current_user.sms_confirmation_code == confirmation_code:
-                current_user.phone_number_confirmed = True
-                current_user.save()
-            else:
-                print('TODO: Log this error') 
-
-            return jsonify(
-                data={},
-                status={
-                    'code': 204,
-                    'message': 'Successfully confirmed phone number'
-                }
-            )   
-
-        except DoesNotExist: 
-            return jsonify(
-                data={},
-                status={
-                    'code': 404,
-                    'message': 'Resource does not exist'
-                }
-            )
-
-    except KeyError:
-        return jsonify(
-            data={},
-            status={
-                'code': 422,
-                'message': 'Invalid request body'
-            }
-        )
-
-
 # Login Route
 @users.route('/login', methods=['POST'])
 def login():
@@ -167,6 +123,50 @@ def login():
                 status={
                     'code': 404,
                     'message': 'Phone number or password is incorrect'
+                }
+            )
+
+    except KeyError:
+        return jsonify(
+            data={},
+            status={
+                'code': 422,
+                'message': 'Invalid request body'
+            }
+        )
+
+
+# Confirm Phone Number Route
+# this is where users confirm there 
+@login_required
+@users.route('/confirm-number', methods=['PUT'])
+def confirm_phone_number():
+    try:
+        data = request.get_json()
+        confirmation_code = data['confirmation_code']
+
+        try:
+            # if the confirmation code is correct the user is active 
+            if current_user.sms_confirmation_code == confirmation_code:
+                current_user.phone_number_confirmed = True
+                current_user.save()
+            else:
+                print('TODO: Log this error') 
+
+            return jsonify(
+                data={},
+                status={
+                    'code': 204,
+                    'message': 'Successfully confirmed phone number'
+                }
+            )   
+
+        except DoesNotExist: 
+            return jsonify(
+                data={},
+                status={
+                    'code': 404,
+                    'message': 'Resource does not exist'
                 }
             )
 
