@@ -7,8 +7,9 @@ export const registerUser = (registrationInfo) => async (dispatch) => {
     console.log('registration info:', registrationInfo);
 
     const response = await usersAPI.registerUser(registrationInfo);
+    console.log('registration response:', response);
 
-    // if the new user was registered
+    // if the new user was registered then the user is logged in
     if (response.status.code === 201) {
         dispatch({
             type: LOGIN_USER,

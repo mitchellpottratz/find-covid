@@ -7,6 +7,9 @@ export default {
     registerUser: async (registrationInfo) => {
         try {
             const response = await fetch(apiURL + 'users/register', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(registrationInfo),
