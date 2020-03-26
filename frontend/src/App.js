@@ -9,7 +9,6 @@ import store from './store';
 import NavigationBar from './components/common/NavigationBar.js';
 import Register from './components/authentication/Register.js';
 
-
 // css
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';

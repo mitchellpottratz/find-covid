@@ -1,5 +1,6 @@
-import { LOGIN_USER } from '../constants/actionTypes.js';
+import { LOGIN_USER, LOGOUT_USER } from '../constants/actionTypes.js';
 import usersAPI from '../api/usersApi.js';
+import usersApi from '../api/usersApi.js';
 
 
 export const registerUser = (registrationInfo) => async (dispatch) => {
@@ -15,3 +16,18 @@ export const registerUser = (registrationInfo) => async (dispatch) => {
 
     return response;
 }
+
+
+export const logoutUser = () => async (dispatch) => {
+    const response = await usersApi.logoutUser();
+
+    if (response.status.code === 200) {
+        console.log('user logged out');
+        dispatch({
+            type: LOGOUT_USER,
+            payload: {}
+        });
+    }
+}
+
+

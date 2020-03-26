@@ -1,5 +1,6 @@
 from flask import Flask, g
 from flask_login import LoginManager
+from peewee import DoesNotExist
 
 from server import Server
 from database import Database
