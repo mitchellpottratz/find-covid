@@ -2,7 +2,7 @@ from flask import request, jsonify, Blueprint
 
 from playhouse.shortcuts import model_to_dict
 from peewee import DoesNotExist
-from flask_bcrypt import generate_password_hash
+from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user
 
 from models.user import User
@@ -139,8 +139,36 @@ def login():
 
         phone_number = data['phone_number'] 
         password = data['password']
-
         
+        try:
+            user = User.get(User.phone_number == phone_number)
+
+            if check_password_hash(user.password, password):
+                login_user(user)
+
+                user_dict = model_to_dict(user)
+                del user_dict['sms_confirmation_code']
+                del user_dict['password']
+
+                return jsonify(
+                    data=user_dict,
+                    status={
+                        'code': 200,
+                        'message': 'Successfully logged in'
+                    }
+                )
+    
+            else:
+                raise DoesNotExist
+
+        except DoesNotExist: 
+            return jsonify(
+                data={},
+                status={
+                    'code': 404,
+                    'message': 'Phone number or password is incorrect'
+                }
+            )
 
     except KeyError:
         return jsonify(

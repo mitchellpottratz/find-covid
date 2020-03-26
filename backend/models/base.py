@@ -15,4 +15,7 @@ class BaseModel(Model):
     class Meta: 
         database = DATABASE
 
+
+        
+
     
