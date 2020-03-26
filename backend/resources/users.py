@@ -1,5 +1,8 @@
 from flask import request, jsonify, Blueprint
+from playhouse.shortcuts import model_to_dict
 from peewee import DoesNotExist
+from flask_bcrypt import generate_password_hash
+from models.user import User
 
 
 users = Blueprint('users', 'users')
@@ -30,7 +33,7 @@ def register():
         password = data['password']
 
         try:
-            user = User.get(User.phone_number == phone_number)
+            user = User.get(User.phone_number == phone_number, User.soft_delete == False)
 
             return jsonify(
                 data={},
@@ -43,7 +46,27 @@ def register():
         # thrown if the provided phone number does not already exist
         except DoesNotExist:
             sms_confirmation_code = User.generate_sms_confirmation_code()
+            password_hash = generate_password_hash(password)
 
+            new_user = User.create(
+                first_name=first_name,
+                last_name=last_name,
+                phone_number=phone_number,
+                sms_confirmation_code=sms_confirmation_code,
+                password=password_hash
+            )
+
+            new_user_dict = model_to_dict(new_user)
+            # del new_user_dict['sms_confirmation_code']   
+            del new_user_dict['password']
+
+            return jsonify(
+                data=new_user_dict,
+                status={
+                    'code': 201,
+                    'message': 'New user created'
+                }
+            ) 
 
     # thrown if the request body is not valid
     except KeyError:

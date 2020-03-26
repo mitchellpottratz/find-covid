@@ -1,7 +1,7 @@
 from peewee import SqliteDatabase, Model, BooleanField, DateTimeField
 import datetime
 
-DATABASE = SqliteDatabase('foodsite.sqlite')
+DATABASE = SqliteDatabase('find-covid.sqlite')
 
 ''' 
 All models inherit from this model

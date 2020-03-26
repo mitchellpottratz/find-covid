@@ -1,5 +1,6 @@
 from .base import BaseModel
 from peewee import CharField, BooleanField
+import random
 
 
 class User(BaseModel):
@@ -14,11 +15,11 @@ class User(BaseModel):
     def generate_sms_confirmation_code():
         confirmation_code_list = []
 
-        for i in range(1, 15):
+        for i in range(1, 6):
             confirmation_code_list.append(str(random.randint(1, 9)))
-
+            
         return ''.join(confirmation_code_list)
-    
+
 
 
 
