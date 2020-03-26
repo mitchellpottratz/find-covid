@@ -1,7 +1,10 @@
 from flask import request, jsonify, Blueprint
+
 from playhouse.shortcuts import model_to_dict
 from peewee import DoesNotExist
 from flask_bcrypt import generate_password_hash
+from flask_login import login_user
+
 from models.user import User
 
 
@@ -56,8 +59,13 @@ def register():
                 password=password_hash
             )
 
+            # sends twilio phone number confirmation text message 
+            new_user.send_confirmation_sms()
+
+            login_user(new_user)
+
             new_user_dict = model_to_dict(new_user)
-            # del new_user_dict['sms_confirmation_code']   
+            del new_user_dict['sms_confirmation_code']   
             del new_user_dict['password']
 
             return jsonify(
