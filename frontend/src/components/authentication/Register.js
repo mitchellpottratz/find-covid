@@ -22,7 +22,8 @@ class Register extends React.Component {
       phone_number: '',
       password: '',
       confirmed_password: '',
-      isLoading: false
+      isLoading: false,
+      formErrorMessages: []
     }
   }
 
@@ -38,6 +39,13 @@ class Register extends React.Component {
 
     // makes api call to register the user
     const response = await this.props.registerUser(this.state);
+
+    // if the server encountered an error the message is displayed to the client
+    if (response.status.code === 404) {
+      this.setState({
+        formErrorMessages: [...this.state.formErrorMessages, response.status.message]
+      });
+    }
 
     this.setState({ isLoading: false });
   }
@@ -70,6 +78,15 @@ class Register extends React.Component {
                 <Form 
                   className="py-3"
                   onSubmit={ this.handleSubmit }> 
+
+                  {/* form error messages */}
+                  {this.state.formErrorMessages.map((message, i) => {
+                      return (
+                        <div key={ i }>
+										      <small className="text-danger">{ message }</small>
+									      </div>
+                      )
+                  })}
 
                   <Row>
                     <Col md={ 6 } sm={ 12 }>
