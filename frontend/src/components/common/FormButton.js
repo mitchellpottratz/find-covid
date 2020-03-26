@@ -18,7 +18,7 @@ class FormButton extends React.Component {
     // shows a loading icon on the button
     } else {
       return (
-        <Button>
+        <Button variant={ this.props.variant }>
           <Spinner
             as="span"
             animation="grow"

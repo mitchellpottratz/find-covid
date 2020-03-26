@@ -1,12 +1,14 @@
 import React from 'react';
 
 // redux 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { registerUser } from '../../actions/userActions.js'
 
 // components
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import FormButton from '../common/FormButton.js';
 import { Link } from 'react-router-dom';
+
 
 
 class Register extends React.Component {
@@ -19,7 +21,8 @@ class Register extends React.Component {
       last_name: '',
       phone_number: '',
       password: '',
-      confirmed_password: ''
+      confirmed_password: '',
+      isLoading: false
     }
   }
 
@@ -31,10 +34,12 @@ class Register extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
+    this.setState({ isLoading: true });
+
     // makes api call to register the user
     const response = await this.props.registerUser(this.state);
 
-    
+    this.setState({ isLoading: false });
   }
 
   render() {
@@ -122,7 +127,11 @@ class Register extends React.Component {
                     </Col>
                   </Row>
 
-                  <Button variant="dark" type="submit">Register</Button>
+                  <FormButton 
+                    variant="dark"
+                    text="Register"
+                    isLoading={ this.state.isLoading } 
+                    />
                 </Form>
                 <small>
                   Already have an account? <Link to="/login">Login Here</Link>
