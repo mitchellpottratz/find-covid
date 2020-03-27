@@ -95,7 +95,7 @@ class MapContainer extends React.Component {
 					</Card.Body>
 				</Card>
 
-				{this.state.mapIsLoading ? (
+				{/* {this.state.mapIsLoading ? (
 					<div className="text-center">
 						<Spinner animation="border" className="m" />
 					</div>
@@ -104,7 +104,7 @@ class MapContainer extends React.Component {
 						usersLocation={ this.state.usersLocation } 
 						mapIsLoading={ this.state.mapIsLoading }
 					/>
-				)}
+				)} */}
 
 			</React.Fragment>
     )

@@ -19,7 +19,8 @@ class ReportCaseModal extends React.Component {
 			has_tested: false,
 			symptoms_date: new Date(),
 			age: '',
-			address: ''
+			address: '',
+			notes: ''
 		}
 	}
 
@@ -91,7 +92,15 @@ class ReportCaseModal extends React.Component {
           				onChange={value => {
 										this.setState({ address: value });
 									}} />	
-
+							</Form.Group>
+							<Form.Group>
+									<Form.Label>Extra information you would like to add</Form.Label>
+									<Form.Control 
+										as="textarea"
+										rows="3"
+										name="notes"
+										value={ this.state.notes }
+										onChange={ this.handleChange } />
 							</Form.Group>
 					</Form>
 				</Modal.Body>

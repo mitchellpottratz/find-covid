@@ -22,13 +22,20 @@ p, label {
   font-size: 0.85em;
 }
 
-input {
+input, 
+textarea, 
+.location-box,
+.react-date-picker__wrapper {
   font-size: 0.85em!important;
   border-radius: 0px!important;
+  border-width: 1px;
   border-color: rgba(0, 0, 0, .08)!important;
 }
 
-input:focus {
+input:focus,
+textarea:focus, 
+.location-box:focus,
+.react-date-picker__wrapper:focus {
   outline: 0;
 }
 
