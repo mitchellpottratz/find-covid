@@ -6,6 +6,7 @@ import {  } from '../../actions/userActions.js';
 
 import GoogleMap from './GoogleMap.js';
 import CitySearchForm from './CitySearchForm.js';
+import ReportCaseModal from '../modals/ReportCaseModal.js';
 import { Row, Col, Card, Button, Spinner } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
