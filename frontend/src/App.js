@@ -11,7 +11,6 @@ import Register from './components/authentication/Register.js';
 import Login from './components/authentication/Login.js';
 import ConfirmPhoneNumber from './components/authentication/ConfirmPhoneNumber.js';
 
-
 // css
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';

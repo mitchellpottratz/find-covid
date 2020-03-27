@@ -113,7 +113,6 @@ def login():
                         'message': 'Successfully logged in'
                     }
                 )
-    
             else:
                 raise DoesNotExist
 
@@ -160,13 +159,10 @@ def confirm_phone_number():
         data = request.get_json()
         confirmation_code = data['confirmation_code']
 
-        try:
-            # if the confirmation code is correct the user is active 
-            if current_user.sms_confirmation_code == confirmation_code:
-                current_user.phone_number_confirmed = True
-                current_user.save()
-            else:
-                print('TODO: Log this error') 
+        # if the confirmation code is correct 
+        if current_user.sms_confirmation_code == confirmation_code:
+            current_user.phone_number_confirmed = True
+            current_user.save()
 
             return jsonify(
                 data={},
@@ -175,16 +171,16 @@ def confirm_phone_number():
                     'message': 'Successfully confirmed phone number'
                 }
             )   
-
-        except DoesNotExist: 
+        # if the confirmation code was incorrect    
+        else:
             return jsonify(
                 data={},
                 status={
                     'code': 404,
-                    'message': 'Resource does not exist'
+                    'message': 'Incorrect confirmation code'
                 }
             )
-
+            
     except KeyError:
         return jsonify(
             data={},

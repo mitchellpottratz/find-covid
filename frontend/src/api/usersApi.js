@@ -43,6 +43,29 @@ export default {
         }
     },
 
+    confirmPhoneNumber: async (confirmationCode) => {
+        const requestBody = {
+            'confirmation_code': confirmationCode
+        }
+
+        try {
+            const response = await fetch(apiURL + 'users/confirm-number', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'PUT',
+                credentials: 'include',
+                body: JSON.stringify(requestBody),
+            });
+            const parsedResponse = await response.json(requestBody);
+            return parsedResponse;        
+
+        } catch (error) {
+            // TODO - handle this error
+            console.log('error occurred during login:', error);
+        }
+    },
+
     // makes a request to logout a user
     logoutUser: async () => {
         try {

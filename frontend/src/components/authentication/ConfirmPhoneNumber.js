@@ -2,7 +2,7 @@ import React from 'react';
 
 // redux 
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/userActions.js'
+import { confirmPhoneNumber } from '../../actions/userActions.js'
 
 // components
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
@@ -17,15 +17,38 @@ class ConfirmPhoneNumber extends React.Component {
     super(props);
 
     this.state = {
-			confirmation_code: [],
-			isLoading: false
+			confirmationCode: [],
+			isLoading: false,
+			formErrorMessages: []
     }
 	}
 
 	handleChange = (value) => {
 		this.setState({
-			confirmation_code: [...this.state.confirmation_code, value]
+			confirmationCode: [...this.state.confirmationCode, value]
 		});
+	}
+
+	handleSubmit = async (e) => {
+		e.preventDefault();
+
+		this.setState({
+			formErrorMessages: [],
+			isLoading: true
+		});
+
+		const response = await this.props.confirmPhoneNumber(this.state.confirmationCode);
+		console.log('response:', response);
+		
+		if (response.status.code === 404) {
+
+			// shows incorrect code error to the client
+			this.setState({
+				formErrorMessages: [...this.state.formErrorMessages, response.status.message]
+			});
+		}		
+
+		this.setState({ isLoading: false });
 	}
 	
 	render() {
@@ -46,6 +69,15 @@ class ConfirmPhoneNumber extends React.Component {
 									<strong>{ this.props.userInfo.phone_number }</strong>
 								</p>	
 
+								{/* form error messages */}
+                {this.state.formErrorMessages.map((message, i) => {
+                      return (
+                        <div key={ i }>
+										      <small className="text-danger">{ message }</small>
+									      </div>
+                      )
+                  })}
+
 								<Form 
 									className="py-3"
 									onSubmit={ this.handleSubmit }>
@@ -56,8 +88,7 @@ class ConfirmPhoneNumber extends React.Component {
 											className="d-inline-block"
 											type="number"
 											fields={ 5 } 
-											name='confirmation_code'
-											values={ this.state.confirmation_code }
+											values={ this.state.confirmationCode }
 											onChange={ (value) => this.handleChange(value) } />
 									</Form.Group>	
 
@@ -87,4 +118,4 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps, { })(ConfirmPhoneNumber);
+export default connect(mapStateToProps, { confirmPhoneNumber })(ConfirmPhoneNumber);

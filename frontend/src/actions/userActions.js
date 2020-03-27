@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER } from '../constants/actionTypes.js';
+import { LOGIN_USER, LOGOUT_USER, CONFIRM_PHONE_NUMBER } from '../constants/actionTypes.js';
 import usersAPI from '../api/usersApi.js';
 import usersApi from '../api/usersApi.js';
 
@@ -25,6 +25,20 @@ export const loginUser = (loginInfo) => async (dispatch) => {
         dispatch({
             type: LOGIN_USER,
             payload: response.data
+        });
+    }
+
+    return response;
+}
+
+
+export const confirmPhoneNumber = (confirmationCode) => async (dispatch) => {
+    const response = await usersAPI.confirmPhoneNumber(confirmationCode);
+
+    if (response.status.code === 204) {
+        dispatch({
+            type: CONFIRM_PHONE_NUMBER,
+            payload: {}
         });
     }
 
