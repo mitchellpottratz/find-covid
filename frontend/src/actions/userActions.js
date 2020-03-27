@@ -1,4 +1,9 @@
-import { LOGIN_USER, LOGOUT_USER, CONFIRM_PHONE_NUMBER } from '../constants/actionTypes.js';
+import { 
+    LOGIN_USER,
+    LOGOUT_USER,
+    CONFIRM_PHONE_NUMBER,
+} from '../constants/actionTypes.js';
+
 import usersAPI from '../api/usersApi.js';
 import usersApi from '../api/usersApi.js';
 

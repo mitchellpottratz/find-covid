@@ -1,9 +1,13 @@
-import { LOGIN_USER, LOGOUT_USER, CONFIRM_PHONE_NUMBER } from '../constants/actionTypes.js';
+import { 
+    LOGIN_USER, 
+    LOGOUT_USER, 
+    CONFIRM_PHONE_NUMBER
+} from '../constants/actionTypes.js';
 
 
 const initialState = {
     isLoggedIn: false,
-    userInfo: {}
+    userInfo: {},
 }
 
 
