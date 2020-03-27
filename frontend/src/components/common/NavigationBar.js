@@ -11,7 +11,6 @@ import { Navbar, Nav } from 'react-bootstrap';
 class NavigationBar extends React.Component {
 
   handleLogoutClick = async (e) => {
-    console.log('logout clicked');
     await this.props.logoutUser();
   }
 

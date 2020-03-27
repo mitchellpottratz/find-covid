@@ -1,4 +1,4 @@
-import { LOGIN_USER, LOGOUT_USER } from '../constants/actionTypes.js';
+import { LOGIN_USER, LOGOUT_USER, CONFIRM_PHONE_NUMBER } from '../constants/actionTypes.js';
 
 
 const initialState = {
@@ -16,6 +16,14 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 isLoggedIn: true,
                 userInfo: action.payload   
+            }
+
+        case CONFIRM_PHONE_NUMBER:
+            return {
+                ...state,
+                userInfo: {
+                    phone_number_confirmed: true
+                }
             }
 
         case LOGOUT_USER:

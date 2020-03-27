@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { confirmPhoneNumber } from '../../actions/userActions.js'
 
 // components
+import AuthCheck from '../common/AuthCheck.js';
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import ReactCodeInput from 'react-verification-code-input';
 import FormButton from '../common/FormButton.js';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 class ConfirmPhoneNumber extends React.Component {
@@ -25,7 +26,7 @@ class ConfirmPhoneNumber extends React.Component {
 
 	handleChange = (value) => {
 		this.setState({
-			confirmationCode: [...this.state.confirmationCode, value]
+			confirmationCode: [...value]
 		});
 	}
 
@@ -37,8 +38,8 @@ class ConfirmPhoneNumber extends React.Component {
 			isLoading: true
 		});
 
-		const response = await this.props.confirmPhoneNumber(this.state.confirmationCode);
-		console.log('response:', response);
+		const confirmationCode = this.state.confirmationCode.join('');
+		const response = await this.props.confirmPhoneNumber(confirmationCode);
 		
 		if (response.status.code === 404) {
 
@@ -52,8 +53,21 @@ class ConfirmPhoneNumber extends React.Component {
 	}
 	
 	render() {
+
+		// if the users phone number is confirmed
+		if (this.props.userInfo.phone_number_confirmed) {
+			return (
+				<Redirect to="/map" />
+			)
+		}
+
 		return (
 			<Container>
+
+			<AuthCheck 
+				isLoggedIn={ this.props.isLoggedIn }
+				phoneNumberConfirmed={ this.props.phoneNumberConfirmed } />	
+
 				<Row className="py-4">
 					<Col></Col>
 
@@ -70,13 +84,13 @@ class ConfirmPhoneNumber extends React.Component {
 								</p>	
 
 								{/* form error messages */}
-                {this.state.formErrorMessages.map((message, i) => {
-                      return (
-                        <div key={ i }>
-										      <small className="text-danger">{ message }</small>
-									      </div>
-                      )
-                  })}
+                				{this.state.formErrorMessages.map((message, i) => {
+                      				return (
+                        				<div key={ i }>
+										    <small className="text-danger">{ message }</small>
+									    </div>
+                      				)
+                  				})}
 
 								<Form 
 									className="py-3"
@@ -114,6 +128,7 @@ class ConfirmPhoneNumber extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
+		isLoggedIn: state.user.isLoggedIn,
 		userInfo: state.user.userInfo
 	}
 }

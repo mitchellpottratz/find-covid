@@ -50,7 +50,6 @@ export const logoutUser = () => async (dispatch) => {
     const response = await usersApi.logoutUser();
 
     if (response.status.code === 200) {
-        console.log('user logged out');
         dispatch({
             type: LOGOUT_USER,
             payload: {}
