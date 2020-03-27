@@ -23,6 +23,26 @@ export default {
         }
     },
 
+    // makes api request to login a user 
+    loginUser: async (loginInfo) => {
+        try {
+            const response = await fetch(apiURL + 'users/login', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(loginInfo),
+            });
+            const parsedResponse = await response.json();
+            return parsedResponse;        
+
+        } catch (error) {
+            // TODO - handle this error
+            console.log('error occurred during login:', error);
+        }
+    },
+
     // makes a request to logout a user
     logoutUser: async () => {
         try {

@@ -74,18 +74,18 @@ class Register extends React.Component {
               <Card.Body>
                 <Card.Title>Register</Card.Title>
 
-                <Form 
-                  className="py-3"
-                  onSubmit={ this.handleSubmit }> 
-
-                  {/* form error messages */}
-                  {this.state.formErrorMessages.map((message, i) => {
+                {/* form error messages */}
+                {this.state.formErrorMessages.map((message, i) => {
                       return (
                         <div key={ i }>
 										      <small className="text-danger">{ message }</small>
 									      </div>
                       )
                   })}
+
+                <Form 
+                  className="py-3"
+                  onSubmit={ this.handleSubmit }> 
 
                   <Row>
                     <Col md={ 6 } sm={ 12 }>
