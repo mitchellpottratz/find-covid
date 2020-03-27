@@ -49,6 +49,20 @@ class Login extends React.Component {
 	}
 
   render() {
+
+		// if the user is logged in and they have not confirmed their phone number
+    if (this.props.isLoggedIn && !this.props.phoneNumberConfirmed) {
+      return (
+        <Redirect to="/confirm-number" />
+      )
+    
+    // if the user is logged in and they have already confirmed their phone number
+    } else if (this.props.isLoggedIn && this.props.phoneNumberConfirmed) {
+      return (
+        <Redirect to="/map" />
+      )
+    }
+
     return (
       <Container>
         <Row className="py-4">
@@ -119,7 +133,8 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.user.isLoggedIn
+		isLoggedIn: state.user.isLoggedIn,
+		phoneNumberConfirmed: state.user.userInfo.phone_number_confirmed || false
   }
 }
 
