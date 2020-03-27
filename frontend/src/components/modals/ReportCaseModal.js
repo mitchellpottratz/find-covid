@@ -6,7 +6,8 @@ import {  } from '../../actions/userActions.js';
 
 // components
 import { Modal, Form } from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
+import DatePicker from 'react-date-picker';
+import { GoogleComponent } from "react-google-location";
 
 
 class ReportCaseModal extends React.Component {
@@ -16,7 +17,9 @@ class ReportCaseModal extends React.Component {
 		
 		this.state = {
 			has_tested: false,
-			symptoms_date: new Date()
+			symptoms_date: new Date(),
+			age: '',
+			address: ''
 		}
 	}
 
@@ -33,7 +36,9 @@ class ReportCaseModal extends React.Component {
 	}
 
 	handleDateChange = (date) => {
-		console.log('date changed to:', date);
+		this.setState({
+			symptoms_date: date
+		});
 	}
 	
 	handleSubmit = (e) => {
@@ -48,7 +53,7 @@ class ReportCaseModal extends React.Component {
 				</Modal.Header>
 				<Modal.Body>
 					<Form
-						className="py-3"
+						className="py-3 text-center"
 						onSubmit={ this.handleSubmit } >
 							<Form.Group>
 								<Form.Check
@@ -61,15 +66,32 @@ class ReportCaseModal extends React.Component {
 							<Form.Group>
 								<Form.Label>Date you started showing symptoms:</Form.Label><br></br>
 								<DatePicker
-									selected={ this.state.symptoms_date }
-									onChange={ (date) => this.handleDateChange(date) } />
+									className="w-100"
+									value={ this.state.symptoms_date }
+									onChange={ this.handleDateChange } />
 							</Form.Group>
 							<Form.Group>
-								<Form.Label>Age</Form.Label>
+								<Form.Label>What is your age?</Form.Label>
 								<Form.Control
 									type="number"
 									name="age"
-									 />
+									placeholder="Age"
+									value={ this.state.age }
+									onChange={ this.handleChange } />
+							</Form.Group>
+							<Form.Group>
+								<Form.Label>What's your address?</Form.Label>
+								<GoogleComponent
+									apiKey={ process.env.REACT_APP_GOOGLE_MAPS_API_KEY }
+          				language={'en'}
+          				country={'country:in|country:us'}
+									coordinates={true}
+									name="address"
+									value={ this.state.address }
+          				onChange={value => {
+										this.setState({ address: value });
+									}} />	
+
 							</Form.Group>
 					</Form>
 				</Modal.Body>
