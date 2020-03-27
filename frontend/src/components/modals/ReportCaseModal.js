@@ -5,14 +5,34 @@ import { connect } from 'react-redux';
 import {  } from '../../actions/userActions.js';
 
 // components
-import { Modal } from 'react-bootstrap';
+import { Modal, Form } from 'react-bootstrap';
 
 
 class ReportCaseModal extends React.Component {
 
   constructor(props) {
-    super(props);
-  }
+		super(props);
+		
+		this.state = {
+			has_tested: false
+		}
+	}
+
+	handleChange = (e) => {
+		this.setState({
+			[e.target.name]: e.target.value
+		});
+	}
+
+	handleCheckBoxChange = (e) => {
+		this.setState({
+			has_tested: e.target.checked
+		});
+	}
+	
+	handleSubmit = (e) => {
+		e.preventDefault();
+	}
 
 	render() {
     return (
@@ -20,6 +40,23 @@ class ReportCaseModal extends React.Component {
 				<Modal.Header closeButton>
 					<Modal.Title>Report Your Covid-19</Modal.Title>
 				</Modal.Header>
+				<Modal.Body>
+					<Form
+						className="py-3"
+						onSubmit={ this.handleSubmit } >
+							<Form.Group>
+								<Form.Check
+									type="checkbox"
+									label="Have you tested positive?"
+									name="has_tested" 
+									checked={ this.state.has_tested }
+									onChange={ this.handleCheckBoxChange } />		
+							</Form.Group>	
+							<Form.Group>
+								
+							</Form.Group>
+					</Form>
+				</Modal.Body>
       </Modal>
     )
   }
