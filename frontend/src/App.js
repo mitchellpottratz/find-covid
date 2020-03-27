@@ -43,7 +43,7 @@ class App extends React.Component {
 
             {/* Map */}
             <Route 
-              path="/map" 
+              path="/map"  
               component={ MapContainer } />
 
             {/* Home */}

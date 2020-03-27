@@ -2,7 +2,7 @@ import React from 'react';
 
 // redux 
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions/userActions.js'
+import { registerUser } from '../../actions/userActions.js';
 
 // components
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
