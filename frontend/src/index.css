@@ -10,3 +10,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card {
+  border-radius: 1px!important;
+  border-color: transparent!important;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.05)
+           
+}
+
+p, label {
+  font-size: 0.85em;
+}
+
+input {
+  font-size: 0.85em!important;
+  border-radius: 0px!important;
+  border-color: rgba(0, 0, 0, .08)!important;
+}
+
+input:focus {
+  outline: 0;
+}
+
+button {
+  border-radius: 2px!important;
+  font-size: 0.85em!important;
+}
