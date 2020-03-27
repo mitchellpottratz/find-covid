@@ -10,6 +10,7 @@ import NavigationBar from './components/common/NavigationBar.js';
 import Register from './components/authentication/Register.js';
 import Login from './components/authentication/Login.js';
 import ConfirmPhoneNumber from './components/authentication/ConfirmPhoneNumber.js';
+import MapContainer from './components/maps/MapContainer.js';
 
 // css
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -39,6 +40,11 @@ class App extends React.Component {
             <Route 
               path="/confirm-number"
               component={ ConfirmPhoneNumber } />
+
+            {/* Map */}
+            <Route 
+              path="/map" 
+              component={ MapContainer } />
 
             {/* Home */}
             <Route path="/">
