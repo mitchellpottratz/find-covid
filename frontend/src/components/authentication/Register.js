@@ -34,7 +34,10 @@ class Register extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    this.setState({ isLoading: true });
+    this.setState({ 
+			formErrorMessages: [],
+			isLoading: true 
+		});
 
     // makes api call to register the user
     const response = await this.props.registerUser(this.state);
