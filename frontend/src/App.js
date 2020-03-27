@@ -9,6 +9,7 @@ import store from './store';
 import NavigationBar from './components/common/NavigationBar.js';
 import Register from './components/authentication/Register.js';
 import Login from './components/authentication/Login.js';
+import ConfirmPhoneNumber from './components/authentication/ConfirmPhoneNumber.js';
 
 
 // css
@@ -34,6 +35,11 @@ class App extends React.Component {
             <Route 
               path="/login" 
               component={ Login } />
+
+            {/* Confirm Phone Number */}
+            <Route 
+              path="/confirm-number"
+              component={ ConfirmPhoneNumber } />
 
             {/* Home */}
             <Route path="/">
