@@ -5,13 +5,15 @@ import { connect } from 'react-redux';
 import { loginUser } from '../../actions/userActions.js';
 
 import GoogleMap from './GoogleMap.js';
+import { Container } from 'react-bootstrap';
 
 
 class MapContainer extends React.Component {
 
   render() {
     return (
-      <p>map container</p>
+			
+			<GoogleMap />
     )
 	}
 	
