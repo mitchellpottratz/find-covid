@@ -6,6 +6,7 @@ import {  } from '../../actions/userActions.js';
 
 // components
 import { Modal, Form } from 'react-bootstrap';
+import DatePicker from 'react-datepicker';
 
 
 class ReportCaseModal extends React.Component {
@@ -14,7 +15,8 @@ class ReportCaseModal extends React.Component {
 		super(props);
 		
 		this.state = {
-			has_tested: false
+			has_tested: false,
+			symptoms_date: new Date()
 		}
 	}
 
@@ -28,6 +30,10 @@ class ReportCaseModal extends React.Component {
 		this.setState({
 			has_tested: e.target.checked
 		});
+	}
+
+	handleDateChange = (date) => {
+		console.log('date changed to:', date);
 	}
 	
 	handleSubmit = (e) => {
@@ -53,7 +59,17 @@ class ReportCaseModal extends React.Component {
 									onChange={ this.handleCheckBoxChange } />		
 							</Form.Group>	
 							<Form.Group>
-								
+								<Form.Label>Date you started showing symptoms:</Form.Label><br></br>
+								<DatePicker
+									selected={ this.state.symptoms_date }
+									onChange={ (date) => this.handleDateChange(date) } />
+							</Form.Group>
+							<Form.Group>
+								<Form.Label>Age</Form.Label>
+								<Form.Control
+									type="number"
+									name="age"
+									 />
 							</Form.Group>
 					</Form>
 				</Modal.Body>
