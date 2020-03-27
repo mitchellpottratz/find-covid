@@ -6,7 +6,8 @@ import {  } from '../../actions/userActions.js';
 
 import GoogleMap from './GoogleMap.js';
 import CitySearchForm from './CitySearchForm.js';
-import { Row, Col, Card, Spinner } from 'react-bootstrap';
+import { Row, Col, Card, Button, Spinner } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 
 class MapContainer extends React.Component {
@@ -36,7 +37,6 @@ class MapContainer extends React.Component {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				}
-				console.log('location:', location);
 
 				this.setState({ 
 					usersLocation: location,
@@ -59,7 +59,20 @@ class MapContainer extends React.Component {
 							<CitySearchForm />
 						</Col>
 						<Col>
-					
+							{this.props.isLoggedIn ? (
+								<div className="d-flex d-flex flex-row-reverse">
+									<Button
+										variant="light" >
+										Report Symptoms
+									</Button>
+								</div>
+							) : (
+								<p className="text-center">
+									Feeling Symptoms? <br></br>
+									<Link to="/register">Sign up here</Link> to report your symptoms
+								</p>
+							)
+							}
 						</Col>
 					</Row>
 					</Card.Body>
