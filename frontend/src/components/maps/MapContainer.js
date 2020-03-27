@@ -21,7 +21,8 @@ class MapContainer extends React.Component {
 			usersLocation: {
 				lat: 0,
 				lng: 0
-			}
+			},
+			showModal: false
 		}
 	}
 
@@ -47,11 +48,25 @@ class MapContainer extends React.Component {
 		}
 	}
 
-  render() {
-		console.log('map loading:', this.state.mapIsLoading);
+	showModal = () => {
+		this.setState({ showModal: true });
+	}
 
+	hideModal = () => {
+		this.setState({ showModal: false });
+	}
+
+  render() {
     return (
 			<React.Fragment>
+
+				{this.state.showModal ? (
+					<ReportCaseModal
+						showModal={ this.state.showModal }
+						hideModal={ this.hideModal } />
+				) : (
+					null
+				)}
 
 				<Card>
 					<Card.Body>
@@ -63,7 +78,8 @@ class MapContainer extends React.Component {
 							{this.props.isLoggedIn ? (
 								<div className="d-flex d-flex flex-row-reverse">
 									<Button
-										variant="light" >
+										variant="light"
+										onClick={ this.showModal }>
 										Report Symptoms
 									</Button>
 								</div>

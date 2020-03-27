@@ -18,7 +18,7 @@ class ReportCaseModal extends React.Component {
     return (
     	<Modal show={ this.props.showModal } onHide={ this.props.hideModal }>
 				<Modal.Header closeButton>
-					<Modal.Title>Report Covid-19</Modal.Title>
+					<Modal.Title>Report Your Covid-19</Modal.Title>
 				</Modal.Header>
       </Modal>
     )
@@ -26,7 +26,7 @@ class ReportCaseModal extends React.Component {
 }
 
 
-export default connect({}, {})(ReportCaseModal);
+export default connect(null, {})(ReportCaseModal);
 
 
 
