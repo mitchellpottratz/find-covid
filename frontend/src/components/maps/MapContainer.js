@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import {  } from '../../actions/userActions.js';
 
 import GoogleMap from './GoogleMap.js';
-import { Spinner } from 'react-bootstrap';
+import CitySearchForm from './CitySearchForm.js';
+import { Row, Col, Card, Spinner } from 'react-bootstrap';
 
 
 class MapContainer extends React.Component {
@@ -50,6 +51,19 @@ class MapContainer extends React.Component {
 
     return (
 			<React.Fragment>
+
+				<Card>
+					<Card.Body>
+				  <Row>
+						<Col>
+							<CitySearchForm />
+						</Col>
+						<Col>
+					
+						</Col>
+					</Row>
+					</Card.Body>
+				</Card>
 
 				{this.state.mapIsLoading ? (
 					<div className="text-center">
