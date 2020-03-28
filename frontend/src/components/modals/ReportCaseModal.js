@@ -8,6 +8,7 @@ import {  } from '../../actions/userActions.js';
 import { Modal, Form } from 'react-bootstrap';
 import DatePicker from 'react-date-picker';
 import { GoogleComponent } from "react-google-location";
+import FormButton from '../common/FormButton.js';
 
 
 class ReportCaseModal extends React.Component {
@@ -20,7 +21,8 @@ class ReportCaseModal extends React.Component {
 			symptoms_date: new Date(),
 			age: '',
 			address: '',
-			notes: ''
+			notes: '',
+			isLoading: false
 		}
 	}
 
@@ -44,18 +46,22 @@ class ReportCaseModal extends React.Component {
 	
 	handleSubmit = (e) => {
 		e.preventDefault();
+
+		
 	}
 
 	render() {
     return (
     	<Modal show={ this.props.showModal } onHide={ this.props.hideModal }>
 				<Modal.Header closeButton>
-					<Modal.Title>Report Your Covid-19</Modal.Title>
+					<Modal.Title>Report Covid-19</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
+
 					<Form
 						className="py-3 text-center"
 						onSubmit={ this.handleSubmit } >
+
 							<Form.Group>
 								<Form.Check
 									type="checkbox"
@@ -102,7 +108,13 @@ class ReportCaseModal extends React.Component {
 										value={ this.state.notes }
 										onChange={ this.handleChange } />
 							</Form.Group>
+
+							<FormButton 
+								variant="dark"
+								text="Next"
+							  isLoading={ this.state.isLoading } />
 					</Form>
+
 				</Modal.Body>
       </Modal>
     )
