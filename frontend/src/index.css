@@ -18,7 +18,9 @@ code {
            
 }
 
-p, label {
+p,
+label, 
+li {
   font-size: 0.85em;
 }
 
