@@ -1,7 +1,9 @@
 import { 
     LOGIN_USER,
     SET_USERS_CASE,
+    SET_USERS_PLACES_VISITED,
     DELETE_USERS_CASE,
+    DELETE_ALL_USERS_PLACES_VISITED,
     LOGOUT_USER,
     CONFIRM_PHONE_NUMBER,
 } from '../constants/actionTypes.js';
@@ -36,8 +38,16 @@ export const loginUser = (loginInfo) => async (dispatch) => {
                 type: SET_USERS_CASE,
                 payload: response.data.case
             });
+
+            // if the user has created places they have visited it is set in the store 
+            if (response.data.case.places_visited.length > 0) {
+                dispatch({
+                    type: SET_USERS_PLACES_VISITED,
+                    payload: response.data.case.places_visited
+                });
+            } 
         }
-        
+
         dispatch({
             type: LOGIN_USER,
             payload: response.data
@@ -75,6 +85,12 @@ export const logoutUser = () => async (dispatch) => {
         dispatch({
             type: DELETE_USERS_CASE,
             payload: {} 
+        });
+
+        // removes the user places visited from the store
+        dispatch({
+            type: DELETE_ALL_USERS_PLACES_VISITED,
+            payload: {}
         });
 
     }

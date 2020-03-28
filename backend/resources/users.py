@@ -108,18 +108,22 @@ def login():
                 del user_dict['sms_confirmation_code']
                 del user_dict['password']
 
-                # gets the user case if they have one
                 try:
                     users_case = Case.get(Case.user_id == user.id)
-
                     places_visited = PlaceVisited.select().where(PlaceVisited.case == user.id)
+
+                    # converts all the places the user visited to a dictonary and 
+                    # removes the case field
+                    places_visited_dicts = []
+                    for place in places_visited:
+                        place_dict = model_to_dict(place)
+                        del place_dict['case']
+                        places_visited_dicts.append(place_dict)
 
                     users_case_dict = model_to_dict(users_case)
                     del users_case_dict['user']
-
-                    # so the data can be sent in the response body as one json object 
-                    places_visited_dict = [model_to_dict(place) for place in places_visited]
-                    users_case_dict['places_visited'] = places_visited_dict
+        
+                    users_case_dict['places_visited'] = places_visited_dicts
                     user_dict['case'] = users_case_dict
 
                 except DoesNotExist:
