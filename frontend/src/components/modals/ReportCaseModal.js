@@ -2,7 +2,7 @@ import React from 'react';
 
 // redux 
 import { connect } from 'react-redux';
-import {  } from '../../actions/userActions.js';
+import { setUsersCase } from '../../actions/casesActions.js';
 
 // components
 import { Modal, Form } from 'react-bootstrap';
@@ -47,7 +47,7 @@ class ReportCaseModal extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		
+		this.props.setUsersCase(this.state)
 	}
 
 	render() {
@@ -122,7 +122,7 @@ class ReportCaseModal extends React.Component {
 }
 
 
-export default connect(null, {})(ReportCaseModal);
+export default connect(null, { setUsersCase })(ReportCaseModal);
 
 
 

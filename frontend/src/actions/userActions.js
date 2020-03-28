@@ -5,7 +5,6 @@ import {
 } from '../constants/actionTypes.js';
 
 import usersAPI from '../api/usersApi.js';
-import usersApi from '../api/usersApi.js';
 
 
 export const registerUser = (registrationInfo) => async (dispatch) => {
@@ -52,7 +51,7 @@ export const confirmPhoneNumber = (confirmationCode) => async (dispatch) => {
 
 
 export const logoutUser = () => async (dispatch) => {
-    const response = await usersApi.logoutUser();
+    const response = await usersAPI.logoutUser();
 
     if (response.status.code === 200) {
         dispatch({
