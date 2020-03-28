@@ -24,7 +24,6 @@ def ping():
     )
 
 
-
 # Create Route
 # this route is where a user can add places they have visited in the last 
 # 7 days of showing symptoms
@@ -77,6 +76,37 @@ def create_place_visited():
                 'message': 'Invalid request body'
             }
         ) 
+
+
+# Delete Route
+# this route is where a user can delete on of the places they have visited
+@places_visited.route('/<place_id>', methods=['DELETE'])
+@login_required
+def delete_place_visited(place_id):
+    try:
+        place_visited = PlaceVisited.get(PlaceVisited.id == place_id)
+
+        # verifies the user is the owner of the case 
+        if place_visited.case == current_user.id:
+            place_visited.delete_instance()
+
+            return jsonify(
+                data={},
+                status={
+                    'code': 204,
+                    'message': 'Successfully deleted the place.'    
+                }
+            )
+
+    except DoesNotExist:
+        return jsonify(
+            data={},
+            status={
+                'code': 404,
+                'message': 'Resource does not exist'
+            }
+        )
+
 
 
 
