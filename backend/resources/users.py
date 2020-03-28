@@ -115,7 +115,8 @@ def login():
                 del user_dict['password']
 
                 # so the data can be sent in the response body as one json object 
-                users_case_dict = model_to_dict(users_case_dict)
+                users_case_dict = model_to_dict(users_case)
+                del users_case_dict['user']
                 user_dict['case'] = users_case_dict
 
                 return jsonify(

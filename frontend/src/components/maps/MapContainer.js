@@ -8,6 +8,7 @@ import GoogleMap from './GoogleMap.js';
 import CitySearchForm from './CitySearchForm.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
 import { Row, Col, Card, Button, Spinner } from 'react-bootstrap';
+import ReportSymptomsButton from '../common/ReportSymptomsButton.js';
 import { Link } from 'react-router-dom';
 
 
@@ -77,11 +78,9 @@ class MapContainer extends React.Component {
 						<Col>
 							{this.props.isLoggedIn ? (
 								<div className="d-flex d-flex flex-row-reverse">
-									<Button
-										variant="light"
-										onClick={ this.showModal }>
-										Report Symptoms
-									</Button>
+									<ReportSymptomsButton 
+										userHasCase={ this.props.usersCase } 
+										showModal={ this.showModal } />
 								</div>
 							) : (
 								<p className="text-center">
@@ -117,6 +116,7 @@ const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
 		userInfo: state.user.userInfo,
+		usersCase: state.cases.usersCase
 	}
 }
 

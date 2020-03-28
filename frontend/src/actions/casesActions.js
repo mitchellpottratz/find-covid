@@ -5,7 +5,6 @@ import {
 import casesAPI from '../api/casesApi.js';
 
 
-
 export const createUsersCase = (caseInfo) => async (dispatch) => {
     const response = await casesAPI.createUsersCase(caseInfo);
 
