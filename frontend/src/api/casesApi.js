@@ -37,6 +37,22 @@ export default {
             // TODO - handle this error
             console.log('error occurred while creating the users case:', error);
         }
+    },
+
+    // makes and api call to delete a users case
+    deleteUsersCase: async (caseId) => {
+        try {
+            const response = await fetch(apiURL + 'cases/' + caseId, {
+                method: 'DELETE',
+                credentials: 'include',
+            });
+            const parsedResponse = await response.json();
+            return parsedResponse;        
+
+        } catch (error) {
+            // TODO - handle this error
+            console.log('error occurred while creating the users case:', error);
+        }        
     }
 
 } 

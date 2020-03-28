@@ -2,6 +2,7 @@ import React from 'react';
 
 // redux
 import { connect } from 'react-redux';
+import { deleteUsersCase } from '../../actions/casesActions.js';
 
 // components
 import { Modal, Button } from 'react-bootstrap';
@@ -16,10 +17,14 @@ class DeleteCaseModal extends React.Component {
 	handleDelete = async (e) => {
 		e.preventDefault();
 
+		const response = await this.props.deleteUsersCase(this.props.userId);
+		console.log('response:', response);
+
 		this.props.hideModal();
 	}
 	
 	render() {
+		console.log('users case id:', this.props.userId)
 		const usersCase = this.props.usersCase;
 
 		return (
@@ -62,4 +67,4 @@ class DeleteCaseModal extends React.Component {
 }
 
 
-export default connect(null, {  })(DeleteCaseModal);
+export default connect(null, { deleteUsersCase })(DeleteCaseModal);

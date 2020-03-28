@@ -56,7 +56,8 @@ class MyCase extends React.Component {
 					<DeleteCaseModal 
 						showModal={ this.state.showDeleteCaseModal }
 						hideModal={ this.hideDeleteCaseModal }
-						usersCase={ usersCase } />
+						usersCase={ usersCase } 
+						userId={ userInfo.id } />
 
 				// if the user has not reported a case they will be able to open the ReportCaseModal
 				) : (

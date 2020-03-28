@@ -115,12 +115,12 @@ def create_case():
 
 # Delete Route
 # this route is where a user can delete their case
-@cases.route('/<case_id>', methods=['DELETE'])
+@cases.route('/<user_id>', methods=['DELETE'])
 @login_required
-def delete_case(case_id):
+def delete_case(user_id):
     try:
         # if the user is not the owner of the case
-        if case_id != current_user.id:
+        if int(user_id) != current_user.id:
             return jsonify(
                 data={},
                 status={
@@ -129,7 +129,7 @@ def delete_case(case_id):
                 }
             )
 
-        case = Case.delete(Case.user = case_id)
+        case = Case.delete().where(Case.user == user_id)
 
         return jsonify(
             data={},
