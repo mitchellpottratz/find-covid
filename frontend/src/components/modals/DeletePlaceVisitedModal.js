@@ -13,6 +13,10 @@ class DeletePlaceVisitedModal extends React.Component {
 	constructor(props) {
 		super(props);
 	}
+
+	handleDelete = (e) => {
+		e.preventDefault();
+	}
 	
 	render() {
 		console.log('placeVisited:', this.props.placeVisited);
@@ -45,6 +49,18 @@ class DeletePlaceVisitedModal extends React.Component {
 						<strong>Date Visited: </strong> { placeVisited.date_visited || '' }
 					</p>
 				</Modal.Body>
+				<Modal.Footer>
+					<Button
+						variant="danger"
+						onClick={ this.handleDelete } >
+							Delete
+					</Button>
+					<Button 
+						variant="light"
+						onClick={ this.props.hideModal }>
+						Cancel
+					</Button>
+				</Modal.Footer>
 			</Modal>
 		)
 	}
