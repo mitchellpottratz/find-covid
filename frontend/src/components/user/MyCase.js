@@ -66,11 +66,42 @@ class MyCase extends React.Component {
 								{/* if the user has reported a case */}
 								{usersCase ? (
 								<Row>
-									<Col md={ 6 } sm={ 12 }>
-										<p>
-											<stong>Tested Positive: </stong> { usersCase.has_test }
+									<Col md={ 12 } sm={ 12 }>
+										<p className="mb-1">
+											<strong>Tested Positive: </strong> { usersCase.has_tested }
 										</p>
+										<p className="mb-1">
+											<strong>Symptoms Date: </strong> { usersCase.symptoms_date }
+										</p>
+										<p className="mb-0">	
+											<strong>Age: </strong> { usersCase.age }
+										</p>
+
+										{/* the notes field is optional so it needs to check if it exists */}
+										{usersCase.notes ? (
+											<p className="mb-0">	
+												<strong>Additional Information: </strong><br></br>
+												{ usersCase.notes }
+											</p>
+										) : (
+											null
+										)}
+										
+										<div className="text-right">
+											<Button 
+												className="mr-2"
+												variant="dark"
+												>
+												Edit
+											</Button>
+											<Button 
+												variant="danger"
+												>
+												Delete
+											</Button>
+										</div>
 									</Col>
+									
 								</Row>
 
 								// if the user has not reported a case yet
