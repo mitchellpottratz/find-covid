@@ -39,4 +39,3 @@ class User(BaseModel, UserMixin):
             from_ = twilio_phone_number,
             to = self.phone_number
         )
-        print(message)
