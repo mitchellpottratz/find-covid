@@ -45,10 +45,10 @@ class ReportCaseModal extends React.Component {
 		});
 	}
 	
-	handleSubmit = (e) => {
+	handleSubmit = async (e) => {
 		e.preventDefault();
 
-		this.setState({
+		await this.setState({
 			formErrorMessages: [],
 			isLoading: true
 		});
@@ -56,6 +56,8 @@ class ReportCaseModal extends React.Component {
 		if (this.zipCodeIsValid()) {
 			this.props.setUsersCase(this.state)
 		}
+
+		this.setState({ isLoading: false });
 	}
 
 	zipCodeIsValid = () => {
@@ -64,7 +66,6 @@ class ReportCaseModal extends React.Component {
 
 		// if the zip code length is not 5 then its invalid
 		if (zipCode.length !== 5) {
-			console.log('invalid length');
 			this.setState({
 				formErrorMessages: [...this.state.formErrorMessages, zipCodeErrorMessage]
 			});
@@ -72,10 +73,8 @@ class ReportCaseModal extends React.Component {
 		}
 		
 		zipCode.split('').forEach((digit) => {
-
 			// if the current digit is not a number then its invalid 
 			if (isNaN(parseInt(digit))) {
-				console.log('invalid digit');
 				this.setState({
 					formErrorMessages: [...this.state.formErrorMessages, zipCodeErrorMessage]
 				});
@@ -93,6 +92,15 @@ class ReportCaseModal extends React.Component {
 					<Modal.Title>Report Covid-19</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
+
+					{/* form error messages */}
+					{this.state.formErrorMessages.map((message, i) => {
+          	return (
+            	<div key={ i }>
+								<small className="text-danger">{ message }</small>
+							</div>
+            )
+          })}
 
 					<Form
 						className="py-3 text-center"
