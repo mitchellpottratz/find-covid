@@ -1,5 +1,6 @@
 import {
-    SET_USERS_PLACES_VISITED
+    SET_USERS_PLACES_VISITED,
+    ADD_USERS_PLACE_VISITED,
 } from '../constants/actionTypes.js';
 
 
@@ -18,6 +19,13 @@ const placesVisitedReducer = (state = initialState, action) => {
             return {
                 ...state,
                 usersPlacesVisited: action.payload
+            }
+
+        // adds a new place visited to the places the user has visited
+        case ADD_USERS_PLACE_VISITED:
+            return {
+                ...state,
+                usersPlacesVisited: [...state.usersPlacesVisited, action.payload]
             }
 
         default: 
