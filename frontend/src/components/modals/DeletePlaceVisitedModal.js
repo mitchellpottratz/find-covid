@@ -15,8 +15,12 @@ class DeletePlaceVisitedModal extends React.Component {
 		super(props);
 	}
 
-	handleDelete = (e) => {
+	handleDelete = async (e) => {
 		e.preventDefault();
+
+		const response = await this.props.deleteUsersPlaceVisited(this.props.placeVisited.id);
+
+		this.props.hideModal();
 	}
 	
 	render() {

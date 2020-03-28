@@ -23,6 +23,15 @@ export const createUsersPlaceVisited = (placeVisitedInfo) => async (dispatch) =>
 
 
 export const deleteUsersPlaceVisited = (placeVisitedId) => async (dispatch) => {
+    const response = await placesVisitedAPI.deleteUsersPlaceVisited(placeVisitedId);
 
-    
+    // if the place visited was deleted successfully
+    if (response.status.code === 204) {
+        dispatch({
+            type: DELETE_USERS_PLACE_VISITED,
+            payload: placeVisitedId
+        });
+    }    
+
+    return response;
 }

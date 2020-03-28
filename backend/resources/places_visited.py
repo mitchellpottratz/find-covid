@@ -87,7 +87,7 @@ def delete_place_visited(place_id):
         place_visited = PlaceVisited.get(PlaceVisited.id == place_id)
 
         # verifies the user is the owner of the case 
-        if place_visited.case == current_user.id:
+        if place_visited.case.user.id == current_user.id:
             place_visited.delete_instance()
 
             return jsonify(
@@ -97,6 +97,16 @@ def delete_place_visited(place_id):
                     'message': 'Successfully deleted the place.'    
                 }
             )
+
+        # if the user is not the owner of the place visited
+        else:
+            return jsonify(
+                data={},
+                status={
+                    'code': 401,
+                    'message': 'Resource access denied'
+                }
+        )
 
     except DoesNotExist:
         return jsonify(

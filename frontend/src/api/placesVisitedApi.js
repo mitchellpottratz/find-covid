@@ -20,6 +20,21 @@ export default {
         } catch (error) {
             console.log('error occured while creating place visited:', error);
         }
+    },
+
+    // makes an api call for the user to delete a place they have visited
+    deleteUsersPlaceVisited: async (placeVisitedId) => {
+        try {
+            const response = await fetch(apiURL + 'places-visited/' + placeVisitedId, {
+                method: 'DELETE',
+                credentials: 'include'
+            });
+            const parsedResponse = await response.json();
+            return parsedResponse; 
+            
+        } catch (error) {
+            console.log('error occured while deleting place visited:', error);
+        }
     }
 
 }

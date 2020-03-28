@@ -1,6 +1,7 @@
 import {
     SET_USERS_PLACES_VISITED,
     ADD_USERS_PLACE_VISITED,
+    DELETE_USERS_PLACE_VISITED
 } from '../constants/actionTypes.js';
 
 
@@ -26,6 +27,19 @@ const placesVisitedReducer = (state = initialState, action) => {
             return {
                 ...state,
                 usersPlacesVisited: [...state.usersPlacesVisited, action.payload]
+            }
+
+        // deletes a place the user visited
+        case DELETE_USERS_PLACE_VISITED:
+            
+            // creates a new array with the place visited that was deleted removed
+            const newUsersPlacesVisited = state.usersPlacesVisited.filter((place) => {
+                return place.id !== action.payload;
+            });
+
+            return {
+                ...state,
+                usersPlacesVisited: newUsersPlacesVisited
             }
 
         default: 
