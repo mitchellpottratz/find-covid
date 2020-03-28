@@ -31,6 +31,7 @@ class MyPlacesVisited extends React.Component {
 	} 
 
 	showDeletePlaceVisitedModal = (placeVisitedToDelete) => {
+		console.log('placeVisitedToDelete:', placeVisitedToDelete);
 		this.setState({
 			showDeletePlaceVisitedModal: true,
 			placeVisitedToDelete: placeVisitedToDelete
@@ -60,6 +61,7 @@ class MyPlacesVisited extends React.Component {
 				<DeletePlaceVisitedModal 
 					showModal={ this.state.showDeletePlaceVisitedModal }
 					hideModal={ this.hideDeletePlaceVisitedModal }
+					placeVisited={ this.state.placeVisitedToDelete }
 				/>
 
   			<div className="mt-4">  

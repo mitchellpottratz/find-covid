@@ -4,7 +4,9 @@ import { Card, Button } from 'react-bootstrap';
 
 
 function PlaceVisitedCard(props) {
-	const placeVisited = props.placeVisited;
+  const placeVisited = props.placeVisited;
+  
+
 
   return (
 		<Card className="mt-4">
@@ -14,7 +16,7 @@ function PlaceVisitedCard(props) {
 				<p>{ placeVisited.date_visited }</p>
 				<Button 
 					variant="danger" 
-          onClick={ props.deleteButtonOnClick }>
+          onClick={ () => props.deleteButtonOnClick(placeVisited) }>
           Delete    
 				</Button>
 			</Card.Body>

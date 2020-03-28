@@ -15,6 +15,15 @@ class DeletePlaceVisitedModal extends React.Component {
 	}
 	
 	render() {
+		console.log('placeVisited:', this.props.placeVisited);
+		const placeVisited = this.props.placeVisited;
+
+		if (!placeVisited.name) {
+			return (
+				null
+			)
+		}
+
 		return (
 			<Modal 
 				show={ this.props.showModal } 
@@ -25,6 +34,15 @@ class DeletePlaceVisitedModal extends React.Component {
 				<Modal.Body>
 					<p>
 						Are you sure you would like to delete this place you visited?
+					</p>
+					<p>
+						<strong>Name: </strong> { placeVisited.name || '' }
+					</p>
+					<p>
+						<strong>Address: </strong> { placeVisited.address.place || '' }
+					</p>
+					<p>
+						<strong>Date Visited: </strong> { placeVisited.date_visited || '' }
 					</p>
 				</Modal.Body>
 			</Modal>
