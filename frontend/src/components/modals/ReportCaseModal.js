@@ -20,9 +20,10 @@ class ReportCaseModal extends React.Component {
 			has_tested: false,
 			symptoms_date: new Date(),
 			age: '',
-			address: '',
+			zip_code: '',
 			notes: '',
-			isLoading: false
+			isLoading: false,
+			formErrorMessages: []
 		}
 	}
 
@@ -47,7 +48,42 @@ class ReportCaseModal extends React.Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 
-		this.props.setUsersCase(this.state)
+		this.setState({
+			formErrorMessages: [],
+			isLoading: true
+		});
+
+		if (this.zipCodeIsValid()) {
+			this.props.setUsersCase(this.state)
+		}
+	}
+
+	zipCodeIsValid = () => {
+		const zipCodeErrorMessage = 'Please provide a valid zip code';
+		const zipCode = this.state.zip_code;
+
+		// if the zip code length is not 5 then its invalid
+		if (zipCode.length !== 5) {
+			console.log('invalid length');
+			this.setState({
+				formErrorMessages: [...this.state.formErrorMessages, zipCodeErrorMessage]
+			});
+			return false
+		}
+		
+		zipCode.split('').forEach((digit) => {
+
+			// if the current digit is not a number then its invalid 
+			if (isNaN(parseInt(digit))) {
+				console.log('invalid digit');
+				this.setState({
+					formErrorMessages: [...this.state.formErrorMessages, zipCodeErrorMessage]
+				});
+				return false;
+			}	
+		});
+
+		return true;
 	}
 
 	render() {
@@ -86,19 +122,17 @@ class ReportCaseModal extends React.Component {
 									value={ this.state.age }
 									onChange={ this.handleChange } />
 							</Form.Group>
+
 							<Form.Group>
-								<Form.Label>What's your address?</Form.Label>
-								<GoogleComponent
-									apiKey={ process.env.REACT_APP_GOOGLE_MAPS_API_KEY }
-          				language={'en'}
-          				country={'country:in|country:us'}
-									coordinates={true}
-									name="address"
-									value={ this.state.address }
-          				onChange={value => {
-										this.setState({ address: value });
-									}} />	
+								<Form.Label>What's your zip code?</Form.Label>
+								<Form.Control 
+									type="text"
+									name="zip_code"
+									placeholder="Zip Code"
+									value={ this.state.zip_code }
+									onChange={ this.handleChange } />
 							</Form.Group>
+
 							<Form.Group>
 									<Form.Label>Extra information you would like to add</Form.Label>
 									<Form.Control 
