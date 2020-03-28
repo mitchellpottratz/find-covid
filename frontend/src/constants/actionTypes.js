@@ -10,6 +10,7 @@ export const DELETE_USERS_CASE = 'DELETE_USERS_CASE';
 
 // places visited 
 export const SET_USERS_PLACES_VISITED = 'SET_USERS_PLACES_VISITED';
+export const ADD_USERS_PLACE_VISITED = 'ADD_USERS_PLACE_VISITED';
 
 
 
