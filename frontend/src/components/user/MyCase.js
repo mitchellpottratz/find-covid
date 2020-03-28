@@ -2,13 +2,13 @@ import React from 'react';
 
 // redux 
 import { connect } from 'react-redux';
-import { logoutUser } from '../../actions/userActions.js';
 
 // components
 import AuthCheck from '../common/AuthCheck.js';
 import CovidFaqs from '../common/CovidFaqs.js';
 import { Container, Card, Row, Col, Button } from 'react-bootstrap';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
+import MyPlacesVisited from './MyPlacesVisited.js';
 
 
 class MyCase extends React.Component {
@@ -87,6 +87,7 @@ class MyCase extends React.Component {
 											null
 										)}
 										
+										{/* Edit and delete buttons */}
 										<div className="text-right">
 											<Button 
 												className="mr-2"
@@ -101,7 +102,6 @@ class MyCase extends React.Component {
 											</Button>
 										</div>
 									</Col>
-									
 								</Row>
 
 								// if the user has not reported a case yet
@@ -120,6 +120,9 @@ class MyCase extends React.Component {
 								)}
 							</Card.Body>
 						</Card>
+
+						<MyPlacesVisited />			
+
 					</Col>	
 				</Row>	
 			</Container>
