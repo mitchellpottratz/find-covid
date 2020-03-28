@@ -2,12 +2,11 @@ import React from 'react';
 
 // redux 
 import { connect } from 'react-redux';
-import { setUsersCase } from '../../actions/casesActions.js';
+import { createUsersCase } from '../../actions/casesActions.js';
 
 // components
 import { Modal, Form } from 'react-bootstrap';
 import DatePicker from 'react-date-picker';
-import { GoogleComponent } from "react-google-location";
 import FormButton from '../common/FormButton.js';
 
 
@@ -54,7 +53,7 @@ class ReportCaseModal extends React.Component {
 		});
 
 		if (this.zipCodeIsValid()) {
-			const response = await this.props.setUsersCase(this.state)
+			const response = await this.props.createUsersCase(this.state)
 			this.props.hideModal();
 		}
 
@@ -165,7 +164,7 @@ class ReportCaseModal extends React.Component {
 }
 
 
-export default connect(null, { setUsersCase })(ReportCaseModal);
+export default connect(null, { createUsersCase })(ReportCaseModal);
 
 
 

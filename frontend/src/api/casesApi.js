@@ -3,8 +3,24 @@ import apiURL from './config.js';
 
 export default {
 
+    // makes an api call to get a users case
+    getUsersCase: async (userId) => {
+        try {
+            const response = await fetch(apiURL + 'cases/' + userId, {
+                method: 'GET',
+                credentials: 'include',
+            });
+            const parsedResponse = await response.json();
+            return parsedResponse;        
+
+        } catch (error) {
+            // TODO - handle this error
+            console.log('error occurred while getting the user case:', error);
+        } 
+    },  
+
     // makes a request to create a users case
-    createUserCase: async (caseInfo) => {
+    createUsersCase: async (caseInfo) => {
         try {
             const response = await fetch(apiURL + 'cases/', {
                 headers: {

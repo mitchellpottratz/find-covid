@@ -6,6 +6,7 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, current_user, logout_user
 
 from models.user import User
+from models.case import Case
 
 
 users = Blueprint('users', 'users')
@@ -102,9 +103,20 @@ def login():
             if check_password_hash(user.password, password):
                 login_user(user)
 
+                # gets the user case if they have one
+                try:
+                    users_case = Case.get(Case.user_id == user.id)
+                except DoesNotExist:
+                    pass 
+
+                
                 user_dict = model_to_dict(user)
                 del user_dict['sms_confirmation_code']
                 del user_dict['password']
+
+                # so the data can be sent in the response body as one json object 
+                users_case_dict = model_to_dict(users_case_dict)
+                user_dict['case'] = users_case_dict
 
                 return jsonify(
                     data=user_dict,

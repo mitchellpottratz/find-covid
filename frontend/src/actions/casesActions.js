@@ -6,8 +6,8 @@ import casesAPI from '../api/casesApi.js';
 
 
 
-export const setUsersCase = (caseInfo) => async (dispatch) => {
-    const response = await casesAPI.createUserCase(caseInfo);
+export const createUsersCase = (caseInfo) => async (dispatch) => {
+    const response = await casesAPI.createUsersCase(caseInfo);
 
     if (response.status.code === 201) {
         dispatch({

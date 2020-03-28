@@ -24,8 +24,10 @@ export const registerUser = (registrationInfo) => async (dispatch) => {
 
 export const loginUser = (loginInfo) => async (dispatch) => {
     const response = await usersAPI.loginUser(loginInfo);
-
+    console.log(response.data)
     if (response.status.code === 200) {
+        console.log('logged in');
+
         dispatch({
             type: LOGIN_USER,
             payload: response.data
