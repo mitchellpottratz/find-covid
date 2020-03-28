@@ -2,6 +2,7 @@ import React from 'react';
 
 // redux
 import { connect } from 'react-redux';
+import { deleteUsersPlaceVisited } from '../../actions/placesVisitedActions.js';
 
 // components
 import { Modal, Form, Button } from 'react-bootstrap';
@@ -68,6 +69,6 @@ class DeletePlaceVisitedModal extends React.Component {
 }
 
 
-export default connect(null, {})(DeletePlaceVisitedModal);
+export default connect(null, { deleteUsersPlaceVisited })(DeletePlaceVisitedModal);
 
 

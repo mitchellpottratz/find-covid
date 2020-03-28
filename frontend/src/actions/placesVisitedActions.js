@@ -1,6 +1,7 @@
 import {
     SET_USERS_PLACES_VISITED,
-    ADD_USERS_PLACE_VISITED
+    ADD_USERS_PLACE_VISITED,
+    DELETE_USERS_PLACE_VISITED
 } from '../constants/actionTypes.js';
 
 import placesVisitedAPI from '../api/placesVisitedApi.js';
@@ -18,4 +19,10 @@ export const createUsersPlaceVisited = (placeVisitedInfo) => async (dispatch) =>
     } 
 
     return response;
+}
+
+
+export const deleteUsersPlaceVisited = (placeVisitedId) => async (dispatch) => {
+
+    
 }
