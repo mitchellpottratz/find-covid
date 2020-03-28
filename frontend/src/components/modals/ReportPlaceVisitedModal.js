@@ -18,7 +18,9 @@ class ReportPlaceVisitedModal extends React.Component {
 		this.state = {
 			name: '',
 			address: '',
-			date_visited: new Date()
+			date_visited: new Date(),
+			isLoading: false,
+			formErrorMessages: []
 		}
 	}
 
@@ -75,6 +77,10 @@ class ReportPlaceVisitedModal extends React.Component {
 							onChange={ this.handleDateChange } />
 					</Form.Group>
 
+					<FormButton 
+						variant="dark"
+						text="Report"
+						isLoading={ this.state.isLoading } />
 				</Form>
 
 				</Modal.Body>
