@@ -65,6 +65,7 @@ def create_case():
         zip_code = data['zip_code']
         age = data['age']
         has_tested = data['has_tested']
+        notes = data['notes']
 
         try:
             case = Case.get(Case.user == current_user.id)
@@ -87,8 +88,9 @@ def create_case():
                 symptoms_date=symptoms_date,
                 zip_code=zip_code,
                 age=age,
-                has_tested=has_tested
-            )
+                has_tested=has_tested,
+                notes=notes
+            )   
 
         new_case_dict = model_to_dict(new_case)
         del new_case_dict['user']['password']

@@ -15,7 +15,8 @@ class Case(BaseModel):
     zip_code = CharField(max_length=10)
     age = IntegerField()
     has_tested = BooleanField()
-    
+    notes = CharField(max_length=100, null=True)
+
 
 
 
