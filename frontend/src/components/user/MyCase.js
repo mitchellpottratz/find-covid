@@ -8,6 +8,7 @@ import AuthCheck from '../common/AuthCheck.js';
 import CovidFaqs from '../common/CovidFaqs.js';
 import { Container, Card, Row, Col, Button } from 'react-bootstrap';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
+import DeleteCaseModal from '../modals/DeleteCaseModal.js';
 import MyPlacesVisited from './MyPlacesVisited.js';
 
 

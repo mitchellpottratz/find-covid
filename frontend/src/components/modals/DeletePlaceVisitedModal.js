@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { deleteUsersPlaceVisited } from '../../actions/placesVisitedActions.js';
 
 // components
-import { Modal, Form, Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
  
 
