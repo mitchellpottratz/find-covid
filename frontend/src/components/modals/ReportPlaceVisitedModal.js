@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 // components
 import { Modal, Form } from 'react-bootstrap';
 import DatePicker from 'react-date-picker';
+import { GoogleComponent } from 'react-google-location'
 import FormButton from '../common/FormButton.js';
 
 
@@ -15,6 +16,8 @@ class ReportPlaceVisitedModal extends React.Component {
 		super(props);
 
 		this.state = {
+			name: '',
+			address: '',
 			date_visited: new Date()
 		}
 	}
@@ -25,7 +28,6 @@ class ReportPlaceVisitedModal extends React.Component {
 
 	handleDateChange = (date) => {
 		this.setState({
-			name: '',
 			date_visited: date
 		});
 	}
@@ -53,6 +55,16 @@ class ReportPlaceVisitedModal extends React.Component {
 							placeholder="Name"
 							value={ this.state.name }
 							onChange={ this.handleChange } />
+					</Form.Group>
+
+					<Form.Group>
+						<Form.Label>What is the address of this place?</Form.Label>
+						<GoogleComponent
+          		apiKey={ process.env.REACT_APP_GOOGLE_MAPS_API_KEY }
+          		language={ 'en' }
+          		country={ 'country:in|country:us' }
+          		coordinates={ true }
+          		onChange={(e) => { this.setState({ address: e }) }} />
 					</Form.Group>
 					
 					<Form.Group>
