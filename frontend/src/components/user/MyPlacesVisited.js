@@ -46,8 +46,6 @@ class MyPlacesVisited extends React.Component {
 	}
 
   render() {
-		console.log('places visited:', this.props.usersPlacesVisited);
-
   	return (
 			<React.Fragment>
 

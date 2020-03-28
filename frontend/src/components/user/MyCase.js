@@ -18,7 +18,8 @@ class MyCase extends React.Component {
 		super(props);
 		
 		this.state = {
-			showReportCaseModal: false
+			showReportCaseModal: false,
+			showDeleteCaseModal: false
 		}
 	}
 	
@@ -30,6 +31,14 @@ class MyCase extends React.Component {
 		this.setState({ showReportCaseModal: false });
 	}
 
+	showDeleteCaseModal = () => {
+		this.setState({ showDeleteCaseModal: true });
+	}
+
+	hideDeleteCaseModal = () => {
+		this.setState({ showDeleteCaseModal: false });
+	}
+
   render() {
 		const { isLoggedIn, userInfo, usersCase } = this.props;
 
@@ -38,12 +47,16 @@ class MyCase extends React.Component {
 
 				{/* Authenticates the user is logged in and has confirmed their phone number */}
       	<AuthCheck 
-        	isLoggedIn={ this.props.isLoggedIn } 
-      		phoneNumberConfirmed={ this.props.userInfo.phone_number_confirmed } />
+        	isLoggedIn={ isLoggedIn } 
+      		phoneNumberConfirmed={ userInfo.phone_number_confirmed } />
 
-				{/* if the user has a case reported they will not be able to open the ReportCaseModal */}
+				{/* if the user has a case reported they will not be able to open the ReportCaseModal
+				    but they will be able to open the DeleteCaseModal */}
 				{usersCase ? (
-					null
+					<DeleteCaseModal 
+						showModal={ this.state.showDeleteCaseModal }
+						hideModal={ this.hideDeleteCaseModal }
+						usersCase={ usersCase } />
 
 				// if the user has not reported a case they will be able to open the ReportCaseModal
 				) : (
@@ -98,7 +111,7 @@ class MyCase extends React.Component {
 											</Button>
 											<Button 
 												variant="danger"
-												>
+												onClick={ this.showDeleteCaseModal }>
 												Delete
 											</Button>
 										</div>

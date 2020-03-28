@@ -27,20 +27,20 @@ class DeleteCaseModal extends React.Component {
 				show={ this.props.showModal } 
 				onHide={ this.props.hideModal }>
 				<Modal.Header closeButton>
-					<Modal.Title>Delete Your Case</Modal.Title>
+					<Modal.Title>Delete Your Reported Case</Modal.Title>
 				</Modal.Header>	
 				<Modal.Body>
 					<p>
 						Are you sure you would like to delete your case?
 					</p>
 					<p>
-						<strong>Name: </strong> 
+						<strong>Tested Positive: </strong> 
 					</p>
 					<p>
-						<strong>Address: </strong> 
+						<strong>Symptoms Date: </strong> { usersCase.symptoms_date } 
 					</p>
 					<p>
-						<strong></strong> 
+						<strong>Age: </strong> { usersCase.age } 
 					</p>
 				</Modal.Body>
 				<Modal.Footer>
