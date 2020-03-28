@@ -54,7 +54,8 @@ class ReportCaseModal extends React.Component {
 		});
 
 		if (this.zipCodeIsValid()) {
-			this.props.setUsersCase(this.state)
+			const response = await this.props.setUsersCase(this.state)
+			this.props.hideModal();
 		}
 
 		this.setState({ isLoading: false });
