@@ -15,6 +15,8 @@ class PlaceVisited(BaseModel):
     date_visited = DateField()
     name = CharField(max_length=150)
     address = CharField(max_length=250)
+    latitude = CharField(max_length=100)
+    longitude = CharField(max_length=100)
 
 
 
