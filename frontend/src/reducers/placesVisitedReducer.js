@@ -1,7 +1,8 @@
 import {
     SET_USERS_PLACES_VISITED,
     ADD_USERS_PLACE_VISITED,
-    DELETE_USERS_PLACE_VISITED
+    DELETE_USERS_PLACE_VISITED,
+    DELETE_ALL_USERS_PLACES_VISITED
 } from '../constants/actionTypes.js';
 
 
@@ -41,6 +42,15 @@ const placesVisitedReducer = (state = initialState, action) => {
                 ...state,
                 usersPlacesVisited: newUsersPlacesVisited
             }
+
+        // deletes all of the places the user has visited 
+        // this case is performed when the user deletes their case
+        case DELETE_ALL_USERS_PLACES_VISITED:
+            return {
+                ...state, 
+                usersPlacesVisited: []
+            }
+            
 
         default: 
             return state

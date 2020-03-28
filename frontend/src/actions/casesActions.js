@@ -1,5 +1,6 @@
 import {
-    SET_USERS_CASE
+    SET_USERS_CASE,
+    DELETE_USERS_CASE
 } from '../constants/actionTypes.js';
 
 import casesAPI from '../api/casesApi.js';
