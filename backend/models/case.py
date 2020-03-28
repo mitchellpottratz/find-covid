@@ -1,8 +1,8 @@
 from .base import BaseModel
 from .user import User
 
-from peewee import ForeignKeyField, DateField, CharField, IntegerField, BooleanField
-
+from peewee import (ForeignKeyField, DateField, CharField,
+                    IntegerField, BooleanField)
 
 ''' 
 This model is holds information for users reporting that they have either tested 
@@ -16,6 +16,7 @@ class Case(BaseModel):
     age = IntegerField()
     has_tested = BooleanField()
     notes = CharField(max_length=100, null=True)
+
 
 
 

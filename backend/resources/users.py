@@ -7,6 +7,7 @@ from flask_login import login_user, login_required, current_user, logout_user
 
 from models.user import User
 from models.case import Case
+from models.place_visited import PlaceVisited
 
 
 users = Blueprint('users', 'users')
@@ -111,9 +112,14 @@ def login():
                 try:
                     users_case = Case.get(Case.user_id == user.id)
 
-                    # so the data can be sent in the response body as one json object 
+                    places_visited = PlaceVisited.select().where(PlaceVisited.case == user.id)
+
                     users_case_dict = model_to_dict(users_case)
                     del users_case_dict['user']
+
+                    # so the data can be sent in the response body as one json object 
+                    places_visited_dict = [model_to_dict(place) for place in places_visited]
+                    users_case_dict['places_visited'] = places_visited_dict
                     user_dict['case'] = users_case_dict
 
                 except DoesNotExist:

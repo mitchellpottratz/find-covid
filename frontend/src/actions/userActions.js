@@ -26,6 +26,7 @@ export const registerUser = (registrationInfo) => async (dispatch) => {
 
 export const loginUser = (loginInfo) => async (dispatch) => {
     const response = await usersAPI.loginUser(loginInfo);
+    console.log('login response:', response);
 
     if (response.status.code === 200) {
         
