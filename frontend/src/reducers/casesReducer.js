@@ -5,7 +5,7 @@ import {
 
 
 const initialState = {
-    usersCase: null
+    usersCase: {}
 }
 
 
@@ -14,15 +14,18 @@ const casesReducer = (state = initialState, action) => {
     switch(action.type) {
         
         case SET_USERS_CASE:
+            console.log('SET_USERS_CASE');
+            console.log('payload:', action.payload);
+            
             return {
                 ...state,
-                usersCase: action.payload
+                usersCase: {...action.payload}
             }
 
         case DELETE_USERS_CASE:
             return {
                 ...state,
-                usersCase: null
+                usersCase: {}
             }
 
         default:

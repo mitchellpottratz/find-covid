@@ -129,7 +129,7 @@ def delete_case(user_id):
                 }
             )
 
-        case = Case.delete().where(Case.user == user_id)
+        case = Case.delete().where(Case.user == user_id).execute()
 
         return jsonify(
             data={},

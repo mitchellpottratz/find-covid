@@ -9,6 +9,7 @@ import casesAPI from '../api/casesApi.js';
 
 export const createUsersCase = (caseInfo) => async (dispatch) => {
     const response = await casesAPI.createUsersCase(caseInfo);
+    console.log(response);
 
     if (response.status.code === 201) {
         dispatch({

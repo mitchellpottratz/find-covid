@@ -42,6 +42,11 @@ class MyCase extends React.Component {
   render() {
 		const { isLoggedIn, userInfo, usersCase } = this.props;
 
+		// determines if the user has reported a case already
+		console.log('users case:', usersCase);
+		const userHasCase = usersCase.zip_code;
+		console.log('user has case:', userHasCase);
+
     return (
 			<Container>
 
@@ -52,7 +57,7 @@ class MyCase extends React.Component {
 
 				{/* if the user has a case reported they will not be able to open the ReportCaseModal
 				    but they will be able to open the DeleteCaseModal */}
-				{usersCase ? (
+				{userHasCase ? (
 					<DeleteCaseModal 
 						showModal={ this.state.showDeleteCaseModal }
 						hideModal={ this.hideDeleteCaseModal }
@@ -79,7 +84,7 @@ class MyCase extends React.Component {
 								<Card.Title>Your Reported Case</Card.Title>
 
 								{/* if the user has reported a case */}
-								{usersCase ? (
+								{userHasCase ? (
 								<Row>
 									<Col md={ 12 } sm={ 12 }>
 										<p className="mb-1">
@@ -136,7 +141,14 @@ class MyCase extends React.Component {
 							</Card.Body>
 						</Card>
 
-						<MyPlacesVisited />			
+						{/* if the user has a case reported then the component that allows the user
+						    to add places they have visited is shown */}
+						{userHasCase ? (
+							<MyPlacesVisited />	
+						) : (
+							null
+						)}		
+								
 
 					</Col>	
 				</Row>	
