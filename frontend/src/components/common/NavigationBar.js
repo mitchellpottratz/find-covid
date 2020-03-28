@@ -32,7 +32,7 @@ class NavigationBar extends React.Component {
                 title="Account"
                 id="basic-nav-dropdown"
                 drop="">
-                <NavDropdown.Item href="#action/3.2">
+                <NavDropdown.Item href="/my-case">
                   My Case
                 </NavDropdown.Item>
                 <NavDropdown.Item onClick={ this.handleLogoutClick }>

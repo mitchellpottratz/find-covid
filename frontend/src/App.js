@@ -11,6 +11,7 @@ import Register from './components/authentication/Register.js';
 import Login from './components/authentication/Login.js';
 import ConfirmPhoneNumber from './components/authentication/ConfirmPhoneNumber.js';
 import MapContainer from './components/maps/MapContainer.js';
+import MyCase from './components/user/MyCase.js';
 
 // css
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -46,6 +47,11 @@ class App extends React.Component {
             <Route 
               path="/map"  
               component={ MapContainer } />
+
+            {/* Show Users Case */}
+            <Route
+              path="/my-case"
+              component={ MyCase } />
 
             {/* Home */}
             <Route path="/">

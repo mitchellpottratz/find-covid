@@ -21,7 +21,13 @@ function AuthCheck(props) {
         return (
             <Redirect to="/confirm-number" />    
         )
-    }    
+    
+    // if the user is logged in and their phone number is confirmed        
+    } else if (props.isLoggedIn && props.phoneNumberConfirmed) {    
+        return (
+            null
+        )
+    }
 } 
 
 
