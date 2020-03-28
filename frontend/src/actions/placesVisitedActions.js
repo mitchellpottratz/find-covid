@@ -7,8 +7,7 @@ import placesVisitedAPI from '../api/placesVisitedApi.js';
 
 
 export const createUsersPlaceVisited = (placeVisitedInfo) => async (dispatch) => {
-    const response = await placesVisitedAPI(placeVisitedInfo);
-    console.log('response:', response);
+    const response = await placesVisitedAPI.createUsersPlaceVisited(placeVisitedInfo);
 
     // if the place visited was create successfully
     if (response.status.code === 201) {

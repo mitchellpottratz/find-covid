@@ -2,6 +2,7 @@ import React from 'react';
 
 // redux 
 import { connect } from 'react-redux';
+import { createUsersPlaceVisited } from '../../actions/placesVisitedActions.js';
 
 // components
 import { Modal, Form } from 'react-bootstrap';
@@ -32,6 +33,24 @@ class ReportPlaceVisitedModal extends React.Component {
 		this.setState({
 			date_visited: date
 		});
+	}
+
+	handleSubmit = async (e) => {
+		e.preventDefault();
+
+		this.setState({
+			formErrorMessages: [],
+			isLoading: true
+		});
+
+		const response = await this.props.createUsersPlaceVisited(this.state);
+
+		this.setState({ isLoading: false });
+
+		// if the place visited was created then the modal is hidden
+		if (response.status.code === 201) {
+			this.props.hideModal();
+		}
 	}
 
   render() {
@@ -90,5 +109,5 @@ class ReportPlaceVisitedModal extends React.Component {
 }
 
 
-export default connect(null, {})(ReportPlaceVisitedModal);
+export default connect(null, { createUsersPlaceVisited })(ReportPlaceVisitedModal);
 
