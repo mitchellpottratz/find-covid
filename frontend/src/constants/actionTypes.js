@@ -6,6 +6,7 @@ export const LOGOUT_USER = 'LOGOUT_USER';
 
 // cases
 export const SET_USERS_CASE = 'SET_USERS_CASE';
+export const DELETE_USERS_CASE = 'DELETE_USERS_CASE';
 
 
 

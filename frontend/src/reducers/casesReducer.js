@@ -1,10 +1,11 @@
 import {
-    SET_USERS_CASE
+    SET_USERS_CASE,
+    DELETE_USERS_CASE
 } from '../constants/actionTypes.js';
 
 
 const initialState = {
-    usersCase: {}
+    usersCase: null
 }
 
 
@@ -16,6 +17,12 @@ const casesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 usersCase: action.payload
+            }
+
+        case DELETE_USERS_CASE:
+            return {
+                ...state,
+                usersCase: null
             }
 
         default:

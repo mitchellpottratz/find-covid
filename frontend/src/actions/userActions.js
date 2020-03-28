@@ -1,6 +1,7 @@
 import { 
     LOGIN_USER,
     SET_USERS_CASE,
+    DELETE_USERS_CASE,
     LOGOUT_USER,
     CONFIRM_PHONE_NUMBER,
 } from '../constants/actionTypes.js';
@@ -68,6 +69,13 @@ export const logoutUser = () => async (dispatch) => {
             type: LOGOUT_USER,
             payload: {}
         });
+
+        // deletes the users case from the store
+        dispatch({
+            type: DELETE_USERS_CASE,
+            payload: {} 
+        });
+
     }
 }
 
