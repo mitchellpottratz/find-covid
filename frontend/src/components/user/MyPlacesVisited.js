@@ -4,8 +4,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // components
-import { Button } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
 import ReportPlaceVisitedModal from '../modals/ReportPlaceVisitedModal.js';
+import DeletePlaceVisitedModal from '../modals/DeletePlaceVisitedModal.js';
+import PlaceVisitedCard from '../common/PlaceVisitedCard.js';
 
 
 class MyPlacesVisited extends React.Component {
@@ -14,7 +16,9 @@ class MyPlacesVisited extends React.Component {
 		super(props);
 
 		this.state = {
-			showReportPlaceVisitedModal: false
+			showReportPlaceVisitedModal: false,
+			showDeletePlaceVisitedModal: false,
+			placeVisitedToDelete: {}
 		}
 	}
 
@@ -26,7 +30,23 @@ class MyPlacesVisited extends React.Component {
 		this.setState({ showReportPlaceVisitedModal: false });
 	} 
 
+	showDeletePlaceVisitedModal = (placeVisitedToDelete) => {
+		this.setState({
+			showDeletePlaceVisitedModal: true,
+			placeVisitedToDelete: placeVisitedToDelete
+		});
+	}
+
+	hideDeletePlaceVisitedModal = () => {
+		this.setState({
+			showDeletePlaceVisitedModal: false,
+			placeVisitedToDelete: {}
+		});
+	}
+
   render() {
+		console.log('places visited:', this.props.usersPlacesVisited);
+
   	return (
 			<React.Fragment>
 
@@ -35,6 +55,12 @@ class MyPlacesVisited extends React.Component {
 					showModal={ this.state.showReportPlaceVisitedModal }
 					hideModal={ this.hideReportPlaceVisitedModal }
 					/>
+
+				{/* Modal for deleting a place the user has visited */}
+				<DeletePlaceVisitedModal 
+					showModal={ this.state.showDeletePlaceVisitedModal }
+					hideModal={ this.hideDeletePlaceVisitedModal }
+				/>
 
   			<div className="mt-4">  
 					<h5>Places Visited</h5>
@@ -47,6 +73,20 @@ class MyPlacesVisited extends React.Component {
 						onClick={ this.showReportPlaceVisitedModal }>
 						Report Place Visited
 					</Button>
+
+					<Row className="py-4">
+						{/* Shows all of the places the user has visited */}
+						{this.props.usersPlacesVisited.map((placeVisited, i) => {
+							return (
+								<Col key={ i } md={ 6 } sm={ 12 }>
+									<PlaceVisitedCard 
+										placeVisited={ placeVisited }
+										deleteButtonOnClick={ this.showDeletePlaceVisitedModal } />
+								</Col>
+							)
+						})}
+					</Row>
+
     		</div>
 			</React.Fragment>
     )
@@ -54,6 +94,12 @@ class MyPlacesVisited extends React.Component {
 }
 
 
-export default connect(null, {})(MyPlacesVisited);
+const mapStateToProps = (state) => {
+	return {
+		usersPlacesVisited: state.placesVisited.usersPlacesVisited
+	}
+}
+
+export default connect(mapStateToProps, {})(MyPlacesVisited);
 
 
