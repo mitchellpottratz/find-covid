@@ -19,8 +19,13 @@ class ReportPlaceVisitedModal extends React.Component {
 		}
 	}
 
+	handleChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value })
+	}
+
 	handleDateChange = (date) => {
 		this.setState({
+			name: '',
 			date_visited: date
 		});
 	}
@@ -38,6 +43,17 @@ class ReportPlaceVisitedModal extends React.Component {
 				<Form
 					className="py-3 text-center"
 					onSubmit={ this.handleSubmit } >
+
+					<Form.Group>
+						<Form.Label>What is the name of this place?</Form.Label>
+						<Form.Control 
+							required
+							type="text"
+							name="name"
+							placeholder="Name"
+							value={ this.state.name }
+							onChange={ this.handleChange } />
+					</Form.Group>
 					
 					<Form.Group>
 						<Form.Label>When did you visit this place?</Form.Label>
@@ -46,6 +62,7 @@ class ReportPlaceVisitedModal extends React.Component {
 							value={ this.state.date_visited }
 							onChange={ this.handleDateChange } />
 					</Form.Group>
+
 				</Form>
 
 				</Modal.Body>
