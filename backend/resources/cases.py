@@ -62,7 +62,7 @@ def create_case():
         data = request.get_json()
 
         symptoms_date = data['symptoms_date']
-        address = data['address']
+        zip_code = data['zip_code']
         age = data['age']
         has_tested = data['has_tested']
 
@@ -85,7 +85,7 @@ def create_case():
             new_case = Case.create(
                 user=current_user.id,
                 symptoms_date=symptoms_date,
-                address=address,
+                zip_code=zip_code,
                 age=age,
                 has_tested=has_tested
             )
