@@ -77,8 +77,8 @@ function CovidFaqs(props) {
 					</Card.Body>
     		</Accordion.Collapse>
 
-				<Card.Footer>
-			    <p> 
+				<Card.Footer className="text-center">
+			    <small> 
 						<span className="mb-2">
 							All information is from the Centers for Disease Control and Prevention
 						</span><br></br>
@@ -87,7 +87,7 @@ function CovidFaqs(props) {
 						  target="_blank">
 					    Learn More 
 					  </a>
-					</p>
+					</small>
 				</Card.Footer>
   		</Card>
 
