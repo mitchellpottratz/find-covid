@@ -106,7 +106,7 @@ def delete_place_visited(place_id):
                     'code': 401,
                     'message': 'Resource access denied'
                 }
-        )
+            )
 
     except DoesNotExist:
         return jsonify(

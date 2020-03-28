@@ -113,6 +113,44 @@ def create_case():
         ) 
 
 
+# Delete Route
+# this route is where a user can delete their case
+@cases.route('/<case_id>', methods=['DELETE'])
+@login_required
+def delete_case(case_id):
+    try:
+        # if the user is not the owner of the case
+        if case_id != current_user.id:
+            return jsonify(
+                data={},
+                status={
+                    'code': 401,
+                    'message': 'Resource access denied'
+                }
+            )
+
+        case = Case.delete(Case.user = case_id)
+
+        return jsonify(
+            data={},
+            status={
+                'code': 204,
+                'message': 'Successfully deleted the user case'
+            }
+        )
+
+    except DoesNotExist:
+        return jsonify(
+            data={},
+            status={
+                'code': 404,
+                'message': 'Resource does not exist'
+            }
+        )
+    
+
+
+
 
 
 

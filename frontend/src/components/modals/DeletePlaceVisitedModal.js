@@ -24,9 +24,10 @@ class DeletePlaceVisitedModal extends React.Component {
 	}
 	
 	render() {
-		console.log('placeVisited:', this.props.placeVisited);
 		const placeVisited = this.props.placeVisited;
 
+		// so the modal is not returned if the user is not trying to delete a place
+		// they have visited
 		if (!placeVisited.name) {
 			return (
 				null
