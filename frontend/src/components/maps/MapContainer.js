@@ -58,6 +58,8 @@ class MapContainer extends React.Component {
 	}
 
   render() {
+		console.log('api key:', process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+
     return (
 			<React.Fragment>
 
@@ -94,7 +96,7 @@ class MapContainer extends React.Component {
 					</Card.Body>
 				</Card>
 
-				{/* {this.state.mapIsLoading ? (
+				{this.state.mapIsLoading ? (
 					<div className="text-center">
 						<Spinner animation="border" className="m" />
 					</div>
@@ -103,7 +105,7 @@ class MapContainer extends React.Component {
 						usersLocation={ this.state.usersLocation } 
 						mapIsLoading={ this.state.mapIsLoading }
 					/>
-				)} */}
+				)}
 
 			</React.Fragment>
     )

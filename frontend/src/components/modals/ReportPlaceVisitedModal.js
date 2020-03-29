@@ -18,7 +18,7 @@ class ReportPlaceVisitedModal extends React.Component {
 
 		this.state = {
 			name: '',
-			address: null,
+			location: {},
 			date_visited: new Date(),
 			isLoading: false,
 			formErrorMessages: []
@@ -89,11 +89,15 @@ class ReportPlaceVisitedModal extends React.Component {
 					<Form.Group>
 						<Form.Label>What is the address of this place?</Form.Label>
 						<GoogleComponent
-          		apiKey={ process.env.REACT_APP_GOOGLE_MAPS_API_KEY }
-          		language={ 'en' }
-          		country={ 'country:in|country:us' }
-          		coordinates={ true }
-          		onChange={ (e) => { this.setState({ address: e }) } } />
+            	apiKey={ process.env.REACT_APP_GOOGLE_MAPS_API_KEY }
+              language={"en"}
+              country={"country:in|country:us"}
+            	coordinates={true}
+              onChange={value => {
+              	this.setState({ location: value });
+              }} 
+						/>
+
 					</Form.Group>
 					
 					<Form.Group>
