@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "babel-loader": "^8.1.0",
     "bootstrap": "^4.4.1",
     "google-maps-react": "^2.0.2",
+    "html-webpack-plugin": "^4.0.3",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-date-picker": "^7.10.0",
@@ -20,13 +24,14 @@
     "react-scripts": "3.4.1",
     "react-verification-code-input": "^1.2.3",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "start": "HOST=0.0.0.0 PORT=3000 react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "eslintConfig": {
     "extends": "react-app"
