@@ -21,8 +21,8 @@ class Server:
         self.login_manager = login_manager
         self.app.secret_key = os.environ['SECRET_KEY']
 
+        self.setup_cors(blueprints)
         self.register_blueprints(blueprints)
-        self.setup_cors()
 
 
     def set_host(self):
@@ -39,8 +39,9 @@ class Server:
             return os.environ['ORIGIN']
 
 
-    def setup_cors(self):
-        CORS(self.app, origins=self.ORIGIN, supports_credentials=True)
+    def setup_cors(self, blueprints):
+        for blueprint in blueprints:
+            CORS(blueprint[0], origins='http://localhost:3000', supports_credentials=True)
 
 
     def register_blueprints(self, blueprints):
@@ -51,7 +52,7 @@ class Server:
     def start(self):
         print('Debug:', self.DEBUG)
         print('Starting Flask server on:', self.PORT)
-        serve(self.app, host='0.0.0.0', port=self.PORT)
+        serve(self.app, host='localhost', port=self.PORT)
 
 
 

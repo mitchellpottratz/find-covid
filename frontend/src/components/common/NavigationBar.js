@@ -20,7 +20,7 @@ class NavigationBar extends React.Component {
         id="navbar"
         bg="dark" 
         variant="dark">
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar.Brand href="#home">Navbar test</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="/map">Map</Nav.Link>
         </Nav>
