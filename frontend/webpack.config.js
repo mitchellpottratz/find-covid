@@ -4,26 +4,28 @@ const webpack = require('webpack');
 
 
 module.exports = {
-	entry: './src/index.js',
-	output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'react-app-bundle.bundle.js'
-	},
 	module: {
 		rules: [
-			{
-				test: /\.js$/,
+		  {
+				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: {
-					loader: 'babel-loader',
-					options: {
-						presets: ['@babel/preset-env']
-					}
+			  	loader: "babel-loader"
 				}
-			}
+			},
+			{
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader"
+          }
+        ]
+			},
+			{
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
 		]
-	},
-	plugins: [
-    new HtmlWebpackPlugin({template: './src/index.html'})
-  ]
+	}
 }
+
