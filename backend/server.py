@@ -1,4 +1,5 @@
 from flask_cors import CORS
+from waitress import serve
 
 import os
 from dotenv import load_dotenv
@@ -50,7 +51,7 @@ class Server:
     def start(self):
         print('Debug:', self.DEBUG)
         print('Starting Flask server on:', self.PORT)
-        self.app.run(host=self.HOST, debug=self.DEBUG, port=self.PORT)
+        serve(self.app, host='0.0.0.0', port=self.PORT)
 
 
 
