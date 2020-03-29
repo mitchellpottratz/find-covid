@@ -13,6 +13,7 @@
     "babel-loader": "^8.1.0",
     "bootstrap": "^4.4.1",
     "css-loader": "^3.4.2",
+    "express": "^4.17.1",
     "google-maps-react": "^2.0.2",
     "html-webpack-plugin": "^4.0.3",
     "react": "^16.13.1",
