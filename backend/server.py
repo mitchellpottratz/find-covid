@@ -19,8 +19,8 @@ class Server:
         self.app.secret_key = os.environ['SECRET_KEY']
         self.origin = self.set_origin()
 
-        self.setup_cors()
         self.register_blueprints(blueprints)
+        self.setup_cors()
 
 
     def set_origin(self):
@@ -31,7 +31,7 @@ class Server:
 
 
     def setup_cors(self):
-        CORS(self.app, resources={r"/*": {"origins": "*"}})
+        CORS(self.app, origins=self.origin, supports_credentials=True)
 
 
     def register_blueprints(self, blueprints):
