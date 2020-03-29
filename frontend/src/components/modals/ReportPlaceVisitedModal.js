@@ -47,11 +47,14 @@ class ReportPlaceVisitedModal extends React.Component {
 		// body needs to be reformatted
 		const requestBody = {
 			name: this.state.name,
-			address: this.state.address.place,
+			address: this.state.location.place,
+			latitude: this.state.location.coordinates.lat,
+			longitude: this.state.location.coordinates.lng,
 			date_visited: this.state.date_visited
 		}
 
 		const response = await this.props.createUsersPlaceVisited(requestBody);
+		console.log('response:', response);
 
 		this.setState({ isLoading: false });
 

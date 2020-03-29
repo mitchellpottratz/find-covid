@@ -52,7 +52,7 @@ def create_place_visited():
             )
 
             new_place_visited_dict = model_to_dict(new_place_visited)
-            del new_place_visited_dict['case']['user']['password']
+            del new_place_visited_dict['case']['user']
 
             return jsonify(
                 data=new_place_visited_dict,
