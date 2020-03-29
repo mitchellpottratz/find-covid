@@ -36,8 +36,6 @@ def create_place_visited():
         date_visited = data['date_visited']
         name = data['name']
         address = data['address']
-        latitude = data['latitude']
-        longitude = data['longitude']
 
         try:    
             users_case = Case.get(Case.user == current_user.id)
@@ -47,8 +45,6 @@ def create_place_visited():
                 date_visited=date_visited,
                 name=name,
                 address=address,
-                latitude=latitude,
-                longitude=longitude
             )
 
             new_place_visited_dict = model_to_dict(new_place_visited)

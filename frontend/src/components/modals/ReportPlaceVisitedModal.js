@@ -18,7 +18,7 @@ class ReportPlaceVisitedModal extends React.Component {
 
 		this.state = {
 			name: '',
-			address: '',
+			address: null,
 			date_visited: new Date(),
 			isLoading: false,
 			formErrorMessages: []
@@ -43,7 +43,15 @@ class ReportPlaceVisitedModal extends React.Component {
 			isLoading: true
 		});
 
-		const response = await this.props.createUsersPlaceVisited(this.state);
+		// address is formatted as a object by the google api so the request 
+		// body needs to be reformatted
+		const requestBody = {
+			name: this.state.name,
+			address: this.state.address.place,
+			date_visited: this.state.date_visited
+		}
+
+		const response = await this.props.createUsersPlaceVisited(requestBody);
 
 		this.setState({ isLoading: false });
 
@@ -85,7 +93,7 @@ class ReportPlaceVisitedModal extends React.Component {
           		language={ 'en' }
           		country={ 'country:in|country:us' }
           		coordinates={ true }
-          		onChange={(e) => { this.setState({ address: e }) }} />
+          		onChange={ (e) => { this.setState({ address: e }) } } />
 					</Form.Group>
 					
 					<Form.Group>
