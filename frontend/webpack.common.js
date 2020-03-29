@@ -28,8 +28,12 @@ module.exports = {
       },
 		]
 	},
-	plugins: [
-		new HtmlWebpackPlugin({template: './src/index.html'}),
-  ]
+	// plugins: [
+	// 	new HtmlWebpackPlugin({template: './src/index.html'}),
+	// ],
+	output: {
+		filename: 'react-app-bundle.bundle.js',
+		path: path.resolve(__dirname, 'dist'),
+	},
 }
 
