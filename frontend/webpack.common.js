@@ -8,8 +8,8 @@ module.exports = {
 	module: {
 		rules: [
 		  {
-				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
+				test: /\.(js|jsx)$/,
 				use: {
 			  	loader: "babel-loader"
 				}
@@ -27,6 +27,9 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
 		]
-	}
+	},
+	plugins: [
+		new HtmlWebpackPlugin({template: './src/index.html'}),
+  ]
 }
 

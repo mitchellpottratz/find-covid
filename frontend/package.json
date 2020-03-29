@@ -4,17 +4,17 @@
   "private": true,
   "homepage": "http://34.66.169.235",
   "dependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
+    "@babel/runtime": "^7.9.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "babel-loader": "^8.1.0",
     "bootstrap": "^4.4.1",
+    "core-js": "^3.6.4",
     "css-loader": "^3.4.2",
     "express": "^4.17.1",
     "google-maps-react": "^2.0.2",
+    "html-loader": "^1.0.0",
     "html-webpack-plugin": "^4.0.3",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
@@ -29,6 +29,7 @@
     "react-verification-code-input": "^1.2.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.13.5",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-merge": "^4.2.2"
@@ -36,7 +37,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "state": "node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,5 +54,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "babel-loader": "^8.1.0"
   }
 }
