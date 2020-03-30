@@ -20,6 +20,7 @@ class ReportPlaceVisitedModal extends React.Component {
 		this.state = {
 			name: '',
 			place: '',
+			placeId: '',
 			date_visited: new Date(),
 			isSearchingForPlace: false,
 			searchPlacePredictions: [],
@@ -69,10 +70,18 @@ class ReportPlaceVisitedModal extends React.Component {
 		}
 	}
 
-
 	handleSearchPredictionClick = (place) => {
-		console.log('place:', place);
+		const placeDescription = place.description;
+		const placeId = place.place_id;
+
+		this.setState({ 
+			isSearchingForPlace: false,
+			place: placeDescription,
+			placeId: placeId
+		});
 	}
+
+	
 
 	handleSubmit = async (e) => {
 		e.preventDefault();
