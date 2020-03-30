@@ -11,7 +11,7 @@ in the last 7 days.
 
 
 class PlaceVisited(BaseModel):
-    case = ForeignKeyField(Case, backref='places_visited')
+    case = ForeignKeyField(Case, backref='places_visited', on_delete='CASCADE')
     date_visited = DateField()
     name = CharField(max_length=150)
     address = CharField(max_length=250)

@@ -26,6 +26,7 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 userInfo: {
+                    ...state.userInfo,
                     phone_number_confirmed: true
                 }
             }

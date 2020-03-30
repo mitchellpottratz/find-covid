@@ -132,8 +132,8 @@ class GoogleMap extends React.Component {
 							/>
 						)
 					}
-
 				})
+				
 			}		
 			</Map>
 

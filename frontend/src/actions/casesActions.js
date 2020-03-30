@@ -22,8 +22,8 @@ export const createUsersCase = (caseInfo) => async (dispatch) => {
 }
 
 
-export const deleteUsersCase = (caseId) => async (dispatch) => {
-    const response = await casesAPI.deleteUsersCase(caseId);
+export const deleteUsersCase = (userId) => async (dispatch) => {
+    const response = await casesAPI.deleteUsersCase(userId);
 
     if (response.status.code === 204) {
         dispatch({
