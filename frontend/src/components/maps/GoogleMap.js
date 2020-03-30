@@ -18,8 +18,6 @@ class GoogleMap extends React.Component {
 			currentTestPositiveCase: {},
 			currentSymptomsCase: {}
 		}
-
-		console.log('google maps props:', this.props);
 	}
 
 	showVeiwTestedPositiveCaseModal = (testedPositiveCase) => {

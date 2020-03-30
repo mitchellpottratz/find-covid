@@ -37,11 +37,7 @@ class ViewTestedPositiveModal extends React.Component {
 
 	// makes a request to the google places api with the places id passed into the parameters
 	getPlacesInformation = (placeId) => {
-		fetch(
-			'http://maps.googleapis.com/maps/api/place/details/json?place_id=' + placeId +
-			'&fields=name,rating,formatted_phone_number' +
-			'&key=' + process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-		)
+		fetch('http://localhost:8000/api/v1/places-visited/' + placeId + '/details')
 		.then((response) => {
 			const parsedResponse = response.json();
 			console.log('place details response:', parsedResponse);

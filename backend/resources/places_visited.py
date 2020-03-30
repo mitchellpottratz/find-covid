@@ -1,5 +1,7 @@
-from flask import request, jsonify, Blueprint
+import os
+import requests
 
+from flask import request, jsonify, Blueprint
 from flask_login import login_required, current_user
 from playhouse.shortcuts import model_to_dict
 from peewee import DoesNotExist
@@ -45,6 +47,26 @@ def get_all_places_visited():
     )
 
 
+# Get Place Information Route
+# this route uses the google places api to get information about a place using the place id
+@places_visited.route('/<google_place_id>/details', methods=['GET'])
+def get_place_details(google_place_id):
+    response = requests.get(
+        'https://maps.googleapis.com/maps/api/place/details/json?place_id=' + google_place_id + 
+        '&fields=name,rating,formatted_phone_number' + 
+        '&key=' + os.environ['GOOGLE_MAPS_API_KEY']
+    )
+    parsed_response = response.json()
+    print('reponse:', parsed_response)
+
+    return jsonify(
+        data=parsed_response,
+        status={
+            'code': 200,
+            'message': 'Successfully got places information'
+        }
+    )
+    
 
 
 
