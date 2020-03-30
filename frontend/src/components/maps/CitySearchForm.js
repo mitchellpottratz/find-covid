@@ -41,13 +41,21 @@ class CitySearchForm extends React.Component {
 	}
 
 	// when a city from the search results drop down is clicked
-	handleSearchPredictionClick = (city) => {
+	handleSearchPredictionClick = async (city) => {
 		console.log('city:', city);
 
 		this.setState({
 			city: city.description,
 			isSearching: false
 		})
+
+		// makes request to get the latitude and longitude of the city
+		const googlePlaceId = city.place_id;
+		const response = await fetch(
+			'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + googlePlaceId
+		);
+		const parsedResponse = await response.json()
+		console.log('response:', parsedResponse)
 	}
 	
 	render() {

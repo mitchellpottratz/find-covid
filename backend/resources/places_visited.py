@@ -65,8 +65,6 @@ def get_place_details(google_place_id):
             'message': 'Successfully got places information'
         }
     )
-    
-
 
 
 # Create Route

@@ -20,7 +20,7 @@ class MapContainer extends React.Component {
 
 		this.state = {
 			mapIsLoading: true,
-			usersLocation: {
+			mapsLocation: {
 				lat: 0,
 				lng: 0
 			},
@@ -33,22 +33,27 @@ class MapContainer extends React.Component {
 		this.props.getPlacesOnMap();
 	}
 
-	// uses the google maps api to get the users current location
+	// uses the google maps api to get the users current location 
 	setUsersLocation = () => {
 		if (navigator.geolocation) {
 			let location;
 			navigator.geolocation.getCurrentPosition((position) => {
+				
 				location = {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
 				}
 
 				this.setState({ 
-					usersLocation: location,
+					mapsLocation: location,
 					mapIsLoading: false 
 				})
 			});	
 		}
+	}
+	
+	setCitiesLocation = (coordinates) => {
+		this.setState({ mapsLocation: coordinates });
 	}
 
 	showModal = () => {
@@ -60,8 +65,6 @@ class MapContainer extends React.Component {
 	}
 
   render() {
-		console.log('api key:', process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
-
     return (
 			<React.Fragment>
 
@@ -77,7 +80,9 @@ class MapContainer extends React.Component {
 					<Card.Body>
 				  <Row>
 						<Col>
-							<CitySearchForm />
+							<CitySearchForm 
+								setCitiesLocations={ this.setCitiesLocation }
+								/>
 						</Col>
 						<Col>
 
@@ -109,7 +114,7 @@ class MapContainer extends React.Component {
 				) : (
 					<GoogleMap 
 						mapIsLoading={ this.state.mapIsLoading }
-						usersLocation={ this.state.usersLocation } 
+						mapsLocation={ this.state.mapsLocation } 
 						placesOnMap={ this.props.placesOnMap }
 
 					/>

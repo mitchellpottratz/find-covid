@@ -12,8 +12,8 @@ class GoogleMap extends React.Component {
 		super(props);
 
 		this.state = {
-			usersLatitude: this.props.usersLocation.lat,
-			usersLongitude: this.props.usersLocation.lng,
+			mapsLatitude: this.props.mapsLocation.lat,
+			mapsLongitude: this.props.mapsLocation.lng,
 			viewSymptomCaseModal: false,
 			viewTestedPositiveCaseModal: false,
 
@@ -80,7 +80,7 @@ class GoogleMap extends React.Component {
       	google={ this.props.google }
 				zoom={ 13 }
 				style={ mapStyles }
-				initialCenter={{ lat: this.state.usersLatitude, lng: this.state.usersLongitude }}
+				initialCenter={{ lat: this.state.mapsLatitude, lng: this.state.mapsLongitude }}
 				>
 
 				{/* users location marker */}
@@ -133,7 +133,7 @@ class GoogleMap extends React.Component {
 						)
 					}
 				})
-				
+
 			}		
 			</Map>
 
