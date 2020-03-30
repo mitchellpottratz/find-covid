@@ -18,11 +18,16 @@ class GoogleMap extends React.Component {
 			currentTestPositiveCase: {},
 			currentSymptomsCase: {}
 		}
+
+		console.log('google maps props:', this.props);
 	}
 
-	showVeiwTestedPositiveCaseModal = () => {
+	showVeiwTestedPositiveCaseModal = (testedPositiveCase) => {
 		console.log('clicked')
-		this.setState({ viewTestedPositiveCaseModal: true })
+		this.setState({ 
+			currentTestPositiveCase: testedPositiveCase,
+			viewTestedPositiveCaseModal: true 
+		})
 	}
 
 	hideVeiwTestedPositiveCaseModal = () => {
@@ -37,11 +42,16 @@ class GoogleMap extends React.Component {
 
     return (
 			<React.Fragment>
-
-			<ViewTestedPositiveModal
-				showModal={ this.state.viewTestedPositiveCaseModal }
-				hideModal={ this.hideVeiwTestedPositiveCaseModal }
-				currentTestPositiveCase={ this.state.currentTestPositiveCase } />
+	
+			{this.state.viewTestedPositiveCaseModal ? (
+				<ViewTestedPositiveModal
+					showModal={ this.state.viewTestedPositiveCaseModal }
+					hideModal={ this.hideVeiwTestedPositiveCaseModal }
+					caseInfo={ this.state.currentTestPositiveCase }
+					google={ this.props.google } />
+			) : (
+				null
+			)}	
 
 
     	<Map
@@ -79,7 +89,7 @@ class GoogleMap extends React.Component {
       						url: "tested-positive-map-marker.svg",
       						scaledSize: new this.props.google.maps.Size(15, 15)
 								}}
-								onClick={ this.showVeiwTestedPositiveCaseModal }
+								onClick={ () => this.showVeiwTestedPositiveCaseModal(place) }
 							/>
 						)
 

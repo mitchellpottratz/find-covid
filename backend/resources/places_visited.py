@@ -47,6 +47,7 @@ def get_all_places_visited():
 
 
 
+
 # Create Route
 # this route is where a user can add places they have visited in the last 
 # 7 days of showing symptoms
