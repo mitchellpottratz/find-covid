@@ -129,7 +129,13 @@ def delete_case(user_id):
                 }
             )
 
-        case = Case.delete().where(Case.user == user_id).execute()
+        # the places visited by the person who reported this case get deleted here
+        delete_places_visited = PlaceVisited.delete().where(
+            PlaceVisited.case == user_id
+        ).execute()
+
+        # then the actual case is deleted
+        delete_case = Case.delete().where(Case.user == user_id).execute()
 
         return jsonify(
             data={},

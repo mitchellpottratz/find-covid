@@ -16,8 +16,7 @@ class DeleteCaseModal extends React.Component {
 
 	handleDelete = async (e) => {
 		e.preventDefault();
-		console.log('userId:', this.props.userId);
-		
+
 		const response = await this.props.deleteUsersCase(this.props.userId);
 		
 		this.props.hideModal();

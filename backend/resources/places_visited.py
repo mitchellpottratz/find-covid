@@ -31,7 +31,6 @@ def ping():
 @places_visited.route('/', methods=['GET'])
 def get_all_places_visited():
     all_places_visited = PlaceVisited.select()
-    print('places visited count:', all_places_visited.count())
 
     places_visited_dicts = []
     for place_visited in all_places_visited:
