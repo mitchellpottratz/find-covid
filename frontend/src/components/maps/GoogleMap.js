@@ -30,7 +30,6 @@ class GoogleMap extends React.Component {
       />
     )
 	}
-
 }
 
 export default GoogleApiWrapper({

@@ -24,6 +24,26 @@ def ping():
     )
 
 
+# Index Route
+# this route returns all the places that have been visited by people reporting symptoms
+@places_visited.route('/', methods=['GET'])
+def get_all_places_visited():
+    all_places_visited = PlaceVisited.select()
+
+    places_visited_dict = [model_to_dict(place_visited) for place_visited in all_places_visited]
+    print('places visited:', places_visited_dict)
+
+    return jsonify(
+        data=places_visited_dict,
+        status={
+            'code': 200,
+            'message': 'Successfully got places visited'
+        }
+    )
+
+
+
+
 # Create Route
 # this route is where a user can add places they have visited in the last 
 # 7 days of showing symptoms

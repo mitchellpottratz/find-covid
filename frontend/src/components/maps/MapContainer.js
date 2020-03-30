@@ -78,12 +78,16 @@ class MapContainer extends React.Component {
 							<CitySearchForm />
 						</Col>
 						<Col>
+
+							{/* if the user is logged in show the butto that allows them to report their symptoms */}
 							{this.props.isLoggedIn ? (
 								<div className="d-flex d-flex flex-row-reverse">
 									<ReportSymptomsButton 
 										userHasCase={ this.props.usersCase } 
 										showModal={ this.showModal } />
 								</div>
+
+							// if the user isnt logged in they are shown a link to register
 							) : (
 								<p className="text-center">
 									Feeling Symptoms? <br></br>
@@ -98,7 +102,7 @@ class MapContainer extends React.Component {
 
 				{this.state.mapIsLoading ? (
 					<div className="text-center">
-						<Spinner animation="border" className="m" />
+						<Spinner animation="border" className="mt-4" />
 					</div>
 				) : (
 					<GoogleMap 

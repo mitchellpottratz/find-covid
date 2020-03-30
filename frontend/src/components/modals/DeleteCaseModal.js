@@ -18,13 +18,11 @@ class DeleteCaseModal extends React.Component {
 		e.preventDefault();
 
 		const response = await this.props.deleteUsersCase(this.props.userId);
-		console.log('response:', response);
-
+		
 		this.props.hideModal();
 	}
 	
 	render() {
-		console.log('users case id:', this.props.userId)
 		const usersCase = this.props.usersCase;
 
 		return (

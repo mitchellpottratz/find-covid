@@ -43,9 +43,7 @@ class MyCase extends React.Component {
 		const { isLoggedIn, userInfo, usersCase } = this.props;
 
 		// determines if the user has reported a case already
-		console.log('users case:', usersCase);
 		const userHasCase = usersCase.zip_code;
-		console.log('user has case:', userHasCase);
 
     return (
 			<Container>
