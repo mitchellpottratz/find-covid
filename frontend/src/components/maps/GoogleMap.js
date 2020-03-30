@@ -48,6 +48,8 @@ class GoogleMap extends React.Component {
 	}
 
   render() {
+		console.log('maps location:', this.props.mapsLocation);
+
 		const mapStyles = {
 			width: '100%',
 			height: '80%',
@@ -80,14 +82,19 @@ class GoogleMap extends React.Component {
       	google={ this.props.google }
 				zoom={ 13 }
 				style={ mapStyles }
-				initialCenter={{ lat: this.state.mapsLatitude, lng: this.state.mapsLongitude }}
+				initialCenter={
+					{ lat: this.props.mapsLocation.lat, lng: this.props.mapsLocation.lng }
+				}
+				center={ 
+					{ lat: this.props.mapsLocation.lat, lng: this.props.mapsLocation.lng }
+				}
 				>
 
 				{/* users location marker */}
 				<Marker 
 					title={ "Current Location" }
 					position={
-						{lat: this.state.usersLatitude, lng: this.state.usersLongitude}
+						{lat: this.state.mapsLatitude, lng: this.state.mapsLongitude}
 					}
 					icon={{
       			url: "user-map-marker.svg",

@@ -42,8 +42,6 @@ class CitySearchForm extends React.Component {
 
 	// when a city from the search results drop down is clicked
 	handleSearchPredictionClick = async (city) => {
-		console.log('city:', city);
-
 		this.setState({
 			city: city.description,
 			isSearching: false
@@ -55,14 +53,16 @@ class CitySearchForm extends React.Component {
 			'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + googlePlaceId
 		);
 		const parsedResponse = await response.json()
-		console.log('response:', parsedResponse)
+
+		// changes the position of the map to whatever city was searched
+		this.props.setCitiesLocations(parsedResponse.data.result.geometry.location)
 	}
 	
 	render() {
 		return (
 			<Form>
 				<Row>
-					<Col md={ 8 } sm={ 9 }>
+					<Col md={ 8 } sm={ 12 }>
 							<MDBInput
 								className="mb-0 pb-0"
 								type="text"
@@ -91,12 +91,7 @@ class CitySearchForm extends React.Component {
 							)}
 	
 					</Col>
-					<Col md={ 4 } sm={ 3 }>
-						<FormButton 
-							variant="dark"
-							text="Search"
-							isLoading={ this.state.isLoading } />
-					</Col>
+					<Col></Col>
 				</Row>
 					
 			</Form>
