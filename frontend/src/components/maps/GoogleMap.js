@@ -1,7 +1,10 @@
 import React from 'react';
 
 // components
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import SymptomMarker from './SymptomMarker.js';
 
 
 class GoogleMap extends React.Component {
@@ -24,12 +27,24 @@ class GoogleMap extends React.Component {
 		}
 
     return (
+			
     	<Map
-      	google={this.props.google}
-				zoom={ 8 }
+      	google={ this.props.google }
+				zoom={ 13 }
 				style={ mapStyles }
-        initialCenter={{ lat: this.state.usersLatitude, lng: this.state.usersLongitude }}
-      />
+				initialCenter={{ lat: this.state.usersLatitude, lng: this.state.usersLongitude }}
+				>
+				<Marker 
+					name={ "Your Location" }
+					position={
+						{lat: this.state.usersLatitude, lng: this.state.usersLongitude}
+					}
+					icon={{
+      			url: "user-map-marker.svg",
+      			scaledSize: new this.props.google.maps.Size(20,20)
+    			}}
+				/>
+			</Map>
     )
 	}
 }
