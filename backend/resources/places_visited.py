@@ -57,7 +57,6 @@ def get_place_details(google_place_id):
         '&key=' + os.environ['GOOGLE_MAPS_API_KEY']
     )
     parsed_response = response.json()
-    print('reponse:', parsed_response)
 
     return jsonify(
         data=parsed_response,
