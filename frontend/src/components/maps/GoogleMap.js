@@ -13,6 +13,8 @@ class GoogleMap extends React.Component {
 			usersLatitude: this.props.usersLocation.lat,
 			usersLongitude: this.props.usersLocation.lng 
 		}
+
+		console.log('places on map:', this.props.placesOnMap);
 	}
 
   render() {

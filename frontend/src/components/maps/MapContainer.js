@@ -107,8 +107,10 @@ class MapContainer extends React.Component {
 					</div>
 				) : (
 					<GoogleMap 
-						usersLocation={ this.state.usersLocation } 
 						mapIsLoading={ this.state.mapIsLoading }
+						usersLocation={ this.state.usersLocation } 
+						placesOnMap={ this.props.placesOnMap }
+
 					/>
 				)}
 
@@ -123,7 +125,8 @@ const mapStateToProps = (state) => {
 	return {
 		isLoggedIn: state.user.isLoggedIn,
 		userInfo: state.user.userInfo,
-		usersCase: state.cases.usersCase
+		usersCase: state.cases.usersCase,
+		placesOnMap: state.placesVisited.placesOnMap
 	}
 }
 

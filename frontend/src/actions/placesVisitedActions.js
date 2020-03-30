@@ -17,7 +17,6 @@ export const getPlacesOnMap = () => async (dispatch) => {
             payload: response.data
         });
     }
-
 }
 
 
