@@ -2,6 +2,7 @@ import React from 'react';
 
 // components
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import ViewTestedPositiveModal from '../modals/ViewTestedPositiveModal.js';
 
 
 class GoogleMap extends React.Component {
@@ -12,17 +13,21 @@ class GoogleMap extends React.Component {
 		this.state = {
 			usersLatitude: this.props.usersLocation.lat,
 			usersLongitude: this.props.usersLocation.lng,
-			showSymptomCaseModal: false,
-			showTestedPositiveCaseModal: false
+			viewSymptomCaseModal: false,
+			viewTestedPositiveCaseModal: false,
+			currentTestPositiveCase: {},
+			currentSymptomsCase: {}
 		}
 	}
 
-	onMarkerClick = (props, marker, e) => {
-		console.log('props:', props);
-		console.log('marker:', marker);
-		console.log('e:', e);
+	showVeiwTestedPositiveCaseModal = () => {
+		console.log('clicked')
+		this.setState({ viewTestedPositiveCaseModal: true })
 	}
 
+	hideVeiwTestedPositiveCaseModal = () => {
+		this.setState({ viewTestedPositiveCaseModal: false })
+	}
 
   render() {
 		const mapStyles = {
@@ -31,7 +36,14 @@ class GoogleMap extends React.Component {
 		}
 
     return (
-			
+			<React.Fragment>
+
+			<ViewTestedPositiveModal
+				showModal={ this.state.viewTestedPositiveCaseModal }
+				hideModal={ this.hideVeiwTestedPositiveCaseModal }
+				currentTestPositiveCase={ this.state.currentTestPositiveCase } />
+
+
     	<Map
       	google={ this.props.google }
 				zoom={ 13 }
@@ -67,7 +79,7 @@ class GoogleMap extends React.Component {
       						url: "tested-positive-map-marker.svg",
       						scaledSize: new this.props.google.maps.Size(15, 15)
 								}}
-								onClick={ this.onMarkerClick }
+								onClick={ this.showVeiwTestedPositiveCaseModal }
 							/>
 						)
 
@@ -91,6 +103,8 @@ class GoogleMap extends React.Component {
 				})
 			}		
 			</Map>
+
+			</React.Fragment>
     )
 	}
 }

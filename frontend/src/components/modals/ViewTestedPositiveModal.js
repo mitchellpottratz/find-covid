@@ -5,7 +5,7 @@ import { Modal } from 'react-bootstrap';
 
 class ViewTestedPositiveModal extends React.Component {
 
-  constuctor(props) {
+  constructor(props) {
 		super(props);
 	}
 	
@@ -18,7 +18,8 @@ class ViewTestedPositiveModal extends React.Component {
 	render() {
 		return (
 			<Modal 
-				show={ this.props.showTestedPositiveCaseModal } >
+				show={ this.props.showModal }
+				onHide={ this.props.hideModal } >
 					<Modal.Header>
 						<Modal.Title>Tested Positive</Modal.Title>
 					</Modal.Header>
