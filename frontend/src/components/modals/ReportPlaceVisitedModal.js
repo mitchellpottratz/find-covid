@@ -9,6 +9,7 @@ import { Modal, Form } from 'react-bootstrap';
 import DatePicker from 'react-date-picker';
 import { GoogleComponent } from 'react-google-location'
 import FormButton from '../common/FormButton.js';
+import { MDBInput, MDBListGroup, MDBListGroupItem } from "mdbreact"
 
 
 class ReportPlaceVisitedModal extends React.Component {
@@ -18,8 +19,10 @@ class ReportPlaceVisitedModal extends React.Component {
 
 		this.state = {
 			name: '',
-			location: {},
+			place: '',
 			date_visited: new Date(),
+			isSearchingForPlace: false,
+			searchPlacePredictions: [],
 			isLoading: false,
 			formErrorMessages: []
 		}
@@ -33,6 +36,42 @@ class ReportPlaceVisitedModal extends React.Component {
 		this.setState({
 			date_visited: date
 		});
+	}
+
+	// handle change for the location autocomplete input
+	handlePlaceChange = (e) => {
+		this.setState({ place: e.target.value });
+
+		if (this.state.place.length < 2) {
+			this.setState({ isSearchingForPlace: false })
+		} else {
+			this.setState({ isSearchingForPlace: true })
+		}
+
+		this.getAutocompleteResults();
+	}
+
+	getAutocompleteResults = async () => {
+		try {
+			const response = await fetch(
+				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place
+			);
+			const parsedResponse = await response.json();
+			const googleApiResponse = parsedResponse.data;
+
+			if (googleApiResponse.status === 'OK') {
+				this.setState({ searchPlacePredictions: googleApiResponse.predictions });
+			}
+
+		}	catch (error) {
+			// TODO - handle this error
+			console.log('error occurred while searching for places:', error);
+		}
+	}
+
+
+	handleSearchPredictionClick = (place) => {
+		console.log('place:', place);
 	}
 
 	handleSubmit = async (e) => {
@@ -91,16 +130,31 @@ class ReportPlaceVisitedModal extends React.Component {
 
 					<Form.Group>
 						<Form.Label>What is the address of this place?</Form.Label>
-						<GoogleComponent
-            	apiKey={ process.env.REACT_APP_GOOGLE_MAPS_API_KEY }
-              language={"en"}
-              country={"country:in|country:us"}
-            	coordinates={true}
-              onChange={value => {
-              	this.setState({ location: value });
-              }} 
-						/>
+						<Form.Control 
+							type="text"
+							name="place"
+							placeholder="Start typing..." 
+							value={ this.state.place }
+							onChange={ this.handlePlaceChange } />
 
+							{/* if the user is currently searching for the place they visited then the search 
+							    predictions box will appear for them to select a place */}
+							{this.state.isSearchingForPlace ? (
+								<MDBListGroup className="dropdown-search-box">
+              	{this.state.searchPlacePredictions.map((place, i) => {
+									return (
+										<MDBListGroupItem 
+											key={ i } 
+											className="dropdown-search-item"
+											onClick={ () => this.handleSearchPredictionClick(place) }>
+											{ place.description }
+										</MDBListGroupItem>
+									)
+								})}
+            	</MDBListGroup>
+							) : (
+								null
+							)}
 					</Form.Group>
 					
 					<Form.Group>

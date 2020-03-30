@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Form, Row, Col } from 'react-bootstrap';
 import { MDBInput, MDBListGroup, MDBListGroupItem } from "mdbreact"
-import FormButton from '../common/FormButton.js';
 
 
 class CitySearchForm extends React.Component {
