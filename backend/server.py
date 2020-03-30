@@ -41,7 +41,7 @@ class Server:
 
     def setup_cors(self, blueprints):
         for blueprint in blueprints:
-            CORS(blueprint[0], origins='http://localhost:3000', supports_credentials=True)
+            CORS(blueprint[0], origins='*', supports_credentials=True)
 
 
     def register_blueprints(self, blueprints):
