@@ -55,7 +55,10 @@ button {
   font-size: 0.9em;
 }
 
-
+.dropdonw-search-box {
+  position: absolute;
+  z-index: 1!important;
+}
 
 
 
