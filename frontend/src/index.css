@@ -55,9 +55,18 @@ button {
   font-size: 0.9em;
 }
 
-.dropdonw-search-box {
+.dropdown-search-box {
   position: absolute;
   z-index: 1!important;
+}
+
+.dropdown-search-item {
+  cursor: pointer;
+}
+
+.dropdown-search-item:hover {
+  opacity: 0.9;
+  background-color: lightgrey;
 }
 
 

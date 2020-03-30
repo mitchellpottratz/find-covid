@@ -39,6 +39,16 @@ class CitySearchForm extends React.Component {
 			this.setState({ searchPredictions: googleApiResponse.predictions });
 		}
 	}
+
+	// when a city from the search results drop down is clicked
+	handleSearchPredictionClick = (city) => {
+		console.log('city:', city);
+
+		this.setState({
+			city: city.description,
+			isSearching: false
+		})
+	}
 	
 	render() {
 		return (
@@ -56,10 +66,13 @@ class CitySearchForm extends React.Component {
 							{/* show the dropdown box to get city autocomplete predictions if the user 
 									is current searching */}
 							{this.state.isSearching ? (
-								<MDBListGroup className="dropdonw-search-box">
+								<MDBListGroup className="dropdown-search-box">
               	{this.state.searchPredictions.map((city, i) => {
 									return (
-										<MDBListGroupItem key={i}>
+										<MDBListGroupItem 
+											key={i} 
+											className="dropdown-search-item"
+											onClick={ () => this.handleSearchPredictionClick(city) }>
 											{ city.description }
 										</MDBListGroupItem>
 									)
