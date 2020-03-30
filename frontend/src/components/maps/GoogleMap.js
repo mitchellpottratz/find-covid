@@ -2,9 +2,6 @@ import React from 'react';
 
 // components
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-import SymptomMarker from './SymptomMarker.js';
 
 
 class GoogleMap extends React.Component {
@@ -16,8 +13,6 @@ class GoogleMap extends React.Component {
 			usersLatitude: this.props.usersLocation.lat,
 			usersLongitude: this.props.usersLocation.lng 
 		}
-
-		console.log('places on map:', this.props.placesOnMap);
 	}
 
   render() {
@@ -34,6 +29,8 @@ class GoogleMap extends React.Component {
 				style={ mapStyles }
 				initialCenter={{ lat: this.state.usersLatitude, lng: this.state.usersLongitude }}
 				>
+
+				{/* users location marker */}
 				<Marker 
 					name={ "Your Location" }
 					position={
@@ -44,6 +41,27 @@ class GoogleMap extends React.Component {
       			scaledSize: new this.props.google.maps.Size(20,20)
     			}}
 				/>
+
+				{this.props.placesOnMap.map((place) => {
+					return (
+						<Marker 
+							name={ "Sympton Case" }
+							position={
+								{lat: place.latitude, lng: place.longitude}
+							}
+							icon={{
+      					url: "symptoms-map-marker.svg",
+      					scaledSize: new this.props.google.maps.Size(15, 15)
+    					}}
+						/>
+					)
+				})
+
+
+
+				}
+
+				
 			</Map>
     )
 	}

@@ -4,6 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 
+// components
 import GoogleMap from './GoogleMap.js';
 import CitySearchForm from './CitySearchForm.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
