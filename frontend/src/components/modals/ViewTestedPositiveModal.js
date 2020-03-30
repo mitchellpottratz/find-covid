@@ -48,7 +48,6 @@ class ViewTestedPositiveModal extends React.Component {
 	
 	render() {
 		const { caseInfo } = this.props;
-		console.log('case info:', caseInfo);
 
 		const dateVisited = new Date(caseInfo.date_visited);
 		const symptomsDate = new Date(caseInfo.case.symptoms_date);
