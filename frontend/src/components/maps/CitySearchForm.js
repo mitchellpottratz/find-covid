@@ -19,6 +19,14 @@ class CitySearchForm extends React.Component {
 		this.setState({
 			city: e.target.value
 		});
+
+		this.getAutocompleteResults();
+	}
+
+	getAutocompleteResults = async () => {
+		const response = await fetch('http://localhost:8000/api/v1/maps/autocomplete/city?search_input=' + this.state.city);
+		const parsedResponse = await response.json();
+		console.log('response:', parsedResponse);
 	}
 	
 	render() {
