@@ -1,10 +1,24 @@
 import {
+    SET_PLACES_ON_MAP,
     SET_USERS_PLACES_VISITED,
     ADD_USERS_PLACE_VISITED,
     DELETE_USERS_PLACE_VISITED
 } from '../constants/actionTypes.js';
 
 import placesVisitedAPI from '../api/placesVisitedApi.js';
+
+
+export const getPlacesOnMap = () => async (dispatch) => {
+    const response = await placesVisitedAPI.getPlacesOnMap();
+
+    if (response.status.code === 200) {
+        dispatch({
+            type: SET_PLACES_ON_MAP,
+            payload: response.data
+        });
+    }
+
+}
 
 
 export const createUsersPlaceVisited = (placeVisitedInfo) => async (dispatch) => {

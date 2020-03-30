@@ -3,6 +3,18 @@ import apiURL from './config.js';
 
 export default {
 
+    // call the api to get all of the places to display on the map
+    getPlacesOnMap: async () => {
+        try {
+            const response = await fetch(apiURL + 'places-visited/');
+            const parsedResponse = await response.json();
+            return parsedResponse;   
+
+        } catch (error) {
+            console.log('error occured getting places on the map:', error);
+        }
+    },
+
     // makes api call for the user to create a new place they have visited 
     createUsersPlaceVisited: async (placeVisitedInfo) => {
         try {

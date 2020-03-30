@@ -2,7 +2,7 @@ import React from 'react';
 
 // redux 
 import { connect } from 'react-redux';
-import {  } from '../../actions/userActions.js';
+import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 
 import GoogleMap from './GoogleMap.js';
 import CitySearchForm from './CitySearchForm.js';
@@ -29,6 +29,7 @@ class MapContainer extends React.Component {
 
 	componentDidMount() {
 		this.setUsersLocation();
+		this.props.getPlacesOnMap();
 	}
 
 	// uses the google maps api to get the users current location
@@ -126,6 +127,6 @@ const mapStateToProps = (state) => {
 	}
 }
 
-export default connect(mapStateToProps, {  })(MapContainer);
+export default connect(mapStateToProps, { getPlacesOnMap })(MapContainer);
 
 

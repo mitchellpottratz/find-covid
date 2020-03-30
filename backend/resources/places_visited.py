@@ -30,11 +30,14 @@ def ping():
 def get_all_places_visited():
     all_places_visited = PlaceVisited.select()
 
-    places_visited_dict = [model_to_dict(place_visited) for place_visited in all_places_visited]
-    print('places visited:', places_visited_dict)
+    places_visited_dicts = []
+    for place_visited in all_places_visited:
+        place_dict = model_to_dict(place_visited)
+        del place_dict['case']['user']
+        places_visited_dicts.append(place_dict)
 
     return jsonify(
-        data=places_visited_dict,
+        data=places_visited_dicts,
         status={
             'code': 200,
             'message': 'Successfully got places visited'
