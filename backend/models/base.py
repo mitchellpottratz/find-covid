@@ -1,7 +1,19 @@
-from peewee import SqliteDatabase, Model, BooleanField, DateTimeField
+import os
 import datetime
 
-DATABASE = SqliteDatabase('find-covid.sqlite')
+from peewee import SqliteDatabase, Model, BooleanField, DateTimeField
+
+
+
+# determines if the production or dev data should be used
+if os.environ['DEBUG']:
+    DATABASE = SqliteDatabase('find-covid.sqlite')
+else:
+    DATABASE = PostgresqlDatabase(
+        user=os.environ['DB_USER'],
+        password=os.environ['DB_PASSWORD'],
+        host=os.environ['DB_HOST']
+    )
 
 ''' 
 All models inherit from this model
