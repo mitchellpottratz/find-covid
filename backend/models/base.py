@@ -1,8 +1,9 @@
 import os
 import datetime
 
-from peewee import (SqliteDatabase, PostgresqlDatabase, Model,
-                    BooleanField, DateTimeField)
+from playhouse.db_url import connect
+from peewee import *
+            
 
 DEBUG = False
 
@@ -10,12 +11,7 @@ DEBUG = False
 if DEBUG:
     DATABASE = SqliteDatabase('find-covid.sqlite')
 else:
-    DATABASE = PostgresqlDatabase(
-        os.environ['DB_NAME'],
-        user=os.environ['DB_USER'],
-        password=os.environ['DB_PASSWORD'],
-        host=os.environ['DB_HOST']
-    )
+    DATABASE = connect(os.environ['DB_URL'])
 
 ''' 
 All models inherit from this model

@@ -1,5 +1,6 @@
 import os
-from peewee import SqliteDatabase, PostgresqlDatabase
+from peewee import *
+from playhouse.db_url import connect
 
 
 class Database:
@@ -15,13 +16,9 @@ class Database:
             print('Using SQLite DB')
             return SqliteDatabase('find-covid.sqlite')
         else:
-            print('Using Postgres DB')
-            return PostgresqlDatabase(
-                'sympto-map-db',
-                user=os.environ['DB_USER'],
-                password=os.environ['DB_PASSWORD'],
-                host=os.environ['DB_HOST']
-            )
+            print('Using Production DB')
+            return connect(os.environ['DB_URL'])
+        
 
 
     def initialize_tables(self):
