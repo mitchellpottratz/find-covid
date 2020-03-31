@@ -49,7 +49,7 @@ class DeletePlaceVisitedModal extends React.Component {
 						<strong>Name: </strong> { placeVisited.name || '' }
 					</p>
 					<p>
-						<strong>Address: </strong> { placeVisited.address.place || '' }
+						<strong>Address: </strong> { placeVisited.address || '' }
 					</p>
 					<p>
 						<strong>Date Visited: </strong> { placeVisited.date_visited || '' }

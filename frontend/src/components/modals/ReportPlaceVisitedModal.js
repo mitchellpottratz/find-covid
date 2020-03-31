@@ -20,7 +20,7 @@ class ReportPlaceVisitedModal extends React.Component {
 		this.state = {
 			name: '',
 			place: '',
-			placeId: '',
+			googlePlaceId: '',
 			date_visited: new Date(),
 			isSearchingForPlace: false,
 			searchPlacePredictions: [],
@@ -72,16 +72,14 @@ class ReportPlaceVisitedModal extends React.Component {
 
 	handleSearchPredictionClick = (place) => {
 		const placeDescription = place.description;
-		const placeId = place.place_id;
+		const googlePlaceId = place.place_id;
 
 		this.setState({ 
 			isSearchingForPlace: false,
 			place: placeDescription,
-			placeId: placeId
+			googlePlaceId: googlePlaceId
 		});
 	}
-
-	
 
 	handleSubmit = async (e) => {
 		e.preventDefault();
@@ -91,13 +89,27 @@ class ReportPlaceVisitedModal extends React.Component {
 			isLoading: true
 		});
 
+		// if the user selected a place correctly
+		let placesLocation;
+		if (this.state.googlePlaceId !== '') {
+			placesLocation = await this.getPlacesLocation();
+
+		// otherwise an error message is show on the form
+		} else {
+			const newErrorMessage = 'The place you selected is not valid';
+			this.setState({
+				formErrorMessages: [...this.state.formErrorMessages, newErrorMessage]
+			});
+		}
+
 		// address is formatted as a object by the google api so the request 
 		// body needs to be reformatted
+		const placesName = this.state.place.split(' ')[0];
 		const requestBody = {
-			name: this.state.name,
-			address: this.state.location.place,
-			latitude: this.state.location.coordinates.lat,
-			longitude: this.state.location.coordinates.lng,
+			name: placesName,
+			address: this.state.place,
+			latitude: placesLocation.lat,
+			longitude: placesLocation.lng,
 			date_visited: this.state.date_visited
 		}
 
@@ -109,6 +121,23 @@ class ReportPlaceVisitedModal extends React.Component {
 		// if the place visited was created then the modal is hidden
 		if (response.status.code === 201) {
 			this.props.hideModal();
+		}
+	}
+
+	// get the latitude and longitude of the place the user visited
+	getPlacesLocation = async () => {
+		try {
+			console.log('place id:', this.state.googlePlaceId);
+			const response = await fetch(
+				'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + this.state.googlePlaceId
+			);
+			const parsedResponse = await response.json();
+			console.log('get location response:', parsedResponse);
+
+			return parsedResponse.data.result.geometry.location;
+
+		} catch (error) {
+			console.log('error:', error);
 		}
 	}
 
@@ -127,17 +156,6 @@ class ReportPlaceVisitedModal extends React.Component {
 					onSubmit={ this.handleSubmit } >
 
 					<Form.Group>
-						<Form.Label>What is the name of this place?</Form.Label>
-						<Form.Control 
-							required
-							type="text"
-							name="name"
-							placeholder="Name"
-							value={ this.state.name }
-							onChange={ this.handleChange } />
-					</Form.Group>
-
-					<Form.Group>
 						<Form.Label>What is the address of this place?</Form.Label>
 						<Form.Control 
 							type="text"
@@ -152,10 +170,11 @@ class ReportPlaceVisitedModal extends React.Component {
 								<MDBListGroup className="dropdown-search-box">
               	{this.state.searchPlacePredictions.map((place, i) => {
 									return (
-										<MDBListGroupItem 
+										<MDBListGroupItem
 											key={ i } 
 											className="dropdown-search-item"
-											onClick={ () => this.handleSearchPredictionClick(place) }>
+											onClick={ () => this.handleSearchPredictionClick(place) }
+											onFocus={() => this.setState({ place: '' })}>
 											{ place.description }
 										</MDBListGroupItem>
 									)
