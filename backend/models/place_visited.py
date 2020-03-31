@@ -1,7 +1,8 @@
 from .base import BaseModel
 from .case import Case
 
-from peewee import ForeignKeyField, DateField, CharField
+from peewee import ForeignKeyField, DateTimeField, CharField
+from datetime import datetime, timedelta
 
 
 ''' 
@@ -12,7 +13,7 @@ in the last 7 days.
 
 class PlaceVisited(BaseModel):
     case = ForeignKeyField(Case, backref='places_visited', on_delete='CASCADE')
-    date_visited = DateField()
+    date_visited = DateTimeField()
     name = CharField(max_length=150)
     address = CharField(max_length=250)
     latitude = CharField(max_length=100)
@@ -22,7 +23,14 @@ class PlaceVisited(BaseModel):
     google_place_id = CharField(max_length=100)
 
 
-    
+    # returns the date 3 days before the current day to determine if 
+    # a place visited is still at risk for covid-19
+    @staticmethod
+    def get_valid_date():
+        current_date = datetime.today() 
+        valid_date = current_date - timedelta(days=10)
+        return valid_date
+
 
 
 

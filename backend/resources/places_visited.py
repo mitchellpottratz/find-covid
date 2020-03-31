@@ -5,6 +5,7 @@ from flask import request, jsonify, Blueprint
 from flask_login import login_required, current_user
 from playhouse.shortcuts import model_to_dict
 from peewee import DoesNotExist
+from datetime import datetime
 
 from models.case import Case
 from models.place_visited import PlaceVisited
@@ -30,14 +31,21 @@ def ping():
 # this route returns all the places that have been visited by people reporting symptoms
 @places_visited.route('/', methods=['GET'])
 def get_all_places_visited():
-    all_places_visited = PlaceVisited.select()
+
+    # places visited before this date will not be shown on the map
+    valid_place_visited_date = PlaceVisited.get_valid_date()
+
+    all_places_visited = PlaceVisited.select().where(
+        PlaceVisited.date_visited > valid_place_visited_date 
+    )
 
     places_visited_dicts = []
     for place_visited in all_places_visited:
         place_dict = model_to_dict(place_visited)
         del place_dict['case']['user']
         places_visited_dicts.append(place_dict)
-
+    
+    
     return jsonify(
         data=places_visited_dicts,
         status={
