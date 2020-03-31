@@ -6,7 +6,6 @@ import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 
 // components
 import GoogleMap from './GoogleMap.js';
-import CitySearchForm from './CitySearchForm.js';
 import PlaceSearchForm from './PlaceSearchForm.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
 import { Row, Col, Card, Button, Spinner } from 'react-bootstrap';
@@ -25,6 +24,7 @@ class MapContainer extends React.Component {
 				lat: 0,
 				lng: 0
 			},
+			mapZoom: 13,
 			showModal: false
 		}
 	}
@@ -52,9 +52,12 @@ class MapContainer extends React.Component {
 			});	
 		}
 	}
-	
-	setCitiesLocation = (coordinates) => {
-		this.setState({ mapsLocation: coordinates });
+
+	setMapsLocation = (coordinates) => {
+		this.setState({ 
+			mapsLocation: coordinates,
+			mapZoom: 18 
+		});
 	}
 
 	showModal = () => {
@@ -83,10 +86,8 @@ class MapContainer extends React.Component {
 					<Card.Body>
 				  <Row>
 						<Col>
-							{/* <CitySearchForm 
-								setCitiesLocations={ this.setCitiesLocation }
-								/> */}
-							<PlaceSearchForm />
+							<PlaceSearchForm 
+								setMapsLocation={ this.setMapsLocation } />
 						</Col>
 						<Col>
 
@@ -111,7 +112,7 @@ class MapContainer extends React.Component {
 					</Card.Body>
 				</Card>
 
-				{/* {this.state.mapIsLoading ? (
+				{this.state.mapIsLoading ? (
 					<div className="text-center">
 						<Spinner animation="border" className="mt-4" />
 					</div>
@@ -120,9 +121,9 @@ class MapContainer extends React.Component {
 						mapIsLoading={ this.state.mapIsLoading }
 						mapsLocation={ this.state.mapsLocation } 
 						placesOnMap={ this.props.placesOnMap }
-
+						mapZoom={ this.state.mapZoom }
 					/>
-				)} */}
+				)}
 
 			</React.Fragment>
     )

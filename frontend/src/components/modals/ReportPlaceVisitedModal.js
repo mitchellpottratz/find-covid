@@ -71,6 +71,7 @@ class ReportPlaceVisitedModal extends React.Component {
 	}
 
 	handleSearchPredictionClick = (place) => {
+		console.log('clicked')
 		const placeDescription = place.description;
 		const googlePlaceId = place.place_id;
 

@@ -80,7 +80,7 @@ class GoogleMap extends React.Component {
 
     	<Map
       	google={ this.props.google }
-				zoom={ 13 }
+				zoom={ this.props.mapZoom }
 				style={ mapStyles }
 				initialCenter={
 					{ lat: this.props.mapsLocation.lat, lng: this.props.mapsLocation.lng }
