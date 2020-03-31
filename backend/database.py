@@ -5,12 +5,13 @@ from peewee import SqliteDatabase, PostgresqlDatabase
 class Database:
 
     def __init__(self, db_tables):
+        self.DEBUG = False
         self.DATABASE = self.set_database()
         self.db_tables = db_tables
 
 
     def set_database(self):
-        if os.environ['DEBUG']:
+        if self.DEBUG:
             print('Using SQLite DB')
             return SqliteDatabase('find-covid.sqlite')
         else:

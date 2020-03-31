@@ -1,15 +1,17 @@
 import os
 import datetime
 
-from peewee import SqliteDatabase, Model, BooleanField, DateTimeField
+from peewee import (SqliteDatabase, PostgresqlDatabase, Model,
+                    BooleanField, DateTimeField)
 
-
+DEBUG = False
 
 # determines if the production or dev data should be used
-if os.environ['DEBUG']:
+if DEBUG:
     DATABASE = SqliteDatabase('find-covid.sqlite')
 else:
     DATABASE = PostgresqlDatabase(
+        os.environ['DB_NAME'],
         user=os.environ['DB_USER'],
         password=os.environ['DB_PASSWORD'],
         host=os.environ['DB_HOST']

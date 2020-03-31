@@ -12,7 +12,7 @@ load_dotenv(dotenv_path)
 class Server:
 
     def __init__(self, app, login_manager, blueprints):
-        self.DEBUG = os.environ['DEBUG']
+        self.DEBUG = False
         self.PORT = os.environ['PORT']
         self.HOST = self.set_host()
         self.ORIGIN = self.set_origin()
