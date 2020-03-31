@@ -50,9 +50,11 @@ class Server:
         
 
     def start(self):
+        print('HOST:', self.HOST)
+        print('ORIGIN:', self.ORIGIN)
         print('Debug:', self.DEBUG)
         print('Starting Flask server on:', self.PORT)
-        serve(self.app, host='localhost', port=self.PORT)
+        serve(self.app, host=self.HOST, port=self.PORT)
 
 
 
