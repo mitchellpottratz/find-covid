@@ -59,7 +59,6 @@ class ReportPlaceVisitedModal extends React.Component {
 			);
 			const parsedResponse = await response.json();
 			const googleApiResponse = parsedResponse.data;
-			console.log('google response:', googleApiResponse);
 
 			if (googleApiResponse.status === 'OK') {
 				this.setState({ searchPlacePredictions: googleApiResponse.predictions });
@@ -116,8 +115,8 @@ class ReportPlaceVisitedModal extends React.Component {
 			date_visited: this.state.date_visited
 		}
 
+		// makes api call to report the place the user visited
 		const response = await this.props.createUsersPlaceVisited(requestBody);
-		console.log('response:', response);
 
 		this.setState({ isLoading: false });
 
@@ -130,13 +129,10 @@ class ReportPlaceVisitedModal extends React.Component {
 	// get the latitude and longitude of the place the user visited
 	getPlacesLocation = async () => {
 		try {
-			console.log('place id:', this.state.googlePlaceId);
 			const response = await fetch(
 				'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + this.state.googlePlaceId
 			);
 			const parsedResponse = await response.json();
-			console.log('get location response:', parsedResponse);
-
 			return parsedResponse.data.result.geometry.location;
 
 		} catch (error) {
@@ -181,15 +177,18 @@ class ReportPlaceVisitedModal extends React.Component {
 							    predictions box will appear for them to select a place */}
 							{this.state.isSearchingForPlace ? (
 								<MDBListGroup className="dropdown-search-box">
-              	{this.state.searchPlacePredictions.map((place, i) => {
-									return (
-										<MDBListGroupItem
-											key={ i } 
-											className="dropdown-search-item"
-											onClick={ () => this.handleSearchPredictionClick(place) }>
-											{ place.description }
-										</MDBListGroupItem>
-									)
+									<MDBListGroupItem>
+										<strong>Select a place below</strong>
+									</MDBListGroupItem>
+              		{this.state.searchPlacePredictions.map((place, i) => {
+										return (
+											<MDBListGroupItem
+												key={ i } 
+												className="dropdown-search-item"
+												onClick={ () => this.handleSearchPredictionClick(place) }>
+												{ place.description }
+											</MDBListGroupItem>
+										)
 								})}
             	</MDBListGroup>
 							) : (

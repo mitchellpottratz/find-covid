@@ -7,6 +7,7 @@ import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 // components
 import GoogleMap from './GoogleMap.js';
 import CitySearchForm from './CitySearchForm.js';
+import PlaceSearchForm from './PlaceSearchForm.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
 import { Row, Col, Card, Button, Spinner } from 'react-bootstrap';
 import ReportSymptomsButton from '../common/ReportSymptomsButton.js';
@@ -68,6 +69,8 @@ class MapContainer extends React.Component {
     return (
 			<React.Fragment>
 
+				{/* if the user is logged in and has not reported a case then this modal 
+					  will be available to report their case */}
 				{this.state.showModal ? (
 					<ReportCaseModal
 						showModal={ this.state.showModal }
@@ -80,9 +83,10 @@ class MapContainer extends React.Component {
 					<Card.Body>
 				  <Row>
 						<Col>
-							<CitySearchForm 
+							{/* <CitySearchForm 
 								setCitiesLocations={ this.setCitiesLocation }
-								/>
+								/> */}
+							<PlaceSearchForm />
 						</Col>
 						<Col>
 
@@ -107,7 +111,7 @@ class MapContainer extends React.Component {
 					</Card.Body>
 				</Card>
 
-				{this.state.mapIsLoading ? (
+				{/* {this.state.mapIsLoading ? (
 					<div className="text-center">
 						<Spinner animation="border" className="mt-4" />
 					</div>
@@ -118,7 +122,7 @@ class MapContainer extends React.Component {
 						placesOnMap={ this.props.placesOnMap }
 
 					/>
-				)}
+				)} */}
 
 			</React.Fragment>
     )
