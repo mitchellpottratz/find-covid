@@ -81,6 +81,7 @@ def create_place_visited():
         address = data['address']
         latitude = data['latitude']
         longitude = data['longitude']
+        google_place_id = data['google_place_id']
 
         try:    
             users_case = Case.get(Case.user == current_user.id)
@@ -91,7 +92,8 @@ def create_place_visited():
                 name=name,
                 address=address,
                 latitude=latitude,
-                longitude=longitude
+                longitude=longitude,
+                google_place_id=google_place_id
             )
 
             new_place_visited_dict = model_to_dict(new_place_visited)

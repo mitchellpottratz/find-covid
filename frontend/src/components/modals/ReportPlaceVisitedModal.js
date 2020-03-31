@@ -71,7 +71,6 @@ class ReportPlaceVisitedModal extends React.Component {
 	}
 
 	handleSearchPredictionClick = (place) => {
-		console.log('clicked')
 		const placeDescription = place.description;
 		const googlePlaceId = place.place_id;
 
@@ -113,7 +112,8 @@ class ReportPlaceVisitedModal extends React.Component {
 			address: this.state.place,
 			latitude: placesLocation.lat,
 			longitude: placesLocation.lng,
-			date_visited: this.state.date_visited
+			date_visited: this.state.date_visited,
+			google_place_id: this.state.googlePlaceId
 		}
 
 		// makes api call to report the place the user visited
@@ -123,6 +123,7 @@ class ReportPlaceVisitedModal extends React.Component {
 
 		// if the place visited was created then the modal is hidden
 		if (response.status.code === 201) {
+			this.clearState();
 			this.props.hideModal();
 		}
 	}
@@ -139,6 +140,15 @@ class ReportPlaceVisitedModal extends React.Component {
 		} catch (error) {
 			console.log('error:', error);
 		}
+	}
+
+	clearState = () => {
+		this.setState({
+			name: '',
+			place: '',
+			googlePlaceId: '',
+			date_visited: new Date(),
+		});
 	}
 
   render() {
@@ -172,7 +182,8 @@ class ReportPlaceVisitedModal extends React.Component {
 							placeholder="Start typing..." 
 							value={ this.state.place }
 							onChange={ this.handlePlaceChange }
-							onBlur={ () => this.setState({ isSearchingForPlace: false }) } />
+							// onBlur={ () => this.setState({ isSearchingForPlace: false }) } 
+							/>
 
 							{/* if the user is currently searching for the place they visited then the search 
 							    predictions box will appear for them to select a place */}
@@ -182,10 +193,14 @@ class ReportPlaceVisitedModal extends React.Component {
 										<strong>Select a place below</strong>
 									</MDBListGroupItem>
               		{this.state.searchPlacePredictions.map((place, i) => {
+										
 										return (
 											<MDBListGroupItem
 												key={ i } 
 												className="dropdown-search-item"
+												description={ place.description }
+												place_id={ place.place_id }
+												value="value"
 												onClick={ () => this.handleSearchPredictionClick(place) }>
 												{ place.description }
 											</MDBListGroupItem>

@@ -18,6 +18,10 @@ class PlaceVisited(BaseModel):
     latitude = CharField(max_length=100)
     longitude = CharField(max_length=100)
 
+    # stores the google id for the place so it can be search quickly
+    google_place_id = CharField(max_length=100)
+
+
     
 
 
