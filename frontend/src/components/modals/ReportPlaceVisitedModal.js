@@ -59,10 +59,11 @@ class ReportPlaceVisitedModal extends React.Component {
 			);
 			const parsedResponse = await response.json();
 			const googleApiResponse = parsedResponse.data;
+			console.log('google response:', googleApiResponse);
 
 			if (googleApiResponse.status === 'OK') {
 				this.setState({ searchPlacePredictions: googleApiResponse.predictions });
-			}
+			} 
 
 		}	catch (error) {
 			// TODO - handle this error
@@ -173,7 +174,8 @@ class ReportPlaceVisitedModal extends React.Component {
 							name="place"
 							placeholder="Start typing..." 
 							value={ this.state.place }
-							onChange={ this.handlePlaceChange } />
+							onChange={ this.handlePlaceChange }
+							onBlur={ () => this.setState({ isSearchingForPlace: false }) } />
 
 							{/* if the user is currently searching for the place they visited then the search 
 							    predictions box will appear for them to select a place */}
