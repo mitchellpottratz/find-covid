@@ -41,6 +41,8 @@ class MyCase extends React.Component {
 
   render() {
 		const { isLoggedIn, userInfo, usersCase } = this.props;
+		const symptomsDate = new Date(usersCase.symptoms_date);
+		console.log('has tested:', usersCase.has_tested);
 
 		// determines if the user has reported a case already
 		const userHasCase = usersCase.zip_code;
@@ -86,12 +88,19 @@ class MyCase extends React.Component {
 								<Row>
 									<Col md={ 12 } sm={ 12 }>
 										<p className="mb-1">
-											<strong>Tested Positive: </strong> { usersCase.has_tested }
+											<strong>Tested Positive: </strong> 
+
+											{usersCase.has_tested ? (
+												<span>Yes</span>
+											) : (
+												<span>No</span>
+											)}
+
 										</p>
 										<p className="mb-1">
-											<strong>Symptoms Date: </strong> { usersCase.symptoms_date }
+											<strong>Symptoms Date: </strong> { symptomsDate.toDateString() }
 										</p>
-										<p className="mb-0">	
+										<p className="mb-2">	
 											<strong>Age: </strong> { usersCase.age }
 										</p>
 
@@ -107,12 +116,6 @@ class MyCase extends React.Component {
 										
 										{/* Edit and delete buttons */}
 										<div className="text-right">
-											<Button 
-												className="mr-2"
-												variant="dark"
-												>
-												Edit
-											</Button>
 											<Button 
 												variant="danger"
 												onClick={ this.showDeleteCaseModal }>

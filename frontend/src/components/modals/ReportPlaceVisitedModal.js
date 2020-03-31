@@ -84,7 +84,7 @@ class ReportPlaceVisitedModal extends React.Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 
-		this.setState({
+		await this.setState({
 			formErrorMessages: [],
 			isLoading: true
 		});
@@ -98,13 +98,15 @@ class ReportPlaceVisitedModal extends React.Component {
 		} else {
 			const newErrorMessage = 'The place you selected is not valid';
 			this.setState({
-				formErrorMessages: [...this.state.formErrorMessages, newErrorMessage]
+				formErrorMessages: [...this.state.formErrorMessages, newErrorMessage],
+				isLoading: false
 			});
+			return;
 		}
 
 		// address is formatted as a object by the google api so the request 
 		// body needs to be reformatted
-		const placesName = this.state.place.split(' ')[0];
+		const placesName = this.state.place.split(',')[0];
 		const requestBody = {
 			name: placesName,
 			address: this.state.place,
@@ -150,6 +152,15 @@ class ReportPlaceVisitedModal extends React.Component {
 					<Modal.Title>Report Place Visited</Modal.Title>
 				</Modal.Header>		
 				<Modal.Body>
+
+					{/* form error messages */}
+					{this.state.formErrorMessages.map((message, i) => {
+          	return (
+            	<div key={ i }>
+								<small className="text-danger">{ message }</small>
+							</div>
+            )
+          })}	
 					
 				<Form
 					className="py-3 text-center"
@@ -173,8 +184,7 @@ class ReportPlaceVisitedModal extends React.Component {
 										<MDBListGroupItem
 											key={ i } 
 											className="dropdown-search-item"
-											onClick={ () => this.handleSearchPredictionClick(place) }
-											onFocus={() => this.setState({ place: '' })}>
+											onClick={ () => this.handleSearchPredictionClick(place) }>
 											{ place.description }
 										</MDBListGroupItem>
 									)
