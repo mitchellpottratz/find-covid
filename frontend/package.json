@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://34.66.169.235",
+  "homepage": ".",
   "dependencies": {
     "@babel/preset-react": "^7.9.4",
     "@babel/runtime": "^7.9.2",

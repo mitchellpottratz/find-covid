@@ -19,12 +19,11 @@ app.get('/ping', function (req, res) {
 
 // This route search the React application
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  console.log('path:' + path.join(__dirname, 'build', 'index.html'))
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 
-app.listen(PORT);
-
 console.log('App is listening on port:', PORT);
-
+app.listen(PORT);
 
