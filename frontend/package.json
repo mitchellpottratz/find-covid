@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "http://34.66.169.235",
   "dependencies": {
     "@babel/preset-react": "^7.9.4",
     "@babel/runtime": "^7.9.2",
@@ -19,6 +19,7 @@
     "google-maps-react": "^2.0.2",
     "html-loader": "^1.0.0",
     "html-webpack-plugin": "^4.0.3",
+    "http-server": "^0.12.1",
     "mdbreact": "^4.25.5",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",

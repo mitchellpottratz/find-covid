@@ -1,3 +1,4 @@
+import os
 from flask import Flask, g
 from flask_login import LoginManager
 from peewee import DoesNotExist
@@ -13,6 +14,7 @@ from models.user import User
 
 
 app = Flask(__name__)
+app.secret_key = os.environ['SECRET_KEY']
 
 
 
@@ -41,6 +43,9 @@ def before_request():
 @app.after_request
 def after_request(response):
     g.db.close()
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
 
 

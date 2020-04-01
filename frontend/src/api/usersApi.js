@@ -6,11 +6,12 @@ export default {
     // makes a request to register a new user
     registerUser: async (registrationInfo) => {
         try {
+	    console.log('api url:', apiURL);	
             const response = await fetch(apiURL + 'users/register', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                method: 'POST',
+		method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(registrationInfo),
             });
@@ -27,12 +28,12 @@ export default {
     loginUser: async (loginInfo) => {
         try {
             const response = await fetch(apiURL + 'users/login', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(loginInfo),
+		headers: {
+		    'Content-Type': 'application/json'
+		}
             });
             const parsedResponse = await response.json();
             return parsedResponse;        
@@ -50,12 +51,12 @@ export default {
 
         try {
             const response = await fetch(apiURL + 'users/confirm-number', {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
                 method: 'PUT',
                 credentials: 'include',
                 body: JSON.stringify(requestBody),
+		headers: {
+		    'Content-Type': 'application/json'
+		}
             });
             const parsedResponse = await response.json(requestBody);
             return parsedResponse;        
