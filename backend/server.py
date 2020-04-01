@@ -12,7 +12,7 @@ load_dotenv(dotenv_path)
 class Server:
 
     def __init__(self, app, login_manager, blueprints):
-        self.DEBUG = False
+        self.DEBUG = True
         self.PORT = os.environ['PORT']
         self.HOST = self.set_host()
         self.ORIGIN = self.set_origin()
@@ -21,7 +21,7 @@ class Server:
         self.login_manager = login_manager
         self.app.secret_key = os.environ['SECRET_KEY']
 
-        self.setup_cors(blueprints)
+        self.setup_cors()
         self.register_blueprints(blueprints)
 
 
@@ -39,9 +39,10 @@ class Server:
             return os.environ['ORIGIN']
 
 
-    def setup_cors(self, blueprints):
-        for blueprint in blueprints:
-            CORS(blueprint[0], origins=self.ORIGIN, supports_credentials=True)
+    def setup_cors(self):
+        cors = CORS(self.app, resources={r"/*": {"origins": "sympto-map.com"}}, supports_credentials=True)
+        print('cors:', cors.__dict__)
+        print('dir(cors):', dir(cors))
 
 
     def register_blueprints(self, blueprints):
