@@ -12,6 +12,7 @@ from models.place_visited import PlaceVisited
 
 users = Blueprint('users', 'users')
 
+print('in users controller')
 
 # Ping Route
 @users.route('/ping', methods=['GET'])

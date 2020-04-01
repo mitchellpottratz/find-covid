@@ -6,11 +6,12 @@ export default {
     // makes a request to register a new user
     registerUser: async (registrationInfo) => {
         try {
+	    console.log('api url:', apiURL);	
             const response = await fetch(apiURL + 'users/register', {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                method: 'POST',
+		    method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(registrationInfo),
             });
