@@ -66,7 +66,6 @@ def register():
             new_user.send_confirmation_sms()
 
             login_user(new_user)
-            session['logged_in'] = True
             print('current user:', current_user)
             print('current user id:', current_user.id)
             print('is authenticated:', current_user.is_authenticated)
@@ -173,7 +172,9 @@ def login():
 #@login_required
 def logout():
     print('request:', request)
+    print('current user id:', current_user.id)
     logout_user()
+    print('current user id:', current_user.id)
 
     return jsonify(
         data={},
