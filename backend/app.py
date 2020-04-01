@@ -1,3 +1,4 @@
+import os
 from flask import Flask, g
 from flask_login import LoginManager
 from peewee import DoesNotExist
@@ -13,6 +14,7 @@ from models.user import User
 
 
 app = Flask(__name__)
+app.secret_key = os.environ['SECRET_KEY']
 
 login_manager = LoginManager()
 login_manager.init_app(app)

@@ -1,4 +1,4 @@
-from flask import request, jsonify, Blueprint
+from flask import request, jsonify, Blueprint, session
 
 from playhouse.shortcuts import model_to_dict
 from peewee import DoesNotExist
@@ -66,7 +66,11 @@ def register():
             new_user.send_confirmation_sms()
 
             login_user(new_user)
-
+            session['logged_in'] = True
+            print('current user:', current_user)
+            print('current user id:', current_user.id)
+            print('is authenticated:', current_user.is_authenticated)
+          
             new_user_dict = model_to_dict(new_user)
             del new_user_dict['sms_confirmation_code']   
             del new_user_dict['password']
@@ -94,6 +98,7 @@ def register():
 @users.route('/login', methods=['POST'])
 def login():
     try:
+        print('request:', request)
         data = request.get_json()
 
         phone_number = data['phone_number'] 
@@ -104,6 +109,10 @@ def login():
 
             if check_password_hash(user.password, password):
                 login_user(user)
+                print('current user:', current_user)
+                print('current user id:', current_user.id)
+                print('session:', session)
+                print('is autheticated:', current_user.is_authenticated)
 
                 user_dict = model_to_dict(user)
                 del user_dict['sms_confirmation_code']
@@ -161,8 +170,9 @@ def login():
 
 # Logout Route
 @users.route('/logout', methods=['POST'])
-@login_required
+#@login_required
 def logout():
+    print('request:', request)
     logout_user()
 
     return jsonify(

@@ -19,7 +19,6 @@ class Server:
 
         self.app = app
         self.login_manager = login_manager
-        self.app.secret_key = os.environ['SECRET_KEY']
 
         self.setup_cors()
         self.register_blueprints(blueprints)
@@ -40,7 +39,7 @@ class Server:
 
 
     def setup_cors(self):
-        CORS(self.app, resources={r"/*": {"origins": "http://sympto-map.com"}}, support_credentials=True)
+        CORS(self.app, resources={r"/*": {"origins": "*"}})
 
 
     def register_blueprints(self, blueprints):

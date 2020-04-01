@@ -19,6 +19,7 @@
     "google-maps-react": "^2.0.2",
     "html-loader": "^1.0.0",
     "html-webpack-plugin": "^4.0.3",
+    "http-server": "^0.12.1",
     "mdbreact": "^4.25.5",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
