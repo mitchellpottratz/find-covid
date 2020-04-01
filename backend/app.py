@@ -17,7 +17,6 @@ app = Flask(__name__)
 app.secret_key = os.environ['SECRET_KEY']
 
 
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 

@@ -12,7 +12,6 @@ from models.place_visited import PlaceVisited
 
 users = Blueprint('users', 'users')
 
-print('in users controller')
 
 # Ping Route
 @users.route('/ping', methods=['GET'])
@@ -66,9 +65,6 @@ def register():
             new_user.send_confirmation_sms()
 
             login_user(new_user)
-            print('current user:', current_user)
-            print('current user id:', current_user.id)
-            print('is authenticated:', current_user.is_authenticated)
           
             new_user_dict = model_to_dict(new_user)
             del new_user_dict['sms_confirmation_code']   
@@ -97,7 +93,6 @@ def register():
 @users.route('/login', methods=['POST'])
 def login():
     try:
-        print('request:', request)
         data = request.get_json()
 
         phone_number = data['phone_number'] 
@@ -108,10 +103,6 @@ def login():
 
             if check_password_hash(user.password, password):
                 login_user(user)
-                print('current user:', current_user)
-                print('current user id:', current_user.id)
-                print('session:', session)
-                print('is autheticated:', current_user.is_authenticated)
 
                 user_dict = model_to_dict(user)
                 del user_dict['sms_confirmation_code']
@@ -171,10 +162,7 @@ def login():
 @users.route('/logout', methods=['POST'])
 #@login_required
 def logout():
-    print('request:', request)
-    print('current user id:', current_user.id)
     logout_user()
-    print('current user id:', current_user.id)
 
     return jsonify(
         data={},
