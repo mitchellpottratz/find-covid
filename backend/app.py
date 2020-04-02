@@ -15,13 +15,8 @@ from models.user import User
 
 app = Flask(
     __name__,
-<<<<<<< HEAD
-    static_folder='./build/static',
-    template_folder='./build'
-=======
     static_folder='../frontend/build/static',
     template_folder='../frontend/build'
->>>>>>> 4f184a2478cd79a163acfb8c485f007242e1f28a
 )
 app.secret_key = os.environ['SECRET_KEY']
 

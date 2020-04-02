@@ -7,6 +7,7 @@ import store from './store';
 
 // custom components
 import NavigationBar from './components/common/NavigationBar.js';
+import HomeContainer from './components/home/HomeContainer.js';
 import Register from './components/authentication/Register.js';
 import Login from './components/authentication/Login.js';
 import ConfirmPhoneNumber from './components/authentication/ConfirmPhoneNumber.js';
@@ -54,9 +55,9 @@ class App extends React.Component {
               component={ MyCase } />
 
             {/* Home */}
-            <Route path="/">
-              <h1>Home</h1>
-            </Route>
+            <Route 
+              path="/"
+              component={ HomeContainer } />
 
           </Switch>
         </BrowserRouter>
