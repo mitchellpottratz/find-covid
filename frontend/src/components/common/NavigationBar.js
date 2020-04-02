@@ -15,16 +15,31 @@ class NavigationBar extends React.Component {
 
   render() {
     return (
-      <Row>
+      <Row className="mx-0">
         <Col md={2} sm={2} className="px-0">
           <Image src={Logo} id="nav-logo" thumbnail />
         </Col>
 
-        <Col className="px-0">
+        <Col md={10} sm={10} className="px-0">
+					<Navbar>
+						<Navbar.Collapse className="justify-content-end">
+							<Nav.Link 
+								className="btn btn-sm btn-outline-primary mr-2"
+								href="/login">
+									Sign in
+							</Nav.Link>
+							<Nav.Link 
+								className="btn btn-sm btn-primary"
+								href="/register">
+								Get Started
+							</Nav.Link>
+  					</Navbar.Collapse>
+					</Navbar>
+
           <Navbar id="navbar" bg="primary" variant="dark">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
             <Nav className="mr-auto">
               <Nav.Link href="/map">Map</Nav.Link>
+							<Nav.Link href="/map">About</Nav.Link>
             </Nav>
             <Nav>
               {this.props.isLoggedIn ? (

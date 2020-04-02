@@ -1,5 +1,5 @@
 
-const apiURL = 'http://sympto-map.com/api/v1/'; 
+const apiURL = 'http://localhost/api/v1/'; 
 
 export default apiURL;
 
