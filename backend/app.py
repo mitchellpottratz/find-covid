@@ -1,5 +1,5 @@
 import os
-from flask import Flask, g
+from flask import Flask, render_template, g
 from flask_login import LoginManager
 from peewee import DoesNotExist
 
@@ -13,7 +13,11 @@ from resources import blueprint_list
 from models.user import User 
 
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_folder='./build/static',
+    template_folder='./build'
+)
 app.secret_key = os.environ['SECRET_KEY']
 
 
@@ -46,6 +50,12 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
     response.headers.add('Access-Control-Allow-Credentials', 'true')
     return response
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
