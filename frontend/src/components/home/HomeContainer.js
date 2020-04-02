@@ -11,7 +11,7 @@ class HomeContainer extends React.Component {
 
   render() {
 		return (
-			<h1>Homedfd</h1>
+			<h1>Home</h1>
 		)
 	}
 
