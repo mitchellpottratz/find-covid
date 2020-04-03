@@ -16,11 +16,11 @@ class NavigationBar extends React.Component {
   render() {
     return (
       <Row className="mx-0">
-        <Col md={2} sm={2} className="px-0">
+        <Col md={1} sm={2} className="px-0">
           <Image src={Logo} id="nav-logo" thumbnail />
         </Col>
 
-        <Col md={10} sm={10} className="px-0">
+        <Col md={11} sm={10} className="px-0">
 					<Navbar>
 						<Navbar.Collapse className="justify-content-end">
 							<Nav.Link 
