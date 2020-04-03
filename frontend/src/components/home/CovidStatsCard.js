@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup, Spinner } from 'react-bootstrap';
 
 
 class CovidStatsCard extends React.Component {
@@ -13,15 +13,16 @@ class CovidStatsCard extends React.Component {
 			recovered: '',
 			critical: '',
 			deaths: '',
-			isLoading:
+			isLoading: true,
 		}
 	}
 
 	componentDidMount() {
-		// this.getCovidStats();
+		this.getCovidStats();
 	}
 	
 	getCovidStats = async () => {
+		console.log('api:', process.env.REACT_APP_XRAPID_API_KEY)
 		const response = await fetch(
 			"https://covid-19-data.p.rapidapi.com/totals?format=json", {
 			"method": "GET",
@@ -36,33 +37,36 @@ class CovidStatsCard extends React.Component {
 			confirmed: parsedResponse[0].confirmed,
 			recovered: parsedResponse[0].recovered,
 			critical: parsedResponse[0].critical,
-			deaths: parsedResponse[0].deaths
+			deaths: parsedResponse[0].deaths,
+			isLoading: false
 		});
 	}
 
   render() {
     return (
-      <Card className="text-center">
-				<Card.Header>
-					Covid-19 World Statistics
-				</Card.Header>
-				<ListGroup>
-  				<ListGroup.Item variant="danger">
-						<h5>Deaths</h5>
-						<hr className="my-1"></hr>
-						{this}
-					</ListGroup.Item>
-  				<ListGroup.Item variant="warning">
-						<h5>Confirmed Cases</h5>
-						<hr className="my-1"></hr>
-						<h6>100000</h6>
-					</ListGroup.Item>
-					<ListGroup.Item variant="success">
-						<h5>Recovered</h5>
-						<hr className="my-1"></hr>
-						<h6>100000</h6>
-					</ListGroup.Item>
-				</ListGroup>
+			<Card id="covid-stats-card">
+				<Card.Body>
+					<Card.Title className="text-center">Covid-19 World Statistics</Card.Title>
+					<hr></hr>
+					<div className="text-center mt-4">
+						<div className="text-danger">
+							<h5>Total Deaths</h5>
+							<hr className="mt-0 mb-2 w-75"></hr>
+							<h5>{ this.state.deaths }</h5>
+						</div>
+						<div className="text-warning mt-4">
+							<h5>Confirmed Cases</h5>
+							<hr className="mt-0 mb-2 w-75"></hr>
+							<h5>{ this.state.confirmed }</h5>
+						</div>
+						<div className="text-success mt-4">
+							<h5>Recovered</h5>
+							<hr className="mt-0 mb-2 w-75"></hr>
+							<h5>{ this.state.recovered }</h5>
+						</div>
+					</div>
+
+				</Card.Body>
       </Card>
         )
     }
