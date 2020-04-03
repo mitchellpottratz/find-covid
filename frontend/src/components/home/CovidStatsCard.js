@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 
 
 class CovidStatsCard extends React.Component {
@@ -12,12 +12,13 @@ class CovidStatsCard extends React.Component {
 			confirmed: '',
 			recovered: '',
 			critical: '',
-			deaths: ''
+			deaths: '',
+			isLoading:
 		}
 	}
 
 	componentDidMount() {
-		this.getCovidStats();
+		// this.getCovidStats();
 	}
 	
 	getCovidStats = async () => {
@@ -26,20 +27,42 @@ class CovidStatsCard extends React.Component {
 			"method": "GET",
 			"headers": {
 				"x-rapidapi-host": "covid-19-data.p.rapidapi.com",
-				"x-rapidapi-key": "4778e9c4d9mshfc64cdfa03ff140p1e6e06jsn8ee30fd8c04a"
+				"x-rapidapi-key": process.env.REACT_APP_XRAPID_API_KEY
 			}
 		});
 		const parsedResponse = await response.json();
-		console.log('response:', parsedResponse);
+
+		this.setState({
+			confirmed: parsedResponse[0].confirmed,
+			recovered: parsedResponse[0].recovered,
+			critical: parsedResponse[0].critical,
+			deaths: parsedResponse[0].deaths
+		});
 	}
 
   render() {
     return (
-      <Card>
-        <Card.Body>
-          <Card.Title>Covid-19 Stats</Card.Title>
-
-        </Card.Body>
+      <Card className="text-center">
+				<Card.Header>
+					Covid-19 World Statistics
+				</Card.Header>
+				<ListGroup>
+  				<ListGroup.Item variant="danger">
+						<h5>Deaths</h5>
+						<hr className="my-1"></hr>
+						{this}
+					</ListGroup.Item>
+  				<ListGroup.Item variant="warning">
+						<h5>Confirmed Cases</h5>
+						<hr className="my-1"></hr>
+						<h6>100000</h6>
+					</ListGroup.Item>
+					<ListGroup.Item variant="success">
+						<h5>Recovered</h5>
+						<hr className="my-1"></hr>
+						<h6>100000</h6>
+					</ListGroup.Item>
+				</ListGroup>
       </Card>
         )
     }
