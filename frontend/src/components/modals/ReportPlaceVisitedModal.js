@@ -7,9 +7,8 @@ import { createUsersPlaceVisited } from '../../actions/placesVisitedActions.js';
 // components
 import { Modal, Form } from 'react-bootstrap';
 import DatePicker from 'react-date-picker';
-import { GoogleComponent } from 'react-google-location'
 import FormButton from '../common/FormButton.js';
-import { MDBInput, MDBListGroup, MDBListGroupItem } from "mdbreact"
+import {  MDBListGroup, MDBListGroupItem } from "mdbreact"
 
 
 class ReportPlaceVisitedModal extends React.Component {
