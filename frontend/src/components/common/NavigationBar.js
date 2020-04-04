@@ -9,7 +9,7 @@ import { logoutUser } from "../../actions/userActions.js";
 import { Row, Col, Image, Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 class NavigationBar extends React.Component {
-  handleLogoutClick = async e => {
+  handleLogoutClick = async (e) => {
     await this.props.logoutUser();
   };
 
@@ -19,32 +19,22 @@ class NavigationBar extends React.Component {
         <Col md={1} sm={2} className="px-0">
           <Image src={Logo} id="nav-logo" thumbnail />
         </Col>
-
         <Col md={11} sm={10} className="px-0">
-					<Navbar>
-						<Navbar.Collapse className="justify-content-end">
-							<Nav.Link 
-								className="btn btn-sm btn-outline-primary mr-2"
-								href="/login">
-									Sign in
-							</Nav.Link>
-							<Nav.Link 
-								className="btn btn-sm btn-primary"
-								href="/register">
-								Get Started
-							</Nav.Link>
-  					</Navbar.Collapse>
-					</Navbar>
-
+          <br />
+          <br />
           <Navbar id="navbar" bg="primary" variant="dark">
             <Nav className="mr-auto">
               <Nav.Link href="/map">Map</Nav.Link>
-							<Nav.Link href="/map">About</Nav.Link>
+              <Nav.Link href="/map">About</Nav.Link>
             </Nav>
             <Nav>
               {this.props.isLoggedIn ? (
                 <React.Fragment>
-                  <NavDropdown title="Account" id="basic-nav-dropdown" drop="">
+                  <NavDropdown
+                    title="Account"
+                    id="basic-nav-dropdown"
+                    drop="down"
+                  >
                     <NavDropdown.Item href="/my-case">My Case</NavDropdown.Item>
                     <NavDropdown.Item onClick={this.handleLogoutClick}>
                       Logout
@@ -53,8 +43,10 @@ class NavigationBar extends React.Component {
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <Nav.Link href="/login">Login</Nav.Link>
-                  <Nav.Link href="/register">Register</Nav.Link>
+                  {/* <Nav.Link href="/login">Login</Nav.Link> */}
+                  <Nav.Link href="/login">Sign In</Nav.Link>
+                  {/* <Nav.Link href="/register">Register</Nav.Link> */}
+                  <Nav.Link href="/register">Get Started</Nav.Link>
                 </React.Fragment>
               )}
             </Nav>
@@ -65,9 +57,9 @@ class NavigationBar extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.user.isLoggedIn
+    isLoggedIn: state.user.isLoggedIn,
   };
 };
 
