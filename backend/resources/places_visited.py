@@ -35,16 +35,21 @@ def get_all_places_visited():
     # places visited before this date will not be shown on the map
     valid_place_visited_date = PlaceVisited.get_valid_date()
 
-    all_places_visited = PlaceVisited.select().where(
+    all_places_visited = PlaceVisited.select(
+        PlaceVisited.google_place_id
+    ).distinct().where(
         PlaceVisited.date_visited > valid_place_visited_date 
+    ).select(
+        PlaceVisited.case, 
+        PlaceVisited.latitude,
+        PlaceVisited.longitude
     )
-
+    
     places_visited_dicts = []
     for place_visited in all_places_visited:
         place_dict = model_to_dict(place_visited)
         del place_dict['case']['user']
         places_visited_dicts.append(place_dict)
-    
     
     return jsonify(
         data=places_visited_dicts,
