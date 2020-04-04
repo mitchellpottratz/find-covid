@@ -76,13 +76,22 @@ class PlaceSearchForm extends React.Component {
 								<Card.Body>
 									<Form.Label>Search for a place nearby</Form.Label>
 									<Form.Control
-										className="mb-0 pb-0"
+										className="mb-2 pb-0"
 										type="text"
 										placeholder="Start typing..."
 										name="place"
 										value={ this.state.place }
 										onChange={ this.handleChange }
 										onBlur={ () => this.setState({ isSearchingForPlace: false }) } />
+										<a 
+											href="#"
+											class="ml-1"
+											onClick={ (e) => {
+												e.preventDefault();
+												this.setState({ place: '', searchPredictions: [] });
+											} }>
+												Clear
+										</a> 
 								</Card.Body>
 							</Card>
 

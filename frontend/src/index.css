@@ -29,9 +29,19 @@ code {
 
 p,
 label, 
-li {
+li,
+a {
   font-size: 0.85em;
 }
+
+a {
+  text-decoration: none!important;
+}
+
+a:visited {
+  color: #0056b3!important;
+}
+
 
 input, 
 textarea, 
@@ -104,6 +114,10 @@ button {
   border-color: #8fbcff!important;
   color: white!important;
 }
+
+
+/* @media only screen and (max-width: 1020px) {
+} */
 
 
 
