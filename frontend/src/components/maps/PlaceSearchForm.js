@@ -111,6 +111,9 @@ class PlaceSearchForm extends React.Component {
 									is current searching */}
 									{this.state.isSearching ? (
 									<MDBListGroup className="dropdown-search-box">
+										<MDBListGroupItem className="text-center">
+											<strong>Please select a place below</strong>
+										</MDBListGroupItem>
               			{this.state.searchPredictions.map((place, i) => {
 											return (
 												<MDBListGroupItem 

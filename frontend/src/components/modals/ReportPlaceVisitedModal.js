@@ -34,9 +34,7 @@ class ReportPlaceVisitedModal extends React.Component {
 	}
 
 	handleDateChange = (date) => {
-		this.setState({
-			date_visited: date
-		});
+		this.setState({ date_visited: date });
 	}
 
 	// handle change for the location autocomplete input
@@ -56,7 +54,8 @@ class ReportPlaceVisitedModal extends React.Component {
 		try {
 			const response = await fetch(
 				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place + 
-				'&ipbias'
+				'&latitude=' + this.props.usersCase.latitude + 
+				'&longitude=' + this.props.usersCase.longitude
 			);
 			const parsedResponse = await response.json();
 			const googleApiResponse = parsedResponse.data;
@@ -197,7 +196,7 @@ class ReportPlaceVisitedModal extends React.Component {
 							placeholder="Start typing..." 
 							value={ this.state.place }
 							onChange={ this.handlePlaceChange }
-							onBlur={ () => this.hideSearchPredictionsBox } 
+							onBlur={ this.hideSearchPredictionsBox } 
 							/>
 
 							{/* if the user is currently searching for the place they visited then the search 
