@@ -152,9 +152,10 @@ class ReportPlaceVisitedModal extends React.Component {
 	}
 
 	hideSearchPredictionsBox = () => {
-		this.setState({
-			isSearchingForPlace: false
-		});
+		// explanation for using timeout in hideSearchPredictionsBox method in PlaceSearchForm.js 
+		setTimeout(() => {
+			this.setState({ isSearchingForPlace: false });
+		}, 200);
 	}
 
   render() {

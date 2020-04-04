@@ -64,27 +64,30 @@ class PlaceSearchForm extends React.Component {
 	}
 
 	// when a place from the search results drop down is clicked
-	handleSearchPredictionClick = async (city) => {
-		this.setState({
-			place: city.description,
-			isSearching: false
-		})
-
+	handleSearchPredictionClick = async (place) => {
+		this.setState({ 
+			place: place.description,
+			isSearching: false 
+		});
+	
 		// makes request to get the latitude and longitude of the place
-		const googlePlaceId = city.place_id;
+		const googlePlaceId = place.place_id;
 		const response = await fetch(
 			'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + googlePlaceId
 		);
 		const parsedResponse = await response.json()
 
-		// changes the position of the map to whatever city was searched
+		// changes the position of the map to whatever place was searched
 		this.props.setMapsLocation(parsedResponse.data.result.geometry.location)
 	}
 
 	hideSearchPredictionsBox = () => {
-		this.setState({
-			isSearching: false
-		}); 	
+		// delayed by 2 milliseconds because when the user clicks on a place from the dropdown 
+		// they leave the search input which hides the search results an it doesnt allow to set
+		// the places the user clicked on in the state without this delay
+		setTimeout(() => {
+			this.setState({ isSearching: false }); 	
+		}, 200);
 	}
 	
 	render() {
