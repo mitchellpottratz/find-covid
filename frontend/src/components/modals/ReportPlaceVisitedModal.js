@@ -93,6 +93,7 @@ class ReportPlaceVisitedModal extends React.Component {
 		let placesLocation;
 		if (this.state.googlePlaceId !== '') {
 			placesLocation = await this.getPlacesLocation();
+			await this.reportPlaceVisited(placesLocation);
 
 		// otherwise an error message is show on the form
 		} else {
@@ -103,9 +104,28 @@ class ReportPlaceVisitedModal extends React.Component {
 			});
 			return;
 		}
+	}
+
+	// get the latitude and longitude of the place the user visited
+	getPlacesLocation = async () => {
+		try {
+			const response = await fetch(
+				'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + this.state.googlePlaceId
+			);
+			const parsedResponse = await response.json();
+			return parsedResponse.data.result.geometry.location;
+
+		} catch (error) {
+			console.log('error:', error);
+		}
+	}
+
+	// formats the request body and calls the action to make a request to 
+	// report the place the user visited
+	reportPlaceVisited = async (placesLocation) => {
 
 		// address is formatted as a object by the google api so the request 
-		// body needs to be reformatted
+		// body needs to be reformatted 
 		const placesName = this.state.place.split(',')[0];
 		const requestBody = {
 			name: placesName,
@@ -128,19 +148,6 @@ class ReportPlaceVisitedModal extends React.Component {
 		}
 	}
 
-	// get the latitude and longitude of the place the user visited
-	getPlacesLocation = async () => {
-		try {
-			const response = await fetch(
-				'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + this.state.googlePlaceId
-			);
-			const parsedResponse = await response.json();
-			return parsedResponse.data.result.geometry.location;
-
-		} catch (error) {
-			console.log('error:', error);
-		}
-	}
 
 	clearState = () => {
 		this.setState({
