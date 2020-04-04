@@ -116,8 +116,12 @@ button {
 }
 
 
-/* @media only screen and (max-width: 1020px) {
-} */
+@media only screen and (max-width: 767px) {
+  #users-case-card {
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+}
 
 
 

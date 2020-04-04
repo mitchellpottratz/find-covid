@@ -20,6 +20,8 @@ class ReportCaseModal extends React.Component {
 			symptoms_date: new Date(),
 			age: '',
 			zip_code: '',
+			latitude: '',
+			longitude: '',
 			notes: '',
 			isLoading: false,
 			formErrorMessages: []
@@ -53,6 +55,11 @@ class ReportCaseModal extends React.Component {
 		});
 
 		if (this.zipCodeIsValid()) {
+			console.log('zip code valid')
+
+			this.getZipCodesLocation();
+			console.log('zip code latitude:', this.state.latitude);
+
 			const response = await this.props.createUsersCase(this.state)
 			this.props.hideModal();
 		}
@@ -83,6 +90,16 @@ class ReportCaseModal extends React.Component {
 		});
 
 		return true;
+	}
+
+	// makes a request to get the latitude and longitude of the zip code
+	getZipCodesLocation = async () => {
+		console.log('getting location')
+		const response = await fetch(
+			'http://localhost:8000/api/v1/maps/zip-code/location&zip_code=' + this.state.zip_code
+		);
+		const parsedResponse = await response.json();
+		
 	}
 
 	render() {

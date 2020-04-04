@@ -79,7 +79,7 @@ class MyCase extends React.Component {
 					</Col>
 
 					<Col md={ 8 } sm={ 12 }>
-						<Card bg="light">
+						<Card bg="light" id="users-case-card">
 							<Card.Body>
 								<Card.Title>Your Reported Case</Card.Title>
 

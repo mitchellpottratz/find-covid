@@ -55,7 +55,8 @@ class ReportPlaceVisitedModal extends React.Component {
 	getAutocompleteResults = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place
+				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place + 
+				'&ipbias'
 			);
 			const parsedResponse = await response.json();
 			const googleApiResponse = parsedResponse.data;

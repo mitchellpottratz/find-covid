@@ -60,24 +60,48 @@ def autocomplete_city_search():
 @maps.route('/autocomplete/places', methods=['GET'])
 def autocomplete_place_search():
     try:
+        google_api_key = os.environ['GOOGLE_MAPS_API_KEY']
         search_input = request.args.get('search_input')
-        latitude = request.args.get('latitude')
-        longitude = request.args.get('longitude')
 
-        response = requests.get(
-            'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + search_input + 
-            '&location=' + latitude + ',' + longitude + '&radius=' + str(150) + 
-            '&types=establishment&key=' + os.environ['GOOGLE_MAPS_API_KEY']
-        )
-        parsed_response = response.json()
+        # if 'ipbias' is a query parameter then the request to the google places api uses location biasing
+        # based off the users ip address
+        if request.args.get('zip_code') is not None:    
 
-        return jsonify(
-            data=parsed_response,
-            status={
-                'code': 200,
-                'message': 'Successfully got search suggestions'
-            }
-        )
+            response = requests.get(
+                'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + search_input + 
+                '&locationbias=ipbias&types=establishment&key=' + google_api_key
+            )
+            parsed_response = response.json()
+            print('response:', parsed_response)
+
+            return jsonify(
+                data=parsed_response,
+                status={
+                    'code': 200,
+                    'message': 'Successfully got search suggestions'
+                }
+            )
+
+        # if 'ipbias' is NOT a query parameter then the latitude and longitude are passed as query parameters 
+        # to the google places api for location biasing
+        else:
+            latitude = request.args.get('latitude')
+            longitude = request.args.get('longitude')
+
+            response = requests.get(
+                'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + search_input + 
+                '&location=' + latitude + ',' + longitude + '&radius=' + str(150) + 
+                '&types=establishment&key=' + google_api_key
+            )
+            parsed_response = response.json()
+
+            return jsonify(
+                data=parsed_response,
+                status={
+                    'code': 200,
+                    'message': 'Successfully got search suggestions'
+                }
+            )
 
 
     except KeyError:
@@ -103,13 +127,56 @@ def get_places_details():
             '&key=' + os.environ['GOOGLE_MAPS_API_KEY']
         )
         parsed_response = response.json()
-        print('reponse:', parsed_response)
 
         return jsonify(
             data=parsed_response,
             status={
                 'code': 200,
                 'message': 'Successfully got places details'
+            }
+        )
+
+    except KeyError:
+        return jsonify(
+            data={},
+            status={
+                'code': 422,
+                'message': 'Invalid query parameters'
+            }
+        ) 
+
+
+# Get Zip Codes Location Route
+# this route takes a zip code as a query paramter and returns the latitude and longitude 
+# if the zip code
+@maps.route('/zip-code/location', methods=['GET'])
+def get_zip_codes_location():
+    try:
+        google_api_key = os.environ['GOOGLE_MAPS_API_KEY']
+        zip_code = request.args.get('zip_code')
+
+        api_url = (
+            'https://maps.googleapis.com/maps/api/geocode/json?address=' + zip_code + 
+            '&key=' + google_api_key
+        )
+
+        response = requests.get(api_url)
+        parsed_response = response.json()
+
+        location = parsed_response['results'][0]['geometry']['location']
+        latitude = location['lat']
+        longitude = location['lng']
+
+        response_body = {
+            'latitude': latitude,
+            'longitude': longitude
+        }
+
+        return jsonify(
+            data=response_body,
+            status={
+                'code': 200,
+                'message': 'Successfully got latitude and longitude for the zip code'
             }
         )
 
