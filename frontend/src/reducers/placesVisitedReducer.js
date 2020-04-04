@@ -19,8 +19,6 @@ const placesVisitedReducer = (state = initialState, action) => {
 
         // sets all of the places that should be shown on the map
         case SET_PLACES_ON_MAP:
-            console.log('SET_PLACES_ON_MAP')
-            console.log('payload:', action.payload);
             return {
                 ...state,
                 placesOnMap: action.payload

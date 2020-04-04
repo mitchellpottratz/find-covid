@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Form, Row, Col } from 'react-bootstrap';
-import { MDBInput, MDBListGroup, MDBListGroupItem } from "mdbreact"
+import { Form, Row, Col, Card } from 'react-bootstrap';
+import { MDBListGroup, MDBListGroupItem } from "mdbreact"
 
 
 class PlaceSearchForm extends React.Component {
@@ -26,7 +26,19 @@ class PlaceSearchForm extends React.Component {
 			this.setState({ isSearching: true })
 		}
 
-		this.getAutocompleteResults();
+		// maps location must be set so the places autocomplete search so 
+		// places near the curent map position will be shown
+		if (this.mapsLocationIsSet()) {
+			this.getAutocompleteResults();
+		}
+	}
+
+
+	mapsLocationIsSet = () => {
+		if (this.props.mapsCurrentLocation === undefined) {
+			return false;
+		} 
+		return true;
 	}
 
 
@@ -34,7 +46,9 @@ class PlaceSearchForm extends React.Component {
 	getAutocompleteResults = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place
+				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place +
+				'&latitude=' + this.props.mapsCurrentLocation.lat + 
+				'&longitude=' + this.props.mapsCurrentLocation.lng
 			);
 			const parsedResponse = await response.json();
 			const googleApiResponse = parsedResponse.data;
@@ -50,21 +64,30 @@ class PlaceSearchForm extends React.Component {
 	}
 
 	// when a place from the search results drop down is clicked
-	handleSearchPredictionClick = async (city) => {
-		this.setState({
-			place: city.description,
-			isSearching: false
-		})
-
+	handleSearchPredictionClick = async (place) => {
+		this.setState({ 
+			place: place.description,
+			isSearching: false 
+		});
+	
 		// makes request to get the latitude and longitude of the place
-		const googlePlaceId = city.place_id;
+		const googlePlaceId = place.place_id;
 		const response = await fetch(
 			'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + googlePlaceId
 		);
 		const parsedResponse = await response.json()
 
-		// changes the position of the map to whatever city was searched
+		// changes the position of the map to whatever place was searched
 		this.props.setMapsLocation(parsedResponse.data.result.geometry.location)
+	}
+
+	hideSearchPredictionsBox = () => {
+		// delayed by 2 milliseconds because when the user clicks on a place from the dropdown 
+		// they leave the search input which hides the search results an it doesnt allow to set
+		// the places the user clicked on in the state without this delay
+		setTimeout(() => {
+			this.setState({ isSearching: false }); 	
+		}, 200);
 	}
 	
 	render() {
@@ -72,34 +95,50 @@ class PlaceSearchForm extends React.Component {
 			<Form>
 				<Row>
 					<Col md={ 8 } sm={ 12 }>
-							<Form.Control
-								className="mb-0 pb-0"
-								type="text"
-								placeholder="Start typing..."
-								name="place"
-								value={ this.state.place }
-								onChange={ this.handleChange }
-								onBlur={ () => this.setState({ isSearchingForPlace: false }) } />
+							<Card>
+								<Card.Body>
+									<Form.Label>Search for a place nearby</Form.Label>
+									<Form.Control
+										className="mb-2 pb-0"
+										type="text"
+										placeholder="Start typing..."
+										name="place"
+										value={ this.state.place }
+										onChange={ this.handleChange }
+										onBlur={ this.hideSearchPredictionsBox } />
 
-							{/* show the dropdown box to get places autocomplete predictions if the user 
+									{/* show the dropdown box to get places autocomplete predictions if the user 
 									is current searching */}
-							{this.state.isSearching ? (
-								<MDBListGroup className="dropdown-search-box">
-              	{this.state.searchPredictions.map((place, i) => {
-									return (
-										<MDBListGroupItem 
-											key={i} 
-											className="dropdown-search-item"
-											onClick={ () => this.handleSearchPredictionClick(place) }>
-											{ place.description }
+									{this.state.isSearching ? (
+									<MDBListGroup className="dropdown-search-box">
+										<MDBListGroupItem className="text-center">
+											<strong>Please select a place below</strong>
 										</MDBListGroupItem>
-									)
-								})}
-            	</MDBListGroup>
-							) : (
-								null
-							)}
-	
+              			{this.state.searchPredictions.map((place, i) => {
+											return (
+												<MDBListGroupItem 
+													key={i} 
+													className="dropdown-search-item"
+													onClick={ () => this.handleSearchPredictionClick(place) }>
+													{ place.description }
+												</MDBListGroupItem>
+											)
+										})}
+            			</MDBListGroup>
+									) : (
+									null
+									)}
+										<a 
+											href="#"
+											class="ml-1"
+											onClick={ (e) => {
+												e.preventDefault();
+												this.setState({ place: '', searchPredictions: [] });
+											} }>
+												Clear
+										</a> 
+								</Card.Body>
+							</Card>
 					</Col>
 					<Col></Col>
 				</Row>

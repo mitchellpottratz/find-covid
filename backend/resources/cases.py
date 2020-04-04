@@ -63,6 +63,8 @@ def create_case():
 
         symptoms_date = data['symptoms_date']
         zip_code = data['zip_code']
+        latitude = data['latitude']
+        longitude = data['longitude']
         age = data['age']
         has_tested = data['has_tested']
         notes = data['notes']
@@ -87,6 +89,8 @@ def create_case():
                 user=current_user.id,
                 symptoms_date=symptoms_date,
                 zip_code=zip_code,
+                latitude=latitude,
+                longitude=longitude,
                 age=age,
                 has_tested=has_tested,
                 notes=notes

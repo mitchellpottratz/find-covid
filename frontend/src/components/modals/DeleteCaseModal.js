@@ -10,16 +10,14 @@ import { Modal, Button } from 'react-bootstrap';
 
 class DeleteCaseModal extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	handleDelete = async (e) => {
 		e.preventDefault();
 
 		const response = await this.props.deleteUsersCase(this.props.userId);
 		
-		this.props.hideModal();
+		if (response.status.code === 204) {
+			this.props.hideModal();
+		}
 	}
 	
 	render() {

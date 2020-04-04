@@ -13,6 +13,11 @@ class Case(BaseModel):
     user = ForeignKeyField(User, primary_key=True)
     symptoms_date = DateField()
     zip_code = CharField(max_length=10)
+
+    # coordinates of the zip code
+    latitude = CharField(max_length=100)
+    longitude = CharField(max_length=100)
+
     age = IntegerField()
     has_tested = BooleanField()
     notes = CharField(max_length=100, null=True)

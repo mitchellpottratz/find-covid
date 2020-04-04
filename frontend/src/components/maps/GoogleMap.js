@@ -48,8 +48,6 @@ class GoogleMap extends React.Component {
 	}
 
   render() {
-		console.log('maps location:', this.props.mapsLocation);
-
 		const mapStyles = {
 			width: '100%',
 			height: '80%',

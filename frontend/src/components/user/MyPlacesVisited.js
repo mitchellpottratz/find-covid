@@ -52,7 +52,8 @@ class MyPlacesVisited extends React.Component {
 				<ReportPlaceVisitedModal 
 					showModal={ this.state.showReportPlaceVisitedModal }
 					hideModal={ this.hideReportPlaceVisitedModal }
-					/>
+					usersCase={ this.props.usersCase }
+				/>
 
 				{/* Modal for deleting a place the user has visited */}
 				<DeletePlaceVisitedModal 

@@ -42,7 +42,6 @@ class MyCase extends React.Component {
   render() {
 		const { isLoggedIn, userInfo, usersCase } = this.props;
 		const symptomsDate = new Date(usersCase.symptoms_date);
-		console.log('has tested:', usersCase.has_tested);
 
 		// determines if the user has reported a case already
 		const userHasCase = usersCase.zip_code;
@@ -79,7 +78,7 @@ class MyCase extends React.Component {
 					</Col>
 
 					<Col md={ 8 } sm={ 12 }>
-						<Card bg="light">
+						<Card bg="light" id="users-case-card">
 							<Card.Body>
 								<Card.Title>Your Reported Case</Card.Title>
 
@@ -99,6 +98,9 @@ class MyCase extends React.Component {
 										</p>
 										<p className="mb-1">
 											<strong>Symptoms Date: </strong> { symptomsDate.toDateString() }
+										</p>
+										<p className="mb-1">
+												<strong>Zip Code: </strong> { usersCase.zip_code }
 										</p>
 										<p className="mb-2">	
 											<strong>Age: </strong> { usersCase.age }
@@ -129,9 +131,9 @@ class MyCase extends React.Component {
 								) : (
 								<div className="text-center">
 									<p className="mb-1"><strong>Have you:</strong></p>
-									<p className="mb-0">Been experiencing symptoms of Coronavirus/Covid-19?</p>
+									<p className="mb-0">Been experiencing symptoms of COVID-19?</p>
 									<p className="mb-0"><strong>or</strong></p>
-									<p>Tested positive for Coronavirus/Covid-19?</p>
+									<p>Tested positive for COVID-19?</p>
 									<Button
 				  					variant="dark"
 										onClick={ this.showReportCaseModal }>
@@ -145,7 +147,8 @@ class MyCase extends React.Component {
 						{/* if the user has a case reported then the component that allows the user
 						    to add places they have visited is shown */}
 						{userHasCase ? (
-							<MyPlacesVisited />	
+							<MyPlacesVisited 
+								usersCase={ usersCase } />	
 						) : (
 							null
 						)}		

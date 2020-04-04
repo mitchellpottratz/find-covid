@@ -11,16 +11,14 @@ import { Modal, Button } from 'react-bootstrap';
 
 class DeletePlaceVisitedModal extends React.Component {
 
-	constructor(props) {
-		super(props);
-	}
-
 	handleDelete = async (e) => {
 		e.preventDefault();
 
 		const response = await this.props.deleteUsersPlaceVisited(this.props.placeVisited.id);
 
-		this.props.hideModal();
+		if (response.status.code === 204) {
+			this.props.hideModal();
+		}
 	}
 	
 	render() {

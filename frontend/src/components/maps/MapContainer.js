@@ -85,12 +85,12 @@ class MapContainer extends React.Component {
 				<Card>
 					<Card.Body>
 				  <Row>
-						<Col>
+						<Col md={6} sm={12}>
 							<PlaceSearchForm 
-								setMapsLocation={ this.setMapsLocation } />
+								setMapsLocation={ this.setMapsLocation } 
+								mapsCurrentLocation={ this.state.mapsLocation } />
 						</Col>
 						<Col>
-
 							{/* if the user is logged in show the butto that allows them to report their symptoms */}
 							{this.props.isLoggedIn ? (
 								<div className="d-flex d-flex flex-row-reverse">
@@ -101,7 +101,7 @@ class MapContainer extends React.Component {
 
 							// if the user isnt logged in they are shown a link to register
 							) : (
-								<p className="text-center">
+								<p className="text-center mt-4">
 									Feeling Symptoms? <br></br>
 									<Link to="/register">Sign up here</Link> to report your symptoms
 								</p>
@@ -112,7 +112,7 @@ class MapContainer extends React.Component {
 					</Card.Body>
 				</Card>
 
-				{this.state.mapIsLoading ? (
+				{/* {this.state.mapIsLoading ? (
 					<div className="text-center">
 						<Spinner animation="border" className="mt-4" />
 					</div>
@@ -123,8 +123,7 @@ class MapContainer extends React.Component {
 						placesOnMap={ this.props.placesOnMap }
 						mapZoom={ this.state.mapZoom }
 					/>
-				)}
-
+				)} */}
 			</React.Fragment>
     )
 	}
