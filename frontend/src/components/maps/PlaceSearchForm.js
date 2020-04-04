@@ -26,7 +26,19 @@ class PlaceSearchForm extends React.Component {
 			this.setState({ isSearching: true })
 		}
 
-		this.getAutocompleteResults();
+		// maps location must be set so the places autocomplete search so 
+		// places near the curent map position will be shown
+		if (this.mapsLocationIsSet()) {
+			this.getAutocompleteResults();
+		}
+	}
+
+
+	mapsLocationIsSet = () => {
+		if (this.props.mapsCurrentLocation === undefined) {
+			return false;
+		} 
+		return true;
 	}
 
 
@@ -34,7 +46,9 @@ class PlaceSearchForm extends React.Component {
 	getAutocompleteResults = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place
+				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place +
+				'&latitude=' + this.props.mapsCurrentLocation.lat + 
+				'&longitude=' + this.props.mapsCurrentLocation.lng
 			);
 			const parsedResponse = await response.json();
 			const googleApiResponse = parsedResponse.data;

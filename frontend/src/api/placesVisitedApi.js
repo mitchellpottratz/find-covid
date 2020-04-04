@@ -8,7 +8,6 @@ export default {
         try {
             const response = await fetch(apiURL + 'places-visited/');
             const parsedResponse = await response.json();
-            console.log('response:', parsedResponse);
             return parsedResponse;   
 
         } catch (error) {
@@ -51,3 +50,5 @@ export default {
     }
 
 }
+
+

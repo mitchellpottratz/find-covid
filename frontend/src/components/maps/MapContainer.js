@@ -87,7 +87,8 @@ class MapContainer extends React.Component {
 				  <Row>
 						<Col md={6} sm={12}>
 							<PlaceSearchForm 
-								setMapsLocation={ this.setMapsLocation } />
+								setMapsLocation={ this.setMapsLocation } 
+								mapsCurrentLocation={ this.state.mapsLocation } />
 						</Col>
 						<Col>
 							{/* if the user is logged in show the butto that allows them to report their symptoms */}
@@ -123,7 +124,6 @@ class MapContainer extends React.Component {
 						mapZoom={ this.state.mapZoom }
 					/>
 				)}
-
 			</React.Fragment>
     )
 	}

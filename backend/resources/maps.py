@@ -61,9 +61,12 @@ def autocomplete_city_search():
 def autocomplete_place_search():
     try:
         search_input = request.args.get('search_input')
+        latitude = request.args.get('latitude')
+        longitude = request.args.get('longitude')
 
         response = requests.get(
             'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + search_input + 
+            '&location=' + latitude + ',' + longitude + '&radius=' + str(150) + 
             '&types=establishment&key=' + os.environ['GOOGLE_MAPS_API_KEY']
         )
         parsed_response = response.json()
