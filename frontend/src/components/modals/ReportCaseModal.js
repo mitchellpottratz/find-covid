@@ -55,11 +55,7 @@ class ReportCaseModal extends React.Component {
 		});
 
 		if (this.zipCodeIsValid()) {
-			console.log('zip code valid')
-
-			this.getZipCodesLocation();
-			console.log('zip code latitude:', this.state.latitude);
-
+			await this.getZipCodesLocation();
 			const response = await this.props.createUsersCase(this.state)
 			this.props.hideModal();
 		}
@@ -94,12 +90,17 @@ class ReportCaseModal extends React.Component {
 
 	// makes a request to get the latitude and longitude of the zip code
 	getZipCodesLocation = async () => {
-		console.log('getting location')
 		const response = await fetch(
-			'http://localhost:8000/api/v1/maps/zip-code/location&zip_code=' + this.state.zip_code
+			'http://localhost:8000/api/v1/maps/zip-code/location?zip_code=' + this.state.zip_code
 		);
 		const parsedResponse = await response.json();
-		
+
+		if (parsedResponse.status.code === 200) {
+			await this.setState({
+				latitude: parsedResponse.data.latitude,
+				longitude: parsedResponse.data.longitude
+			});
+		}
 	}
 
 	render() {

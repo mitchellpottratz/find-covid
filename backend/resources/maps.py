@@ -180,12 +180,13 @@ def get_zip_codes_location():
             }
         )
 
+    # thrown if the response from the google api is not valid
     except KeyError:
         return jsonify(
             data={},
             status={
                 'code': 422,
-                'message': 'Invalid query parameters'
+                'message': 'Provided zip code is not valid'
             }
         ) 
 
