@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Form, Row, Col } from 'react-bootstrap';
-import { MDBInput, MDBListGroup, MDBListGroupItem } from "mdbreact"
+import { Form, Row, Col, Card } from 'react-bootstrap';
+import { MDBListGroup, MDBListGroupItem } from "mdbreact"
 
 
 class PlaceSearchForm extends React.Component {
@@ -72,14 +72,19 @@ class PlaceSearchForm extends React.Component {
 			<Form>
 				<Row>
 					<Col md={ 8 } sm={ 12 }>
-							<Form.Control
-								className="mb-0 pb-0"
-								type="text"
-								placeholder="Start typing..."
-								name="place"
-								value={ this.state.place }
-								onChange={ this.handleChange }
-								onBlur={ () => this.setState({ isSearchingForPlace: false }) } />
+							<Card>
+								<Card.Body>
+									<Form.Label>Search for a place nearby</Form.Label>
+									<Form.Control
+										className="mb-0 pb-0"
+										type="text"
+										placeholder="Start typing..."
+										name="place"
+										value={ this.state.place }
+										onChange={ this.handleChange }
+										onBlur={ () => this.setState({ isSearchingForPlace: false }) } />
+								</Card.Body>
+							</Card>
 
 							{/* show the dropdown box to get places autocomplete predictions if the user 
 									is current searching */}

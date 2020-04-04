@@ -85,7 +85,7 @@ class MapContainer extends React.Component {
 				<Card>
 					<Card.Body>
 				  <Row>
-						<Col>
+						<Col md={6} sm={12}>
 							<PlaceSearchForm 
 								setMapsLocation={ this.setMapsLocation } />
 						</Col>
