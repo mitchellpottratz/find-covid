@@ -61,48 +61,25 @@ def autocomplete_city_search():
 def autocomplete_place_search():
     try:
         google_api_key = os.environ['GOOGLE_MAPS_API_KEY']
+
         search_input = request.args.get('search_input')
+        latitude = request.args.get('latitude')
+        longitude = request.args.get('longitude')
 
-        # if 'ipbias' is a query parameter then the request to the google places api uses location biasing
-        # based off the users ip address
-        if request.args.get('zip_code') is not None:    
+        response = requests.get(
+            'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + search_input + 
+            '&location=' + latitude + ',' + longitude + '&radius=150' + 
+            '&types=establishment&key=' + google_api_key
+        )
+        parsed_response = response.json()
 
-            response = requests.get(
-                'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + search_input + 
-                '&locationbias=ipbias&types=establishment&key=' + google_api_key
-            )
-            parsed_response = response.json()
-            print('response:', parsed_response)
-
-            return jsonify(
-                data=parsed_response,
-                status={
-                    'code': 200,
-                    'message': 'Successfully got search suggestions'
-                }
-            )
-
-        # if 'ipbias' is NOT a query parameter then the latitude and longitude are passed as query parameters 
-        # to the google places api for location biasing
-        else:
-            latitude = request.args.get('latitude')
-            longitude = request.args.get('longitude')
-
-            response = requests.get(
-                'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' + search_input + 
-                '&location=' + latitude + ',' + longitude + '&radius=' + str(150) + 
-                '&types=establishment&key=' + google_api_key
-            )
-            parsed_response = response.json()
-
-            return jsonify(
-                data=parsed_response,
-                status={
-                    'code': 200,
-                    'message': 'Successfully got search suggestions'
-                }
-            )
-
+        return jsonify(
+            data=parsed_response,
+            status={
+                'code': 200,
+                'message': 'Successfully got search suggestions'
+            }
+        )
 
     except KeyError:
         return jsonify(
