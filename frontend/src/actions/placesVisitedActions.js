@@ -10,7 +10,7 @@ import placesVisitedAPI from '../api/placesVisitedApi.js';
 
 export const getPlacesOnMap = () => async (dispatch) => {
     const response = await placesVisitedAPI.getPlacesOnMap();
-
+    console.log('response:', response);
     if (response.status.code === 200) {
         dispatch({
             type: SET_PLACES_ON_MAP,

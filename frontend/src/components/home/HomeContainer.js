@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Jumbotron } from 'react-bootstrap';
 import CovidStatsCard from './CovidStatsCard.js';
+import { Link } from 'react-router-dom';
 
 
 class HomeContainer extends React.Component {
@@ -13,14 +14,20 @@ class HomeContainer extends React.Component {
   render() {
 		return (
 			<Container className="mt-4">
-				<Row>
-					<Col md={4} sm={12}>
-						<CovidStatsCard />
-					</Col>
-					<Col md={8} sm={12}>
-					
-					</Col>
-				</Row>
+				<Jumbotron fluid>
+  					<Container className="text-center">
+							<h2 class="mb-4">
+								<strong>Know your risk of exposure</strong>
+							</h2>
+							<h3 class="mb-4">to COVID-19 the next time you</h3>
+							<h3>leave your house...</h3>
+							<Link 
+								className="btn btn-primary mt-4"
+								to="/register">
+								Get Started
+							</Link>
+  					</Container>
+					</Jumbotron>
 			</Container>
 
 		)
