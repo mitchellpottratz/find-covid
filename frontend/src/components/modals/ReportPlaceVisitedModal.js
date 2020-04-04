@@ -151,6 +151,12 @@ class ReportPlaceVisitedModal extends React.Component {
 		});
 	}
 
+	hideSearchPredictionsBox = () => {
+		this.setState({
+			isSearchingForPlace: false
+		});
+	}
+
   render() {
 		return (
 			<Modal 
@@ -175,14 +181,14 @@ class ReportPlaceVisitedModal extends React.Component {
 					onSubmit={ this.handleSubmit } >
 
 					<Form.Group>
-						<Form.Label>What is the address of this place?</Form.Label>
+						<Form.Label>Search for the place</Form.Label>
 						<Form.Control 
 							type="text"
 							name="place"
 							placeholder="Start typing..." 
 							value={ this.state.place }
 							onChange={ this.handlePlaceChange }
-							// onBlur={ () => this.setState({ isSearchingForPlace: false }) } 
+							onBlur={ () => this.hideSearchPredictionsBox } 
 							/>
 
 							{/* if the user is currently searching for the place they visited then the search 

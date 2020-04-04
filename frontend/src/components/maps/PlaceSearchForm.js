@@ -66,6 +66,12 @@ class PlaceSearchForm extends React.Component {
 		// changes the position of the map to whatever city was searched
 		this.props.setMapsLocation(parsedResponse.data.result.geometry.location)
 	}
+
+	hideSearchPredictionsBox = () => {
+		this.setState({
+			isSearching: false
+		}); 	
+	}
 	
 	render() {
 		return (
@@ -82,7 +88,26 @@ class PlaceSearchForm extends React.Component {
 										name="place"
 										value={ this.state.place }
 										onChange={ this.handleChange }
-										onBlur={ () => this.setState({ isSearchingForPlace: false }) } />
+										onBlur={ this.hideSearchPredictionsBox } />
+
+									{/* show the dropdown box to get places autocomplete predictions if the user 
+									is current searching */}
+									{this.state.isSearching ? (
+									<MDBListGroup className="dropdown-search-box">
+              			{this.state.searchPredictions.map((place, i) => {
+											return (
+												<MDBListGroupItem 
+													key={i} 
+													className="dropdown-search-item"
+													onClick={ () => this.handleSearchPredictionClick(place) }>
+													{ place.description }
+												</MDBListGroupItem>
+											)
+										})}
+            			</MDBListGroup>
+									) : (
+									null
+									)}
 										<a 
 											href="#"
 											class="ml-1"
@@ -94,26 +119,6 @@ class PlaceSearchForm extends React.Component {
 										</a> 
 								</Card.Body>
 							</Card>
-
-							{/* show the dropdown box to get places autocomplete predictions if the user 
-									is current searching */}
-							{this.state.isSearching ? (
-								<MDBListGroup className="dropdown-search-box">
-              	{this.state.searchPredictions.map((place, i) => {
-									return (
-										<MDBListGroupItem 
-											key={i} 
-											className="dropdown-search-item"
-											onClick={ () => this.handleSearchPredictionClick(place) }>
-											{ place.description }
-										</MDBListGroupItem>
-									)
-								})}
-            	</MDBListGroup>
-							) : (
-								null
-							)}
-	
 					</Col>
 					<Col></Col>
 				</Row>
