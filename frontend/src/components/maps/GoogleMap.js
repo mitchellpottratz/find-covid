@@ -4,6 +4,10 @@ import React from 'react';
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 import ViewPlaceModal from '../modals/ViewPlaceModal.js';
 
+// icons 
+import UserMapMarker from '../../icons/user-map-marker.svg';
+import PlaceMapMarker from '../../icons/place-map-marker.svg';
+
 
 class GoogleMap extends React.Component {
 
@@ -70,7 +74,7 @@ class GoogleMap extends React.Component {
 						{lat: this.state.mapsLatitude, lng: this.state.mapsLongitude}
 					}
 					icon={{
-      			url: "/icons/user-map-marker.svg",
+      			url: UserMapMarker,
       			scaledSize: new this.props.google.maps.Size(20,20)
     			}}
 				/>
@@ -85,7 +89,7 @@ class GoogleMap extends React.Component {
 									{lat: place.latitude, lng: place.longitude}
 								}
 								icon={{
-      						url: "/icons/tested-positive-map-marker.svg",
+      						url: PlaceMapMarker,
       						scaledSize: new this.props.google.maps.Size(15, 15)
 								}}
 								onClick={ () => this.showViewPlaceModal(place) }
