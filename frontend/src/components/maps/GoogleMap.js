@@ -70,7 +70,7 @@ class GoogleMap extends React.Component {
 						{lat: this.state.mapsLatitude, lng: this.state.mapsLongitude}
 					}
 					icon={{
-      			url: "user-map-marker.svg",
+      			url: "/icons/user-map-marker.svg",
       			scaledSize: new this.props.google.maps.Size(20,20)
     			}}
 				/>
@@ -85,7 +85,7 @@ class GoogleMap extends React.Component {
 									{lat: place.latitude, lng: place.longitude}
 								}
 								icon={{
-      						url: "tested-positive-map-marker.svg",
+      						url: "/icons/tested-positive-map-marker.svg",
       						scaledSize: new this.props.google.maps.Size(15, 15)
 								}}
 								onClick={ () => this.showViewPlaceModal(place) }
