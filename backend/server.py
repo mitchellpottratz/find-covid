@@ -1,5 +1,5 @@
 from flask_cors import CORS
-from waitress import serve
+from gevent import pywsgi
 
 import os
 from dotenv import load_dotenv
@@ -52,7 +52,8 @@ class Server:
         print('ORIGIN:', self.ORIGIN)
         print('Debug:', self.DEBUG)
         print('Starting Flask server on:', self.PORT)
-        serve(self.app, host=self.HOST, port=self.PORT)
+        server = pywsgi.WSGIServer((self.HOST, int(self.PORT)), self.app)
+        server.serve_forever()
 
 
 
