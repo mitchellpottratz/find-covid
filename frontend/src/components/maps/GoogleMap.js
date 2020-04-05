@@ -18,7 +18,8 @@ class GoogleMap extends React.Component {
 		}
 	}
 
-	showViewPlaceModal = () => {
+	showViewPlaceModal = (place) => {
+		console.log('place:', place);
 		this.setState({ showViewPlaceModal: true });
 	}
 
@@ -38,8 +39,8 @@ class GoogleMap extends React.Component {
 			{/* this modal is for displaying all of the cases for a certain location	 */}
 			{this.state.showViewPlaceModal ? (
 					<ViewPlaceModal
-						show={ this.state.showViewPlaceModal }
-						onHide={ this.hideShowPlaceModal } /> 
+						showModal={ this.state.showViewPlaceModal }
+						hideModal={ this.hideShowPlaceModal } /> 
 				) : (
 					null
 				)}	
@@ -84,7 +85,7 @@ class GoogleMap extends React.Component {
       						url: "tested-positive-map-marker.svg",
       						scaledSize: new this.props.google.maps.Size(15, 15)
 								}}
-								onClick={ () => this.showViewTestedPositiveCaseModal(place) }
+								onClick={ () => this.showViewPlaceModal(place) }
 							/>
 						)
 
@@ -101,7 +102,7 @@ class GoogleMap extends React.Component {
       						url: "symptoms-map-marker.svg",
       						scaledSize: new this.props.google.maps.Size(15, 15)
 								}}
-								onClick={ () => this.showViewSymptomsCaseModal(place) }
+								onClick={ () => this.showViewPlaceModal(place) }
 							/>
 						)
 					}
