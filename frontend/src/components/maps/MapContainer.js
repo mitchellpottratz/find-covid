@@ -8,6 +8,7 @@ import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 import GoogleMap from './GoogleMap.js';
 import PlaceSearchForm from './PlaceSearchForm.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
+import ViewPlaceModal from '../modals/ViewPlaceModal.js';
 import { Row, Col, Card, Button, Spinner } from 'react-bootstrap';
 import ReportSymptomsButton from '../common/ReportSymptomsButton.js';
 import { Link } from 'react-router-dom';
@@ -25,7 +26,9 @@ class MapContainer extends React.Component {
 				lng: 0
 			},
 			mapZoom: 13,
-			showModal: false
+			showModal: false,
+			showViewPlaceModal: false,
+			currentPlace: {}
 		}
 	}
 
@@ -68,6 +71,14 @@ class MapContainer extends React.Component {
 		this.setState({ showModal: false });
 	}
 
+	showViewPlaceModal = () => {
+		this.setState({ showViewPlaceModal: true });
+	}
+
+	hideShowPlaceModal = () => {
+		this.setState({ showViewPlaceModal: false });
+	}
+
   render() {
     return (
 			<React.Fragment>
@@ -78,6 +89,14 @@ class MapContainer extends React.Component {
 					<ReportCaseModal
 						showModal={ this.state.showModal }
 						hideModal={ this.hideModal } />
+				) : (
+					null
+				)}
+
+				{this.state.showViewPlaceModal ? (
+					<ViewPlaceModal
+						show={ this.state.showViewPlaceModal }
+						onHide={ this.hideShowPlaceModal } /> 
 				) : (
 					null
 				)}
