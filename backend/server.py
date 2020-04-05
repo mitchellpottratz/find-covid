@@ -52,7 +52,13 @@ class Server:
         print('ORIGIN:', self.ORIGIN)
         print('Debug:', self.DEBUG)
         print('Starting Flask server on:', self.PORT)
-        server = pywsgi.WSGIServer((self.HOST, int(self.PORT)), self.app)
+
+        server = pywsgi.WSGIServer(
+                (self.HOST, int(self.PORT)),
+                self.app,
+                keyfile='/etc/letsencrypt/live/sympto-map.com-0001/privkey.pem',
+                certfile='/etc/letsencrypt/live/sympto-map.com-0001/cert.pem'
+            )
         server.serve_forever()
 
 
