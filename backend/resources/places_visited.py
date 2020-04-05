@@ -78,7 +78,7 @@ def get_place(google_place_id):
     # converts all the models to dictionaries and removes the users information
     all_cases_dicts = []
     for case in all_cases: 
-        case_dict = modal_to_dict(case)
+        case_dict = model_to_dict(case)
         del case_dict['case']['user']
         all_cases_dicts.append(case_dict)
 
