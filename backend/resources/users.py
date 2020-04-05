@@ -233,7 +233,11 @@ def send_new_confirmation_code():
         }
     )
 
-
+# updates user's password
+@users.route('/change-password', methods=['GET', 'POST'])
+@login_required
+def change_password():
+    
 
 
 
