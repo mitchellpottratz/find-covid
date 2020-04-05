@@ -19,7 +19,7 @@ class ViewPlaceModal extends React.Component {
 					<Modal.Title>Place</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-
+					
 				</Modal.Body>
 			</Modal>
 		)

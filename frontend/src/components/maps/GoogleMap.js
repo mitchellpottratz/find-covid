@@ -19,12 +19,17 @@ class GoogleMap extends React.Component {
 	}
 
 	showViewPlaceModal = (place) => {
-		console.log('place:', place);
-		this.setState({ showViewPlaceModal: true });
+		this.setState({ 
+			showViewPlaceModal: true,
+			currentPlace: place
+		});
 	}
 
 	hideShowPlaceModal = () => {
-		this.setState({ showViewPlaceModal: false });
+		this.setState({ 
+			showViewPlaceModal: false, 
+			currentPlace: {} 
+		});
 	}
 
   render() {
@@ -40,7 +45,8 @@ class GoogleMap extends React.Component {
 			{this.state.showViewPlaceModal ? (
 					<ViewPlaceModal
 						showModal={ this.state.showViewPlaceModal }
-						hideModal={ this.hideShowPlaceModal } /> 
+						hideModal={ this.hideShowPlaceModal } 
+						place={ this.state.currentPlace } /> 
 				) : (
 					null
 				)}	

@@ -1,5 +1,7 @@
 import {
     SET_PLACES_ON_MAP,
+    SET_CURRENT_PLACE,
+    DELETE_CURRENT_PLACE,
     SET_USERS_PLACES_VISITED,
     ADD_USERS_PLACE_VISITED,
     DELETE_USERS_PLACE_VISITED,
@@ -9,7 +11,8 @@ import {
 
 const initialState = {
     placesOnMap: [], 
-    usersPlacesVisited: []
+    usersPlacesVisited: [],
+    currentPlace: {}
 }
 
 
@@ -23,6 +26,20 @@ const placesVisitedReducer = (state = initialState, action) => {
                 ...state,
                 placesOnMap: action.payload
             }
+
+        // sets the current place being visited by the user
+        case SET_CURRENT_PLACE:
+            return {
+                ...state,
+                currentPlace: action.payload
+            }
+
+        // removes the current place being view by the user
+        case DELETE_CURRENT_PLACE:
+            return {
+                ...state, 
+                currentPlace: {}
+            }    
 
         // sets all to places the user has visited since testing positive or 
         // showing symptoms of covid-19
