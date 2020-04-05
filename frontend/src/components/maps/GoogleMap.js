@@ -77,11 +77,8 @@ class GoogleMap extends React.Component {
 
 				{/* places where people with symptoms have visited */}
 				{this.props.placesOnMap.map((place, i) => {
-					
-					// if the person that visited this place has tested positive
-					if (place.case.has_tested) {
-						return (
-							<Marker 
+					return (
+						<Marker 
 								key={ i }
 								title={ "Has Tested Positive Case" }
 								position={
@@ -93,28 +90,8 @@ class GoogleMap extends React.Component {
 								}}
 								onClick={ () => this.showViewPlaceModal(place) }
 							/>
-						)
-
-					// if the person that visited this place has only been experiencing symtoms	
-					} else {
-						return (
-							<Marker 
-								key={ i }
-								title={ "Sympton Case" }
-								position={
-									{lat: place.latitude, lng: place.longitude}
-								}
-								icon={{
-      						url: "symptoms-map-marker.svg",
-      						scaledSize: new this.props.google.maps.Size(15, 15)
-								}}
-								onClick={ () => this.showViewPlaceModal(place) }
-							/>
-						)
-					}
-				})
-
-			}		
+					)
+						})}
 			</Map>
 
 			</React.Fragment>
