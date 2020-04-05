@@ -2,3 +2,4 @@ venv
 .env 
 find-covid.sqlite
 __pycache__
+ssl

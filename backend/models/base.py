@@ -5,7 +5,7 @@ from playhouse.db_url import connect
 from peewee import *
             
 
-DEBUG = True
+DEBUG = False
 
 # determines if the production or dev data should be used
 if DEBUG:
