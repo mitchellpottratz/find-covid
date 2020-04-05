@@ -42,7 +42,14 @@ def get_all_places_visited():
     ).select(
         PlaceVisited.case, 
         PlaceVisited.latitude,
-        PlaceVisited.longitude
+        PlaceVisited.longitude,
+        PlaceVisited.name,
+        PlaceVisited.date_visited,
+        PlaceVisited.address,
+        PlaceVisited.google_place_id,
+        PlaceVisited.last_updated,
+        PlaceVisited.timestamp,
+        PlaceVisited.id
     )
     
     places_visited_dicts = []

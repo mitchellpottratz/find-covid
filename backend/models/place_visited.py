@@ -21,7 +21,7 @@ class PlaceVisited(BaseModel):
 
     # stores the google id for the place so it can be search quickly
     google_place_id = CharField(max_length=100)
-
+    
 
     # returns the date 3 days before the current day to determine if 
     # a place visited is still at risk for covid-19
