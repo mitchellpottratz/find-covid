@@ -12,7 +12,7 @@ load_dotenv(dotenv_path)
 class Server:
 
     def __init__(self, app, login_manager, blueprints):
-        self.DEBUG = False
+        self.DEBUG = True
         self.PORT = os.environ['PORT']
         self.HOST = self.set_host()
         self.ORIGIN = self.set_origin()
@@ -53,12 +53,19 @@ class Server:
         print('Debug:', self.DEBUG)
         print('Starting Flask server on:', self.PORT)
 
-        server = pywsgi.WSGIServer(
+        # if served in debug mode the server uses http
+        if self.DEBUG:
+            server = pywsgi.WSGIServer((self.HOST, int(self.PORT)), self.app)
+
+        # otherwise if in production the server uses https
+        else:
+            server = pywsgi.WSGIServer(
                 (self.HOST, int(self.PORT)),
                 self.app,
                 keyfile='/etc/letsencrypt/live/sympto-map.com-0001/privkey.pem',
                 certfile='/etc/letsencrypt/live/sympto-map.com-0001/cert.pem'
             )
+
         server.serve_forever()
 
 
