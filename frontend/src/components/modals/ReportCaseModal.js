@@ -91,7 +91,7 @@ class ReportCaseModal extends React.Component {
 	// makes a request to get the latitude and longitude of the zip code
 	getZipCodesLocation = async () => {
 		const response = await fetch(
-			'http://localhost:8000/api/v1/maps/zip-code/location?zip_code=' + this.state.zip_code
+			process.env.REACT_APP_API_URL + 'maps/zip-code/location?zip_code=' + this.state.zip_code
 		);
 		const parsedResponse = await response.json();
 

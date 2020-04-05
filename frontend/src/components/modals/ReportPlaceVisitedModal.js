@@ -52,7 +52,7 @@ class ReportPlaceVisitedModal extends React.Component {
 	getAutocompleteResults = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place + 
+				process.env.REACT_APP_API_URL + 'maps/autocomplete/places?search_input=' + this.state.place + 
 				'&latitude=' + this.props.usersCase.latitude + 
 				'&longitude=' + this.props.usersCase.longitude
 			);
@@ -109,7 +109,7 @@ class ReportPlaceVisitedModal extends React.Component {
 	getPlacesLocation = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + this.state.googlePlaceId
+				process.env.REACT_APP_API_URL + 'maps/places/location?google_place_id=' + this.state.googlePlaceId
 			);
 			const parsedResponse = await response.json();
 			return parsedResponse.data.result.geometry.location;

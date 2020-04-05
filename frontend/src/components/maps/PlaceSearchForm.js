@@ -46,7 +46,7 @@ class PlaceSearchForm extends React.Component {
 	getAutocompleteResults = async () => {
 		try {
 			const response = await fetch(
-				'http://localhost:8000/api/v1/maps/autocomplete/places?search_input=' + this.state.place +
+				process.env.REACT_APP_API_URL + 'maps/autocomplete/places?search_input=' + this.state.place +
 				'&latitude=' + this.props.mapsCurrentLocation.lat + 
 				'&longitude=' + this.props.mapsCurrentLocation.lng
 			);
@@ -73,7 +73,7 @@ class PlaceSearchForm extends React.Component {
 		// makes request to get the latitude and longitude of the place
 		const googlePlaceId = place.place_id;
 		const response = await fetch(
-			'http://localhost:8000/api/v1/maps/places/location?google_place_id=' + googlePlaceId
+			process.env.REACT_APP_API_URL + 'maps/places/location?google_place_id=' + googlePlaceId
 		);
 		const parsedResponse = await response.json()
 
