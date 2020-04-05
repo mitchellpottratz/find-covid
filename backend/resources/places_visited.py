@@ -67,6 +67,33 @@ def get_all_places_visited():
     )
 
 
+
+# Show Route
+# this route takes a google place id as a query parameter and returns all 
+# reported cases of infected people visiting their 
+@places_visited.route('/<google_place_id>', methods=['GET'])
+def get_place(google_place_id):
+    all_cases = PlaceVisited.select().where(PlaceVisited.google_place_id == google_place_id)
+
+    # converts all the models to dictionaries and removes the users information
+    all_cases_dicts = []
+    for case in all_cases: 
+        case_dict = modal_to_dict(case)
+        del case_dict['case']['user']
+        all_cases_dicts.append(case_dict)
+
+    return jsonify(
+        data=all_cases_dicts,
+        status={
+            'code': 200,
+            'messages': 'Got all the cases for this place'
+        }
+    )    
+
+  
+   
+
+
 # Get Place Information Route
 # this route uses the google places api to get information about a place using the place id
 @places_visited.route('/<google_place_id>/details', methods=['GET'])
