@@ -2,8 +2,7 @@ import React from 'react';
 
 // components
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
-import ViewTestedPositiveModal from '../modals/ViewTestedPositiveModal.js';
-import ViewSymptomsCaseModal from '../modals/ViewSymptomsCaseModal.js';
+import ViewPlaceModal from '../modals/ViewPlaceModal.js';
 
 
 class GoogleMap extends React.Component {
@@ -14,37 +13,17 @@ class GoogleMap extends React.Component {
 		this.state = {
 			mapsLatitude: this.props.mapsLocation.lat,
 			mapsLongitude: this.props.mapsLocation.lng,
-			viewSymptomCaseModal: false,
-			viewTestedPositiveCaseModal: false,
-
-			// case that will be shown in the ViewTestedPositiveModal
-			currentTestPositiveCase: {}, 
-
-			// case the will shown in the ViewSymptomsCaseModal
-			currentSymptomsCase: {}
+			showViewPlaceModal: false,
+			currentPlace: {}
 		}
 	}
 
-	showViewTestedPositiveCaseModal = (testedPositiveCase) => {
-		this.setState({ 
-			currentTestPositiveCase: testedPositiveCase,
-			viewTestedPositiveCaseModal: true 
-		})
+	showViewPlaceModal = () => {
+		this.setState({ showViewPlaceModal: true });
 	}
 
-	hideViewTestedPositiveCaseModal = () => {
-		this.setState({ viewTestedPositiveCaseModal: false })
-	}
-
-	showViewSymptomsCaseModal = (testedPositiveCase) => {
-		this.setState({ 
-			currentSymptomsCase: testedPositiveCase,
-			viewSymptomsCaseModal: true 
-		})
-	}
-
-	hideViewSymptomsCaseModal = () => {
-		this.setState({ viewSymptomsCaseModal: false })
+	hideShowPlaceModal = () => {
+		this.setState({ showViewPlaceModal: false });
 	}
 
   render() {
@@ -55,26 +34,15 @@ class GoogleMap extends React.Component {
 
     return (
 			<React.Fragment>
-	
-			{/* modal for viewing a place where a person who has been tested positive has visited */}
-			{this.state.viewTestedPositiveCaseModal ? (
-				<ViewTestedPositiveModal
-					showModal={ this.state.viewTestedPositiveCaseModal }
-					hideModal={ this.hideViewTestedPositiveCaseModal }
-					caseInfo={ this.state.currentTestPositiveCase } />
-			) : (
-				null
-			)}	
 
-			{/* modal for viewing a place where a person who has been showing symptoms has visited	 */}
-			{this.state.viewSymptomCaseModal ? (
-				<ViewSymptomsCaseModal 
-					showModal={ this.state.viewSymptomCaseModal }
-					hideModal={ this.hideViewSymptomsCaseModal }
-					caseInfo={ this.state.currentSymptomsCase } />
-			) : (
-				null
-			)}
+			{/* this modal is for displaying all of the cases for a certain location	 */}
+			{this.state.showViewPlaceModal ? (
+					<ViewPlaceModal
+						show={ this.state.showViewPlaceModal }
+						onHide={ this.hideShowPlaceModal } /> 
+				) : (
+					null
+				)}	
 
     	<Map
       	google={ this.props.google }
@@ -100,7 +68,7 @@ class GoogleMap extends React.Component {
     			}}
 				/>
 
-				{/* places where people with symptoms have visited	 */}
+				{/* places where people with symptoms have visited */}
 				{this.props.placesOnMap.map((place, i) => {
 					
 					// if the person that visited this place has tested positive

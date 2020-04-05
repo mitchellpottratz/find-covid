@@ -71,13 +71,6 @@ class MapContainer extends React.Component {
 		this.setState({ showModal: false });
 	}
 
-	showViewPlaceModal = () => {
-		this.setState({ showViewPlaceModal: true });
-	}
-
-	hideShowPlaceModal = () => {
-		this.setState({ showViewPlaceModal: false });
-	}
 
   render() {
     return (
@@ -89,14 +82,6 @@ class MapContainer extends React.Component {
 					<ReportCaseModal
 						showModal={ this.state.showModal }
 						hideModal={ this.hideModal } />
-				) : (
-					null
-				)}
-
-				{this.state.showViewPlaceModal ? (
-					<ViewPlaceModal
-						show={ this.state.showViewPlaceModal }
-						onHide={ this.hideShowPlaceModal } /> 
 				) : (
 					null
 				)}
