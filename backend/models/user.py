@@ -1,6 +1,8 @@
 import os
 import random
 
+import uuid
+
 from .base import BaseModel
 from flask_login import UserMixin
 
@@ -15,6 +17,7 @@ class User(BaseModel, UserMixin):
     phone_number_confirmed = BooleanField(default=False)
     sms_confirmation_code = CharField(max_length=10)
     password = CharField(max_length=255)
+    password_token = CharField(max_length=35)
 
 
     @staticmethod
@@ -38,4 +41,21 @@ class User(BaseModel, UserMixin):
                    self.sms_confirmation_code,
             from_ = twilio_phone_number,
             to = self.phone_number
+        )
+
+    # sends password-reset url + randomly generated key
+    def send_password_confirmation_sms(sending_phone_number, recieving_phone_number):    
+        twilio_phone_number = os.environ['TWILIO_PHONE_NUMBER']
+        account_sid = os.environ['TWILIO_SID']
+        auth_token = os.environ['TWILIO_AUTH_TOKEN']
+        client = Client(account_sid, auth_token)
+
+        random_password_token = uuid.uuid4()
+        random_password_token_to_string = str(random_password_token)
+
+        message = client.messages.create(
+            body = 'Click the link below to Update Password\n\n: ' + 
+                   'http://localhost:3000/reset-password/' + random_password_token_to_string,
+            from_ = twilio_phone_number,
+            to = recieving_phone_number
         )

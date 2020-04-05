@@ -1,66 +1,62 @@
-import React from 'react';
+import React from "react";
 
-// redux 
-import { connect } from 'react-redux';
-import { loginUser } from '../../actions/userActions.js';
+// redux
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/userActions.js";
 
 // components
-import { Container, Row, Col, Card, Form } from 'react-bootstrap';
-import FormButton from '../common/FormButton.js';
-import { Link, Redirect } from 'react-router-dom';
-
-
+import { Container, Row, Col, Card, Form } from "react-bootstrap";
+import FormButton from "../common/FormButton.js";
+import ReportCaseModal from "../modals/ReportCaseModal";
+import { Link, Redirect } from "react-router-dom";
 
 class Login extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
-      phone_number: '',
-			password: '',
-			isLoading: false,
-			formErrorMessages: []
-    }
-	}
-	
-	handleChange = (e) => {
+      phone_number: "",
+      password: "",
+      isLoading: false,
+      formErrorMessages: [],
+    };
+  }
+
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-	}
-	
-	handleSubmit = async (e) => {
-		e.preventDefault();
+  };
 
-		this.setState({ 
-			formErrorMessages: [],
-			isLoading: true 
-		});
+  handleSubmit = async (e) => {
+    e.preventDefault();
 
-		const response = await this.props.loginUser(this.state);
+    this.setState({
+      formErrorMessages: [],
+      isLoading: true,
+    });
+
+    const response = await this.props.loginUser(this.state);
 
     // if the server encountered an error the message is displayed to the client
     if (response.status.code === 404) {
       this.setState({
-        formErrorMessages: [...this.state.formErrorMessages, response.status.message]
+        formErrorMessages: [
+          ...this.state.formErrorMessages,
+          response.status.message,
+        ],
       });
     }
 
     this.setState({ isLoading: false });
-	}
+  };
 
   render() {
-
-		// if the user is logged in and they have not confirmed their phone number
+    // if the user is logged in and they have not confirmed their phone number
     if (this.props.isLoggedIn && !this.props.phoneNumberConfirmed) {
-      return (
-        <Redirect to="/confirm-number" />
-      )
-    
-    // if the user is logged in and they have already confirmed their phone number
+      return <Redirect to="/confirm-number" />;
+
+      // if the user is logged in and they have already confirmed their phone number
     } else if (this.props.isLoggedIn && this.props.phoneNumberConfirmed) {
-      return (
-        <Redirect to="/map" />
-      )
+      return <Redirect to="/map" />;
     }
 
     return (
@@ -68,76 +64,75 @@ class Login extends React.Component {
         <Row className="py-4">
           <Col></Col>
 
-          <Col md={ 8 } sm={ 12 }>
+          <Col md={8} sm={12}>
             <Card>
-							<Card.Body>
-              	<Card.Title>Login</Card.Title>
+              <Card.Body>
+                <Card.Title>Login</Card.Title>
 
-								{/* form error messages */}
-								{this.state.formErrorMessages.map((message, i) => {
-                      return (
-                        <div key={ i }>
-										      <small className="text-danger">{ message }</small>
-									      </div>
-                      )
-                  })}
-							
-								<Form 
-									className="py-3"
-                  onSubmit={ this.handleSubmit } >
+                {/* form error messages */}
+                {this.state.formErrorMessages.map((message, i) => {
+                  return (
+                    <div key={i}>
+                      <small className="text-danger">{message}</small>
+                    </div>
+                  );
+                })}
 
-									<Form.Group>
-										<Form.Label>Phone Number</Form.Label>
-										<Form.Control 
-                      required 
+                <Form className="py-3" onSubmit={this.handleSubmit}>
+                  <Form.Group>
+                    <Form.Label>Phone Number</Form.Label>
+                    <Form.Control
+                      required
                       type="text"
-                      placeholder="Phone Number" 
+                      placeholder="Phone Number"
                       name="phone_number"
-                      value={ this.state.phone_number }
-											onChange={ this.handleChange } 
-                      />
-									</Form.Group>	
-									<Form.Group>
-										<Form.Label>Password</Form.Label>
-                    <Form.Control 
-                      required 
+                      value={this.state.phone_number}
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      required
                       type="password"
-                      placeholder="Password" 
+                      placeholder="Password"
                       name="password"
-                      value={ this.state.password }
-											onChange={ this.handleChange } 
-                      />		
-									</Form.Group>	
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                    />
+                  </Form.Group>
 
-									<FormButton 
+                  <FormButton
                     variant="dark"
                     text="Login"
-                    isLoading={ this.state.isLoading } 
-                    />	
-								</Form>
-								<small>
-                  Don't have an account? <Link to="/register">Register Here</Link>
-                </small> 
-							</Card.Body>
-						</Card>
-					</Col>
+                    isLoading={this.state.isLoading}
+                  />
+                </Form>
+                <small>
+                  Don't have an account?{" "}
+                  <Link to="/register">Register Here</Link>
+                </small>
+                <br />
+                <small>
+                  Reset Password{" "}
+                  <Link to="/password-reset-form">Click Here</Link>
+                </small>
+              </Card.Body>
+            </Card>
+          </Col>
 
-					<Col></Col>
-				</Row>
-			</Container>
-    )
-	}
-	
-}
-
-
-const mapStateToProps = (state) => {
-  return {
-		isLoggedIn: state.user.isLoggedIn,
-		phoneNumberConfirmed: state.user.userInfo.phone_number_confirmed || false
+          <Col></Col>
+        </Row>
+      </Container>
+    );
   }
 }
 
-export default connect(mapStateToProps, { loginUser })(Login); 
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    phoneNumberConfirmed: state.user.userInfo.phone_number_confirmed || false,
+  };
+};
 
-
+export default connect(mapStateToProps, { loginUser })(Login);
