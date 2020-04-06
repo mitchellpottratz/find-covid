@@ -163,6 +163,12 @@ class Register extends React.Component {
                     </Col>
                   </Row>
 
+                  <Form.Group>
+                    <small className="text-center">
+                      Will be used in accordance with our <Link to="privacy-policy">Privacy Policy</Link> 
+                    </small>
+                  </Form.Group>
+
                   <FormButton 
                     variant="primary"
                     text="Register"

@@ -52,6 +52,7 @@ textarea,
   border-radius: 0px!important;
   border-width: 1px;
   border-color: rgba(0, 0, 0, .08)!important;
+  padding: .375rem .75rem!important;
 }
 
 input:focus,
