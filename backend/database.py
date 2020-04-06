@@ -6,7 +6,7 @@ from playhouse.db_url import connect
 class Database:
 
     def __init__(self, db_tables):
-        self.DEBUG = True
+        self.DEBUG = False
         self.DATABASE = self.set_database()
         self.db_tables = db_tables
 
