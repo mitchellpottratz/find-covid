@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 // icons 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandsHelping } from "@fortawesome/free-solid-svg-icons";
+import { faHandsHelping, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 
 class HomeContainer extends React.Component {
@@ -55,6 +55,7 @@ class HomeContainer extends React.Component {
 
         <Row className="py-4">
           <Col lg={2} md={1} sm={0}></Col>
+
           <Col lg={4} md={5} sm={12} className="mt-3">
             <Card className="h-100">
               <Card.Body>
@@ -81,10 +82,16 @@ class HomeContainer extends React.Component {
               </Card.Body>
             </Card>
           </Col>
+
           <Col lg={4} md={5} sm={12} className="mt-3">
             <Card className="h-100">
               <Card.Body>
-                <Card.Title className="text-center">Be Aware. Be Safe</Card.Title>
+                <div class="text-primary text-center pb-2">
+                  <FontAwesomeIcon icon={ faHeart } />
+                  <Card.Title className="text-center">Be Aware. Be Safe</Card.Title>
+                  <hr class="bg-primary"></hr>
+                </div>
+                
                 <p className="text-center">
                   <strong>
                     The next time you go to the grocery store–– would you like to know you risk of exposure
@@ -103,6 +110,7 @@ class HomeContainer extends React.Component {
               </Card.Body>
             </Card>
           </Col>
+
           <Col lg={2} md={1} sm={0}></Col>
         </Row>
 
