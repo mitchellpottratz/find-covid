@@ -137,6 +137,7 @@ class ReportCaseModal extends React.Component {
 								<DatePicker
 									className="w-100"
 									value={ this.state.symptoms_date }
+									maxDate={new Date()}
 									onChange={ this.handleDateChange } />
 							</Form.Group>
 							<Form.Group>

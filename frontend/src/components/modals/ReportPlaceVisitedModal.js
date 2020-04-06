@@ -230,6 +230,7 @@ class ReportPlaceVisitedModal extends React.Component {
 						<DatePicker
 							className="w-100"
 							value={ this.state.date_visited }
+							maxDate={new Date()}
 							onChange={ this.handleDateChange } />
 					</Form.Group>
 
