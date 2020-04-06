@@ -135,7 +135,7 @@ class MyCase extends React.Component {
 									<p className="mb-0"><strong>or</strong></p>
 									<p>Tested positive for COVID-19?</p>
 									<Button
-				  					variant="dark"
+				  					variant="primary"
 										onClick={ this.showReportCaseModal }>
 										Report Symptoms
 									</Button>
