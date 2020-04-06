@@ -117,8 +117,12 @@ class MapContainer extends React.Component {
 				</Container>
 
 				{this.state.mapIsLoading ? (
-					<div className="text-center">
-						<Spinner animation="border" className="mt-4" />
+					<div className="text-center text-primary mt-4">
+						<Spinner
+					 		animation="border"
+					 		variant="primary" />
+					 		<p className="mt-1 mb-2">Loading the Map</p>
+					 		<p>*You must allow Google to use your current location*</p>
 					</div>
 				) : (
 					<div id="map-container">
