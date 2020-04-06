@@ -17,6 +17,12 @@ class User(BaseModel, UserMixin):
     password = CharField(max_length=255)
 
 
+    # removes the leading +1 from phone numbers
+    @staticmethod 
+    def format_phone_number(phone_number):
+        return phone_number[2:]
+
+
     @staticmethod
     def generate_sms_confirmation_code():
         confirmation_code_list = []
@@ -39,3 +45,4 @@ class User(BaseModel, UserMixin):
             from_ = twilio_phone_number,
             to = self.phone_number
         )
+        

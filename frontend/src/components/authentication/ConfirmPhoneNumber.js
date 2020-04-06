@@ -108,7 +108,7 @@ class ConfirmPhoneNumber extends React.Component {
 
 									<FormButton
 										className="d-inline-block"
-										variant="dark"
+										variant="primary"
 										text="Confirm"
 										isLoading={ this.state.isLoading } />
 								</Form>
