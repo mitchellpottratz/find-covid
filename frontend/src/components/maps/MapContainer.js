@@ -8,9 +8,13 @@ import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 import GoogleMap from './GoogleMap.js';
 import PlaceSearchForm from './PlaceSearchForm.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
-import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner, Button } from 'react-bootstrap';
 import ReportSymptomsButton from '../common/ReportSymptomsButton.js';
 import { Link } from 'react-router-dom';
+
+// icons 
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 class MapContainer extends React.Component {
@@ -20,6 +24,7 @@ class MapContainer extends React.Component {
 
 		this.state = {
 			mapIsLoading: true,
+			locationBlocked: false,
 			mapsLocation: {
 				lat: 0,
 				lng: 0
@@ -41,7 +46,6 @@ class MapContainer extends React.Component {
 		if (navigator.geolocation) {
 			let location;
 			navigator.geolocation.getCurrentPosition((position) => {
-				
 				location = {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
@@ -50,9 +54,16 @@ class MapContainer extends React.Component {
 				this.setState({ 
 					mapsLocation: location,
 					mapIsLoading: false 
-				})
-			});	
-		}
+				});	
+
+			// if the user blocked google accessing their current location
+			}, (error) => {
+				this.setState({
+					mapIsLoading: false,
+					locationBlocked: true
+				});
+			});
+		} 
 	}
 
 	setMapsLocation = (coordinates) => {
@@ -97,7 +108,7 @@ class MapContainer extends React.Component {
 								<Col md={6} sm={12}>
 								{/* if the user is logged in show the butto that allows them to report their symptoms */}
 									{this.props.isLoggedIn ? (
-										<div className="d-flex d-flex flex-row-reverse">
+										<div class="d-flex d-flex flex-row-reverse">
 											<ReportSymptomsButton 
 												userHasCase={ this.props.usersCase } 
 												showModal={ this.showModal } />
@@ -116,24 +127,35 @@ class MapContainer extends React.Component {
 					</Card>					
 				</Container>
 
-				{this.state.mapIsLoading ? (
-					<div className="text-center text-primary mt-4">
-						<Spinner
-					 		animation="border"
-					 		variant="primary" />
-					 		<p className="mt-1 mb-2">Loading the Map</p>
-					 		<p>*You must allow Google to use your current location*</p>
-					</div>
-				) : (
-					<div id="map-container">
-						<GoogleMap 
-							mapIsLoading={ this.state.mapIsLoading }
-							mapsLocation={ this.state.mapsLocation } 
-							placesOnMap={ this.props.placesOnMap }
-							mapZoom={ this.state.mapZoom } />
-					</div>
-				)}
 
+				{this.state.mapIsLoading === false & this.state.locationBlocked ? (
+					<div className="text-center mt-4">
+						<p className="text-danger">
+							<FontAwesomeIcon icon={ faExclamationCircle } className="mr-2" />
+							You blocked Google from acessing your current location
+						</p>
+						<small>
+							In order to use our map, you must allow Google to access your current location 
+							in your browser settings.
+						</small>	
+					</div>
+				) : 
+					this.state.mapIsLoading ? (
+						<div className="text-center text-primary mt-4">
+							<Spinner
+								animation="border"
+						 		variant="primary" />
+						 		<p className="mt-1 mb-2">Loading the Map</p>
+						</div>
+					) : (
+						<div id="map-container">
+							<GoogleMap 
+								mapIsLoading={ this.state.mapIsLoading }
+								mapsLocation={ this.state.mapsLocation } 
+								placesOnMap={ this.props.placesOnMap }
+								mapZoom={ this.state.mapZoom } />
+						</div>
+					)} 
 			</React.Fragment>
     )
 	}
