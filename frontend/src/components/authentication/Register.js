@@ -40,26 +40,41 @@ class Register extends React.Component {
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    this.setState({ 
+    await this.setState({ 
 			formErrorMessages: [],
 			isLoading: true 
 		});
 
-    // makes api call to register the user
-    const response = await this.props.registerUser(this.state);	
+		const doPasswordsMatch = this.checkPasswordsMatch();
+		if (doPasswordsMatch) {
+			// makes api call to register the user
+			const response = await this.props.registerUser(this.state);	
 
-    // if the server encountered an error the message is displayed to the client
-    if (response.status.code === 404) {
-      this.setState({
-        formErrorMessages: [...this.state.formErrorMessages, response.status.message]
-      });
-    }
+			// if the server encountered an error the message is displayed to the client
+			if (response.status.code !== 201) {
+				this.setState({
+					formErrorMessages: [...this.state.formErrorMessages, response.status.message]
+				});
+			}
 
-    this.setState({ isLoading: false });
-  }
+		} else {
+			// displays form error message saying the passwords don't match
+			this.setState({
+				formErrorMessages: [...this.state.formErrorMessages, 'Passwords do not match']
+			});
+		}
+
+		this.setState({ isLoading: false });
+	}
+	
+	checkPasswordsMatch = () => {
+		if (this.state.password === this.state.confirmed_password) {
+			return true;
+		}
+		return false;
+	}
 
   render() {
-
     // if the user is logged in and they have not confirmed their phone number
     if (this.props.isLoggedIn && !this.props.phoneNumberConfirmed) {
       return (
