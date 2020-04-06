@@ -1,7 +1,9 @@
 import React from 'react';
 
+// components
 import { Form, Row, Col, Card } from 'react-bootstrap';
-import { MDBListGroup, MDBListGroupItem } from "mdbreact"
+import { MDBListGroup, MDBListGroupItem } from "mdbreact";
+import MapSearchPopover from '../help/MapSearchPopover.js';
 
 
 class PlaceSearchForm extends React.Component {
@@ -94,10 +96,12 @@ class PlaceSearchForm extends React.Component {
 		return (
 			<Form>
 				<Row>
-					<Col md={ 8 } sm={ 12 }>
+					<Col lg={10} md={12}>
 							<Card>
 								<Card.Body>
-									<Form.Label>Search for a place nearby</Form.Label>
+									<Form.Label>
+										Search for a place nearby <MapSearchPopover />
+									</Form.Label>
 									<Form.Control
 										className="mb-2 pb-0"
 										type="text"

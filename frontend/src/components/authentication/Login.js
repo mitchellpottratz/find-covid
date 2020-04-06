@@ -1,11 +1,12 @@
 import React from 'react';
+import Logo from "../../logo.png";
 
 // redux 
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/userActions.js';
 
 // components
-import { Container, Row, Col, Card, Form } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Image } from 'react-bootstrap';
 import FormButton from '../common/FormButton.js';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -71,7 +72,14 @@ class Login extends React.Component {
           <Col lg={ 6 } md={ 8 } sm={ 12 }>
             <Card>
 							<Card.Body>
-              	<Card.Title>Login</Card.Title>
+                <div className="text-center">
+									<Image 
+										src={Logo}
+										width="70px" 
+										height="70px"
+										className="mb-2" />
+									<Card.Title>Login</Card.Title>
+								</div>
 
 								{/* form error messages */}
 								{this.state.formErrorMessages.map((message, i) => {

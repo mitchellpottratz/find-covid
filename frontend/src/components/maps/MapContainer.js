@@ -8,8 +8,7 @@ import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 import GoogleMap from './GoogleMap.js';
 import PlaceSearchForm from './PlaceSearchForm.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
-import ViewPlaceModal from '../modals/ViewPlaceModal.js';
-import { Row, Col, Card, Button, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner } from 'react-bootstrap';
 import ReportSymptomsButton from '../common/ReportSymptomsButton.js';
 import { Link } from 'react-router-dom';
 
@@ -86,48 +85,55 @@ class MapContainer extends React.Component {
 					null
 				)}
 
-				<Card>
-					<Card.Body>
-				  <Row>
-						<Col md={6} sm={12}>
-							<PlaceSearchForm 
-								setMapsLocation={ this.setMapsLocation } 
-								mapsCurrentLocation={ this.state.mapsLocation } />
-						</Col>
-						<Col>
-							{/* if the user is logged in show the butto that allows them to report their symptoms */}
-							{this.props.isLoggedIn ? (
-								<div className="d-flex d-flex flex-row-reverse">
-									<ReportSymptomsButton 
-										userHasCase={ this.props.usersCase } 
-										showModal={ this.showModal } />
-								</div>
+				<Container className="mb-2">
+					<Card>
+						<Card.Body>
+				  		<Row>
+								<Col md={6} sm={12}>
+									<PlaceSearchForm 
+										setMapsLocation={ this.setMapsLocation } 
+										mapsCurrentLocation={ this.state.mapsLocation } />
+								</Col>
+								<Col md={6} sm={12}>
+								{/* if the user is logged in show the butto that allows them to report their symptoms */}
+									{this.props.isLoggedIn ? (
+										<div className="d-flex d-flex flex-row-reverse">
+											<ReportSymptomsButton 
+												userHasCase={ this.props.usersCase } 
+												showModal={ this.showModal } />
+										</div>
 
-							// if the user isnt logged in they are shown a link to register
-							) : (
-								<p className="text-center mt-4">
-									Feeling Symptoms? <br></br>
-									<Link to="/register">Sign up here</Link> to report your symptoms
-								</p>
-							)
-							}
-						</Col>
-					</Row>
-					</Card.Body>
-				</Card>
+									// if the user isnt logged in they are shown a link to register
+									) : (
+										<p className="text-center mt-4">
+											Feeling Symptoms? <br></br>
+											<Link to="/register">Sign up here</Link> to report your symptoms
+										</p>
+									)}
+								</Col>
+							</Row>
+						</Card.Body>
+					</Card>					
+				</Container>
 
 				{this.state.mapIsLoading ? (
-					<div className="text-center">
-						<Spinner animation="border" className="mt-4" />
+					<div className="text-center text-primary mt-4">
+						<Spinner
+					 		animation="border"
+					 		variant="primary" />
+					 		<p className="mt-1 mb-2">Loading the Map</p>
+					 		<p>*You must allow Google to use your current location*</p>
 					</div>
 				) : (
-					<GoogleMap 
-						mapIsLoading={ this.state.mapIsLoading }
-						mapsLocation={ this.state.mapsLocation } 
-						placesOnMap={ this.props.placesOnMap }
-						mapZoom={ this.state.mapZoom }
-					/>
+					<div id="map-container">
+						<GoogleMap 
+							mapIsLoading={ this.state.mapIsLoading }
+							mapsLocation={ this.state.mapsLocation } 
+							placesOnMap={ this.props.placesOnMap }
+							mapZoom={ this.state.mapZoom } />
+					</div>
 				)}
+
 			</React.Fragment>
     )
 	}

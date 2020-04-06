@@ -40,7 +40,7 @@ class User(BaseModel, UserMixin):
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(
-            body = 'Thanking you for signing up for FindCovid\n\nYour account activation code is: ' + 
+            body = 'Thank you for signing up for Sympto+Map!\n\nYour account activation code is: ' + 
                    self.sms_confirmation_code,
             from_ = twilio_phone_number,
             to = self.phone_number

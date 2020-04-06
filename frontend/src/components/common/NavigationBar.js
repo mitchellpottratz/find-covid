@@ -17,12 +17,14 @@ class NavigationBar extends React.Component {
     return (
       <Navbar id="navbar" bg="primary" variant="dark">
         <Navbar.Brand>
-          <Image src={Logo} id="nav-logo"  />
+          <Nav.Link href="/home">
+            <Image src={Logo} id="nav-logo"  />
+          </Nav.Link>
         </Navbar.Brand>
 
         <Nav className="mr-auto">
           <Nav.Link href="/map">Map</Nav.Link>
-          <Nav.Link href="/map">About</Nav.Link>
+          <Nav.Link href="/home">About</Nav.Link>
         </Nav>
 
         <Nav>

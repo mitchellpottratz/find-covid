@@ -2,7 +2,9 @@ import React from 'react';
 
 // components
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import MapHelpModal from '../help/MapHelpModal.js';
 import ViewPlaceModal from '../modals/ViewPlaceModal.js';
+import { Link } from 'react-router-dom';
 
 // icons 
 import UserMapMarker from '../../icons/user-map-marker.svg';
@@ -17,9 +19,18 @@ class GoogleMap extends React.Component {
 		this.state = {
 			mapsLatitude: this.props.mapsLocation.lat,
 			mapsLongitude: this.props.mapsLocation.lng,
+			showMapHelpModal: false,
 			showViewPlaceModal: false,
 			currentPlace: {}
 		}
+	}
+
+	showMapHelpModal = () => {
+		this.setState({ showMapHelpModal: true });
+	}
+
+	hideMapHelpModal = () => {
+		this.setState({ showMapHelpModal: false });
 	}
 
 	showViewPlaceModal = (place) => {
@@ -45,6 +56,10 @@ class GoogleMap extends React.Component {
     return (
 			<React.Fragment>
 
+			<MapHelpModal 
+				showModal={ this.state.showMapHelpModal }
+				hideModal={ this.hideMapHelpModal } />
+
 			{/* this modal is for displaying all of the cases for a certain location	 */}
 			{this.state.showViewPlaceModal ? (
 					<ViewPlaceModal
@@ -55,6 +70,14 @@ class GoogleMap extends React.Component {
 					null
 				)}	
 
+			<div className="text-center pt-1 pb-3">
+				<Link 
+					to="#"
+					onClick={ this.showMapHelpModal }>
+						Need Help?
+				</Link>
+			</div>
+				
     	<Map
       	google={ this.props.google }
 				zoom={ this.props.mapZoom }
