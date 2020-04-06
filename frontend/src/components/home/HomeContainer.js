@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Container, Row, Col, Jumbotron } from "react-bootstrap";
-import CovidStatsCard from "./CovidStatsCard.js";
+import { Container, Jumbotron } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 class HomeContainer extends React.Component {
