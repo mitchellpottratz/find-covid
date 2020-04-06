@@ -79,7 +79,7 @@ class Register extends React.Component {
         <Row className="py-4">
           <Col></Col>
 
-          <Col md={ 8 } sm={ 12 }>
+          <Col lg={ 6 } md={ 8 } sm={ 12 }>
             <Card className="mb-4">
               <Card.Body>
                 <Card.Title>Register</Card.Title>

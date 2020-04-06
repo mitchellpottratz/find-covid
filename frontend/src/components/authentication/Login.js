@@ -6,6 +6,7 @@ import { loginUser } from '../../actions/userActions.js';
 
 // components
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
+import PhoneInput from 'react-phone-number-input';
 import FormButton from '../common/FormButton.js';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -68,7 +69,7 @@ class Login extends React.Component {
         <Row className="py-4">
           <Col></Col>
 
-          <Col md={ 8 } sm={ 12 }>
+          <Col lg={ 6 } md={ 8 } sm={ 12 }>
             <Card>
 							<Card.Body>
               	<Card.Title>Login</Card.Title>
