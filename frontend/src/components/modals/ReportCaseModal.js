@@ -170,7 +170,7 @@ class ReportCaseModal extends React.Component {
 							</Form.Group>
 
 							<FormButton 
-								variant="dark"
+								variant="primary"
 								text="Next"
 							  isLoading={ this.state.isLoading } />
 					</Form>

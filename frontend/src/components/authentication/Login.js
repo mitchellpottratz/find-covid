@@ -97,7 +97,7 @@ class Login extends React.Component {
 											onChange={ this.handleChange } 
                       />
 									</Form.Group>	
-									<Form.Group>
+									<Form.Group className="mb-4">
 										<Form.Label>Password</Form.Label>
                     <Form.Control 
                       required 
@@ -109,8 +109,8 @@ class Login extends React.Component {
                       />		
 									</Form.Group>	
 
-									<FormButton 
-                    variant="dark"
+                  <FormButton 
+                    variant="primary"
                     text="Login"
                     isLoading={ this.state.isLoading } 
                     />	

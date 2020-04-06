@@ -188,7 +188,7 @@ class ReportPlaceVisitedModal extends React.Component {
 					onSubmit={ this.handleSubmit } >
 
 					<Form.Group>
-						<Form.Label>Search for the place</Form.Label>
+						<Form.Label>Start typing the name of the place</Form.Label>
 						<Form.Control 
 							type="text"
 							name="place"
@@ -234,7 +234,7 @@ class ReportPlaceVisitedModal extends React.Component {
 					</Form.Group>
 
 					<FormButton 
-						variant="dark"
+						variant="primary"
 						text="Report"
 						isLoading={ this.state.isLoading } />
 				</Form>

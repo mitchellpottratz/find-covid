@@ -75,7 +75,7 @@ class Register extends React.Component {
           <Col></Col>
 
           <Col md={ 8 } sm={ 12 }>
-            <Card>
+            <Card className="mb-4">
               <Card.Body>
                 <Card.Title>Register</Card.Title>
 
@@ -133,7 +133,7 @@ class Register extends React.Component {
                       />
                   </Form.Group>
 
-                  <Row>
+                  <Row className="mb-2">
                     <Col md={ 6 } sm={ 12 }>
                       <Form.Group>
                         <Form.Label>Password</Form.Label>
@@ -163,7 +163,7 @@ class Register extends React.Component {
                   </Row>
 
                   <FormButton 
-                    variant="dark"
+                    variant="primary"
                     text="Register"
                     isLoading={ this.state.isLoading } 
                     />
