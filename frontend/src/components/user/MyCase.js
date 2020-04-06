@@ -80,8 +80,7 @@ class MyCase extends React.Component {
 					<Col md={ 8 } sm={ 12 }>
 						<Card bg="light" id="users-case-card">
 							<Card.Body>
-								<Card.Title>Your Reported Case</Card.Title>
-
+								<Card.Title>Your Case</Card.Title>
 								{/* if the user has reported a case */}
 								{userHasCase ? (
 								<Row>
@@ -135,7 +134,7 @@ class MyCase extends React.Component {
 									<p className="mb-0"><strong>or</strong></p>
 									<p>Tested positive for COVID-19?</p>
 									<Button
-				  					variant="dark"
+				  					variant="primary"
 										onClick={ this.showReportCaseModal }>
 										Report Symptoms
 									</Button>

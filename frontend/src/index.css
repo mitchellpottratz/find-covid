@@ -12,8 +12,8 @@ code {
 }
 
 #nav-logo {
-  width: 100%;
-  height: 112px;
+  width: 55px;
+  height: 55px;
 }
 
 .card {
@@ -38,19 +38,17 @@ a {
   text-decoration: none!important;
 }
 
-a:visited {
-  color: #0056b3!important;
-}
-
 
 input, 
 textarea, 
 .location-box,
-.react-date-picker__wrapper {
+.react-date-picker__wrapper,
+.PhoneInputInput {
   font-size: 0.85em!important;
   border-radius: 0px!important;
   border-width: 1px;
   border-color: rgba(0, 0, 0, .08)!important;
+  padding: .375rem .75rem!important;
 }
 
 input:focus,

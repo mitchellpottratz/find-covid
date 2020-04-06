@@ -68,7 +68,7 @@ class Login extends React.Component {
         <Row className="py-4">
           <Col></Col>
 
-          <Col md={ 8 } sm={ 12 }>
+          <Col lg={ 6 } md={ 8 } sm={ 12 }>
             <Card>
 							<Card.Body>
               	<Card.Title>Login</Card.Title>
@@ -97,7 +97,7 @@ class Login extends React.Component {
 											onChange={ this.handleChange } 
                       />
 									</Form.Group>	
-									<Form.Group>
+									<Form.Group className="mb-4">
 										<Form.Label>Password</Form.Label>
                     <Form.Control 
                       required 
@@ -109,8 +109,8 @@ class Login extends React.Component {
                       />		
 									</Form.Group>	
 
-									<FormButton 
-                    variant="dark"
+                  <FormButton 
+                    variant="primary"
                     text="Login"
                     isLoading={ this.state.isLoading } 
                     />	

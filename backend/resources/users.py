@@ -34,7 +34,7 @@ def register():
         # verifies the request body is valid
         first_name = data['first_name'] 
         last_name = data['first_name'] 
-        phone_number = data['phone_number']
+        phone_number = User.format_phone_number(data['phone_number'])
         password = data['password']
 
         try:

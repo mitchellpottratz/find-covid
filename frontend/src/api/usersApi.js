@@ -11,7 +11,7 @@ export default {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-		method: 'POST',
+		        method: 'POST',
                 credentials: 'include',
                 body: JSON.stringify(registrationInfo),
             });
@@ -54,9 +54,9 @@ export default {
                 method: 'PUT',
                 credentials: 'include',
                 body: JSON.stringify(requestBody),
-		headers: {
-		    'Content-Type': 'application/json'
-		}
+		        headers: {
+		            'Content-Type': 'application/json'
+		        }
             });
             const parsedResponse = await response.json(requestBody);
             return parsedResponse;        

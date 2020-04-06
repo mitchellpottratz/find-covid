@@ -6,6 +6,7 @@ import { registerUser } from '../../actions/userActions.js';
 
 // components
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
+import PhoneInput from 'react-phone-number-input';
 import FormButton from '../common/FormButton.js';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -31,9 +32,12 @@ class Register extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  handlePhoneNumberChange = (value) => {
+    this.setState({ phone_number: value });
+  }
+
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('register form submitted');
 
     this.setState({ 
 			formErrorMessages: [],
@@ -41,8 +45,7 @@ class Register extends React.Component {
 		});
 
     // makes api call to register the user
-    const response = await this.props.registerUser(this.state);
-    console.log("register response:", response);	
+    const response = await this.props.registerUser(this.state);	
 
     // if the server encountered an error the message is displayed to the client
     if (response.status.code === 404) {
@@ -74,8 +77,8 @@ class Register extends React.Component {
         <Row className="py-4">
           <Col></Col>
 
-          <Col md={ 8 } sm={ 12 }>
-            <Card>
+          <Col lg={ 6 } md={ 8 } sm={ 12 }>
+            <Card className="mb-4">
               <Card.Body>
                 <Card.Title>Register</Card.Title>
 
@@ -123,17 +126,13 @@ class Register extends React.Component {
 
                   <Form.Group>
                     <Form.Label>Phone Number</Form.Label>
-                    <Form.Control 
-                      required 
-                      type="text"
-                      placeholder="Phone Number" 
-                      name="phone_number"
+                    <PhoneInput 
+                      placeholder="Enter your phone number"
                       value={ this.state.phone_number }
-											onChange={ this.handleChange } 
-                      />
+                      onChange={ (value) => this.handlePhoneNumberChange(value) } />
                   </Form.Group>
 
-                  <Row>
+                  <Row className="mb-2">
                     <Col md={ 6 } sm={ 12 }>
                       <Form.Group>
                         <Form.Label>Password</Form.Label>
@@ -162,8 +161,14 @@ class Register extends React.Component {
                     </Col>
                   </Row>
 
+                  <Form.Group>
+                    <small className="text-center">
+                      Will be used in accordance with our <Link to="/privacy-policy">Privacy Policy</Link> 
+                    </small>
+                  </Form.Group>
+
                   <FormButton 
-                    variant="dark"
+                    variant="primary"
                     text="Register"
                     isLoading={ this.state.isLoading } 
                     />
