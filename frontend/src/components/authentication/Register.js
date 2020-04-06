@@ -38,7 +38,6 @@ class Register extends React.Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('register form submitted');
 
     this.setState({ 
 			formErrorMessages: [],
@@ -46,8 +45,7 @@ class Register extends React.Component {
 		});
 
     // makes api call to register the user
-    const response = await this.props.registerUser(this.state);
-    console.log("register response:", response);	
+    const response = await this.props.registerUser(this.state);	
 
     // if the server encountered an error the message is displayed to the client
     if (response.status.code === 404) {

@@ -6,7 +6,6 @@ import { loginUser } from '../../actions/userActions.js';
 
 // components
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
-import PhoneInput from 'react-phone-number-input';
 import FormButton from '../common/FormButton.js';
 import { Link, Redirect } from 'react-router-dom';
 
