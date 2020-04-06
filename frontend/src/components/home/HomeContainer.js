@@ -75,17 +75,21 @@ class HomeContainer extends React.Component {
           <Col lg={4} md={5} sm={12} className="mt-3">
             <Card className="h-100">
               <Card.Body>
-                <Card.Title className="text-center">Take Precaution</Card.Title>
+                <Card.Title className="text-center">Be Aware. Be Safe</Card.Title>
                 <p className="text-center">
                   <strong>
-                    Want to know if someone who goes to the same grocery has COVID-19?
+                    The next time you go to the grocery store–– would you like to know you risk of exposure
+                    to COVID-19?
                   </strong>
                 </p>
                 <p>
-                  Sympto+Map's place search feature provides all users, whether signed up or not, with a solution. 
-                  Our place search feature allows users to search for places near them such as; grocery stores, 
-                  gas stations, restaurants, etc. To learn useful information about these places such as how many
-                  people have visited that place while being positive for COVID-19.
+                  Sympto+Map provides you with the answer to the question–– whether you are signed up or not.
+                  It works just like any other map or GPS application. You can search for any location and 
+                  instantly know when and how many people have visited the location who have symptoms, been in 
+                  contact with someone with symptoms, or tested positive for COVID-19.
+                </p>
+                <p class="font-italic text-center">
+                  Don't leave home without checking Sympto+Map
                 </p>
               </Card.Body>
             </Card>
