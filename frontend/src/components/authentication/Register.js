@@ -165,7 +165,7 @@ class Register extends React.Component {
 
                   <Form.Group>
                     <small className="text-center">
-                      Will be used in accordance with our <Link to="privacy-policy">Privacy Policy</Link> 
+                      Will be used in accordance with our <Link to="/privacy-policy">Privacy Policy</Link> 
                     </small>
                   </Form.Group>
 

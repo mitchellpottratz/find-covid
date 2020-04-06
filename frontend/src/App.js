@@ -13,6 +13,7 @@ import Login from './components/authentication/Login.js';
 import ConfirmPhoneNumber from './components/authentication/ConfirmPhoneNumber.js';
 import MapContainer from './components/maps/MapContainer.js';
 import MyCase from './components/user/MyCase.js';
+import PrivacyPolicy from './components/common/PrivacyPolicy';
 
 // css
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -54,6 +55,10 @@ class App extends React.Component {
             <Route
               path="/my-case"
               component={ MyCase } />
+
+            <Route 
+              path="/privacy-policy"
+              component={ PrivacyPolicy } />
 
             {/* Home */}
             <Route 
