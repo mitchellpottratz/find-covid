@@ -15,38 +15,41 @@ class NavigationBar extends React.Component {
 
   render() {
     return (
-      <Navbar id="navbar" bg="primary" variant="dark">
+      <Navbar 
+        id="navbar"
+        bg="primary" 
+        expand="md" 
+        sticky="top" 
+        collapseOnSelect>
         <Navbar.Brand>
           <Nav.Link href="/home">
-            <Image src={Logo} id="nav-logo"  />
+            <Image src={Logo} id="nav-logo" alt="Sympto Map Logo" />
           </Nav.Link>
         </Navbar.Brand>
-
-        <Nav className="mr-auto">
-          <Nav.Link href="/map">Map</Nav.Link>
-          <Nav.Link href="/home">About</Nav.Link>
-        </Nav>
-
-        <Nav>
-          {this.props.isLoggedIn ? (
-            <React.Fragment>
-              <NavDropdown title="Account" id="basic-nav-dropdown" drop="down">
-                <NavDropdown.Item href="/my-case">My Case</NavDropdown.Item>
-                <NavDropdown.Item onClick={this.handleLogoutClick}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-              {/* <Nav.Link href="/login">Login</Nav.Link> */}
-              <Nav.Link href="/login">Sign In</Nav.Link>
-              {/* <Nav.Link href="/register">Register</Nav.Link> */}
-              <Nav.Link href="/register">Get Started</Nav.Link>
-            </React.Fragment>
-          )}
-        </Nav>
-
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="/map">Map</Nav.Link>
+            <Nav.Link href="/home">About</Nav.Link>
+          </Nav>
+          <Nav>
+            {this.props.isLoggedIn ? (
+              <React.Fragment>
+                <NavDropdown title="Account" drop="down">
+                  <NavDropdown.Item href="/my-case">My Case</NavDropdown.Item>
+                  <NavDropdown.Item onClick={this.handleLogoutClick}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <Nav.Link href="/login">Sign In</Nav.Link>
+                <Nav.Link href="/register">Get Started</Nav.Link>
+              </React.Fragment>
+            )}
+          </Nav>
+        </Navbar.Collapse>  
       </Navbar>
     );
   }

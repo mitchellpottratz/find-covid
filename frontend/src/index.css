@@ -16,6 +16,12 @@ code {
   height: 55px;
 }
 
+/* mobile nav icon border */
+.navbar-toggler {
+  color: white!important;
+  border-color: white!important;
+}
+
 .card {
   border-radius: 1px!important;
   border-color: transparent!important;
@@ -37,7 +43,6 @@ a {
 a {
   text-decoration: none!important;
 }
-
 
 input, 
 textarea, 
