@@ -19,9 +19,18 @@ class GoogleMap extends React.Component {
 		this.state = {
 			mapsLatitude: this.props.mapsLocation.lat,
 			mapsLongitude: this.props.mapsLocation.lng,
+			showMapHelpModal: false,
 			showViewPlaceModal: false,
 			currentPlace: {}
 		}
+	}
+
+	showMapHelpModal = () => {
+		this.setState({ showMapHelpModal: true });
+	}
+
+	hideMapHelpModal = () => {
+		this.setState({ showMapHelpModal: false });
 	}
 
 	showViewPlaceModal = (place) => {
@@ -47,6 +56,10 @@ class GoogleMap extends React.Component {
     return (
 			<React.Fragment>
 
+			<MapHelpModal 
+				showModal={ this.state.showMapHelpModal }
+				hideModal={ this.hideMapHelpModal } />
+
 			{/* this modal is for displaying all of the cases for a certain location	 */}
 			{this.state.showViewPlaceModal ? (
 					<ViewPlaceModal
@@ -58,7 +71,11 @@ class GoogleMap extends React.Component {
 				)}	
 
 			<div className="text-center pt-1 pb-3">
-				<Link to="#">Need Help?</Link>
+				<Link 
+					to="#"
+					onClick={ this.showMapHelpModal }>
+						Need Help?
+				</Link>
 			</div>
 				
     	<Map

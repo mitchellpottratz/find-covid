@@ -6,9 +6,9 @@ import { Modal } from 'react-bootstrap';
 function MapHelpModal(props) {
   return (
 		<Modal
-			show={ this.props.showModal } 
-			onHide={ this.props.hideModal }>
-		  <Modal.Header>
+			show={ props.showModal } 
+			onHide={ props.hideModal }>
+		  <Modal.Header closeButton>
 				<Modal.Title>How to use the Map</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
