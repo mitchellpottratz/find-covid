@@ -113,10 +113,10 @@ class MapContainer extends React.Component {
 								</Col>
 							</Row>
 						</Card.Body>
-					</Card>
+					</Card>					
 				</Container>
 
-				{/* {this.state.mapIsLoading ? (
+				{this.state.mapIsLoading ? (
 					<div className="text-center">
 						<Spinner animation="border" className="mt-4" />
 					</div>
@@ -128,7 +128,7 @@ class MapContainer extends React.Component {
 							placesOnMap={ this.props.placesOnMap }
 							mapZoom={ this.state.mapZoom } />
 					</div>
-				)} */}
+				)}
 
 			</React.Fragment>
     )

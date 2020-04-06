@@ -2,7 +2,9 @@ import React from 'react';
 
 // components
 import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
+import MapHelpModal from '../help/MapHelpModal.js';
 import ViewPlaceModal from '../modals/ViewPlaceModal.js';
+import { Link } from 'react-router-dom';
 
 // icons 
 import UserMapMarker from '../../icons/user-map-marker.svg';
@@ -55,6 +57,10 @@ class GoogleMap extends React.Component {
 					null
 				)}	
 
+			<div className="text-center pt-1 pb-3">
+				<Link to="#">Need Help?</Link>
+			</div>
+				
     	<Map
       	google={ this.props.google }
 				zoom={ this.props.mapZoom }
