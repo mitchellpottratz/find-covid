@@ -36,7 +36,7 @@ function MapSearchPopover(props) {
   return (
 		<OverlayTrigger 
 			trigger="click"
-			placement="right"
+			placement="bottom"
 			overlay={ popover }>
 			<FontAwesomeIcon 
 				className="info-icon ml-2"
