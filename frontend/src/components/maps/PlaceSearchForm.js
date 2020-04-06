@@ -94,7 +94,7 @@ class PlaceSearchForm extends React.Component {
 		return (
 			<Form>
 				<Row>
-					<Col md={ 8 } sm={ 12 }>
+					<Col lg={10} md={12}>
 							<Card>
 								<Card.Body>
 									<Form.Label>Search for a place nearby</Form.Label>
