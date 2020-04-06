@@ -136,13 +136,23 @@ def get_zip_codes_location():
             'https://maps.googleapis.com/maps/api/geocode/json?address=' + zip_code + 
             '&key=' + google_api_key
         )
-
+        
         response = requests.get(api_url)
         parsed_response = response.json()
 
-        location = parsed_response['results'][0]['geometry']['location']
-        latitude = location['lat']
-        longitude = location['lng']
+        if parsed_response['status'] == 'OK':
+            location = parsed_response['results'][0]['geometry']['location']
+            latitude = location['lat']
+            longitude = location['lng']
+        else:
+            return jsonify(
+                data={},
+                status={
+                    'code': 404,
+                    'message': 'Zip code is not valid'
+                }
+            )
+        
 
         response_body = {
             'latitude': latitude,
