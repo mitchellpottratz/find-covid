@@ -12,8 +12,8 @@ code {
 }
 
 #nav-logo {
-  width: 100%;
-  height: 112px;
+  width: 55px;
+  height: 55px;
 }
 
 .card {
@@ -36,10 +36,6 @@ a {
 
 a {
   text-decoration: none!important;
-}
-
-a:visited {
-  color: #0056b3!important;
 }
 
 
