@@ -46,7 +46,8 @@ a:visited {
 input, 
 textarea, 
 .location-box,
-.react-date-picker__wrapper {
+.react-date-picker__wrapper,
+.PhoneInputInput {
   font-size: 0.85em!important;
   border-radius: 0px!important;
   border-width: 1px;

@@ -6,6 +6,7 @@ import { registerUser } from '../../actions/userActions.js';
 
 // components
 import { Container, Row, Col, Card, Form } from 'react-bootstrap';
+import PhoneInput from 'react-phone-number-input';
 import FormButton from '../common/FormButton.js';
 import { Link, Redirect } from 'react-router-dom';
 
@@ -29,6 +30,10 @@ class Register extends React.Component {
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handlePhoneNumberChange = (value) => {
+    this.setState({ phone_number: value });
   }
 
   handleSubmit = async (e) => {
@@ -123,14 +128,10 @@ class Register extends React.Component {
 
                   <Form.Group>
                     <Form.Label>Phone Number</Form.Label>
-                    <Form.Control 
-                      required 
-                      type="text"
-                      placeholder="Phone Number" 
-                      name="phone_number"
+                    <PhoneInput 
+                      placeholder="Enter your phone number"
                       value={ this.state.phone_number }
-											onChange={ this.handleChange } 
-                      />
+                      onChange={ (value) => this.handlePhoneNumberChange(value) } />
                   </Form.Group>
 
                   <Row className="mb-2">

@@ -16,6 +16,7 @@ import MyCase from './components/user/MyCase.js';
 
 // css
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-phone-number-input/style.css';
 import "react-datepicker/dist/react-datepicker.css";
 import './App.css';
 
