@@ -53,18 +53,21 @@ class HomeContainer extends React.Component {
           <Col lg={4} md={5} sm={12} className="mt-3">
             <Card className="h-100">
               <Card.Body>
-                <Card.Title className="text-center">Report Your Case</Card.Title>
+                <Card.Title className="text-center">Make a Difference.</Card.Title>
                 <p class="text-center">
                   <strong>
-                    Have you been tested positive or shown symptoms of COVID-19?
+                    Have you displayed symptoms, been in contact with someone with symptoms, or
+                    tested positive for COVID-19?
                   </strong>
                 </p>
                 <p>
-                  If so, it is crucial for your to <Link to="/register">sign up</Link> for Sympto+Map 
-                  right now. Once signed up, you can report all of the public places you have visited 
-                  while showing symptoms or being positive for COVID-19. The places you visited are 
-                  shown on the map for other users to see and take into precautions before going out 
-                  in public next.
+                  If so, <Link to="/register">sign up</Link> now to help prevent the spread of COVID-19 in
+                  your community. As a regisered user, your identity is completely anonymous. You will be 
+                  able to report all places you have visited, so people in your community can be aware 
+                  of their risk of exposure.
+                </p>
+                <p class="font-italic text-center">
+                  Saving lives made simple
                 </p>
               </Card.Body>
             </Card>
