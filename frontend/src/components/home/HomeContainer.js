@@ -1,8 +1,13 @@
 import React from "react";
 import Logo from "../../logo.png";
 
+// components
 import { Container, Jumbotron, Image, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+// icons 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandsHelping } from "@fortawesome/free-solid-svg-icons";
 
 
 class HomeContainer extends React.Component {
@@ -53,7 +58,11 @@ class HomeContainer extends React.Component {
           <Col lg={4} md={5} sm={12} className="mt-3">
             <Card className="h-100">
               <Card.Body>
-                <Card.Title className="text-center">Make a Difference.</Card.Title>
+                <div class="text-primary text-center pb-2">
+                  <FontAwesomeIcon icon={ faHandsHelping } />
+                  <Card.Title>Make a Difference.</Card.Title>
+                  <hr class="bg-primary"></hr>
+                </div>
                 <p class="text-center">
                   <strong>
                     Have you displayed symptoms, been in contact with someone with symptoms, or

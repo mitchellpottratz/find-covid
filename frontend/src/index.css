@@ -115,6 +115,14 @@ button {
   color: white!important;
 }
 
+.bg-primary {
+  background-color: #8fbcff!important;
+}
+
+.text-primary {
+  color: #8fbcff!important;
+}
+
 .info-icon {
   color: #8fbcff;
 }
