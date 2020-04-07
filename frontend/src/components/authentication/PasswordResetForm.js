@@ -10,6 +10,7 @@ import { Link, Redirect } from "react-router-dom";
 
 class PasswordResetForm extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
 
     this.state = {
@@ -31,6 +32,7 @@ class PasswordResetForm extends React.Component {
     });
 
     const response = await this.props.resetPassword(this.state.phone_number);
+    console.log(response);
 
     // if the server encountered an error the message is displayed to the client
     if (response.status.code === 404) {

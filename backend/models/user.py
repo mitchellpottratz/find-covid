@@ -1,7 +1,8 @@
 import os
 import random
 
-import uuid
+import secrets
+import string
 
 from .base import BaseModel
 from flask_login import UserMixin
@@ -50,12 +51,15 @@ class User(BaseModel, UserMixin):
         auth_token = os.environ['TWILIO_AUTH_TOKEN']
         client = Client(account_sid, auth_token)
 
-        random_password_token = uuid.uuid4()
-        random_password_token_to_string = str(random_password_token)
+        # this will determine the length of the random string
+        length = 32
+        random_password_token = ''.join(secrets.choice(string.ascii_uppercase + string.digits) 
+                                                  for i in range(length)) 
+
 
         message = client.messages.create(
             body = 'Click the link below to Update Password\n\n: ' + 
-                   'http://localhost:3000/reset-password/' + random_password_token_to_string,
+                   'http://localhost:3000/reset-password/' + random_password_token,
             from_ = twilio_phone_number,
             to = recieving_phone_number
         )

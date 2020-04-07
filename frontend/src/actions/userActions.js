@@ -70,7 +70,7 @@ export const confirmPhoneNumber = (confirmationCode) => async (dispatch) => {
 export const resetPassword = (phoneNumber) => async (dispatch) => {
   const response = await usersAPI.resetPassword(phoneNumber);
 
-  if (response.ok) {
+  if (response.status.code === 204) {
     dispatch({
       type: RESET_PASSWORD,
       payload: response.data,

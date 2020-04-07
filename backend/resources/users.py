@@ -1,3 +1,4 @@
+import os
 from flask import request, jsonify, Blueprint, session
 
 import uuid
@@ -11,9 +12,7 @@ from models.user import User
 from models.case import Case
 from models.place_visited import PlaceVisited
 
-# import uuid
-# from twilio.rest import Client
-
+from twilio.rest import Client
 
 users = Blueprint('users', 'users')
 
@@ -236,22 +235,6 @@ def send_new_confirmation_code():
         }
     )
 
-# sends password-reset url + randomly generated key
-# def send_password_confirmation_sms(phone_number):    
-#     twilio_phone_number = os.environ['TWILIO_PHONE_NUMBER']
-#     account_sid = os.environ['TWILIO_SID']
-#     auth_token = os.environ['TWILIO_AUTH_TOKEN']
-#     client = Client(account_sid, auth_token)
-
-#     random_password_token = uuid.uuid4()
-
-#     message = client.messages.create(
-#         body = 'Click the link below to Update Password\n\n: ' + 
-#                 'http://localhost:3000/reset-password/' + random_password_token,
-#         from_ = twilio_phone_number,
-#         to = self.phone_number
-#     )
-
 # sends link to user reset password
 @users.route('/reset-password', methods=['POST'])
 def send_pwd_link():
@@ -261,9 +244,10 @@ def send_pwd_link():
     # this is the phone number that the user is 
     # entering into form and sending out to
     phone_number = data['phone_number']
+    twilio_phone_number = os.environ['TWILIO_PHONE_NUMBER']
 
     # send password confirmation link
-    User.send_password_confirmation_sms(phone_number, phone_number)
+    User.send_password_confirmation_sms(twilio_phone_number, phone_number)
     
     return jsonify(
         data={},

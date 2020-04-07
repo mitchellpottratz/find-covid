@@ -79,18 +79,20 @@ export default {
 
   resetPassword: async (phoneNumber) => {
     try {
-      console.log("phoneNumber: " + phoneNumber);
-
       const response = await fetch(apiURL + "users/reset-password", {
         method: "POST",
         credentials: "include",
+        body: JSON.stringify(phoneNumber),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
-      console.log("response: " + response);
 
       const parsedResponse = await response.json();
-      console.log("parsedResponse: " + parsedResponse);
 
       return parsedResponse;
-    } catch (err) {}
+    } catch (error) {
+      console.log("error occurred while logging out:", error);
+    }
   },
 };
