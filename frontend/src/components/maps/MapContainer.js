@@ -6,6 +6,7 @@ import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 
 // components
 import GoogleMap from './GoogleMap.js';
+import MapSearchContainer from './MapSearchContainer.js';
 import PlaceSearchForm from './PlaceSearchForm.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
 import { Container, Row, Col, Card, Spinner, Button } from 'react-bootstrap';

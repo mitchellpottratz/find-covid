@@ -13,7 +13,7 @@ class Server:
 
     def __init__(self, app, login_manager, blueprints):
         self.DEBUG = True
-        self.PORT = os.environ['PORT']
+        self.PORT = int(os.environ['PORT'])
         self.HOST = self.set_host()
         self.ORIGIN = self.set_origin()
 
@@ -55,12 +55,14 @@ class Server:
 
         # if served in debug mode the server uses http
         if self.DEBUG:
-            server = pywsgi.WSGIServer((self.HOST, int(self.PORT)), self.app)
+            print('in debug mode')
+            self.app.run(port=self.PORT, debug=self.DEBUG)
+          
 
         # otherwise if in production the server uses https
         else:
             server = pywsgi.WSGIServer(
-                (self.HOST, int(self.PORT)),
+                (self.HOST, self.PORT),
                 self.app,
                 keyfile='/etc/letsencrypt/live/sympto-map.com-0001/privkey.pem',
                 certfile='/etc/letsencrypt/live/sympto-map.com-0001/cert.pem'
