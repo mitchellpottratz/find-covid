@@ -97,7 +97,7 @@ class MapContainer extends React.Component {
 					null
 				)}
 
-				<Container className="py-1">
+				<Container className="pt-3">
 					<MapSearchContainer />
 				</Container>
 
