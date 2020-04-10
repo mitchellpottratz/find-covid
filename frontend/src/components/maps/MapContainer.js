@@ -97,7 +97,11 @@ class MapContainer extends React.Component {
 					null
 				)}
 
-				<Container className="mb-2">
+				<Container className="py-1">
+					<MapSearchContainer />
+				</Container>
+
+				{/* <Container className="mb-2">
 					<Card>
 						<Card.Body>
 				  		<Row>
@@ -107,7 +111,7 @@ class MapContainer extends React.Component {
 										mapsCurrentLocation={ this.state.mapsLocation } />
 								</Col>
 								<Col md={6} sm={12}>
-								{/* if the user is logged in show the butto that allows them to report their symptoms */}
+							
 									{this.props.isLoggedIn ? (
 										<div class="d-flex d-flex flex-row-reverse">
 											<ReportSymptomsButton 
@@ -126,7 +130,7 @@ class MapContainer extends React.Component {
 							</Row>
 						</Card.Body>
 					</Card>					
-				</Container>
+				</Container> */}
 
 
 				{this.state.mapIsLoading === false & this.state.locationBlocked ? (

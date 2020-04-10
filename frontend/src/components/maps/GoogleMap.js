@@ -70,13 +70,13 @@ class GoogleMap extends React.Component {
 					null
 				)}	
 
-			<div className="text-center pt-1 pb-3">
+			{/* <div className="text-center pt-1 pb-3">
 				<Link 
 					to="#"
 					onClick={ this.showMapHelpModal }>
 						Need Help?
 				</Link>
-			</div>
+			</div> */}
 				
     	<Map
       	google={ this.props.google }
