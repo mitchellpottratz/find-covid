@@ -2,7 +2,7 @@ import React from 'react';
 
 // components
 import { Tabs, Tab } from 'react-bootstrap';
-import { Typeahead } from 'react-bootstrap-typeahead';
+import LocationSearch from './LocationSearch.js';
 
 
 class MapSearchContainer extends React.Component {
@@ -19,7 +19,7 @@ class MapSearchContainer extends React.Component {
 						defaultActiveKey="location-search"
 						transition={false}>
   					<Tab eventKey="location-search" title="Location">
-    					<p>Location search</p>
+    					<LocationSearch />
   					</Tab>
   					<Tab eventKey="place-search" title="Place">
     					<p>Place search</p>
