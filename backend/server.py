@@ -67,8 +67,7 @@ class Server:
                 keyfile='/etc/letsencrypt/live/sympto-map.com-0001/privkey.pem',
                 certfile='/etc/letsencrypt/live/sympto-map.com-0001/cert.pem'
             )
-
-        server.serve_forever()
+            server.serve_forever()
 
 
 

@@ -31,6 +31,7 @@ class MapSearchContainer extends React.Component {
     					<p>Place search</p>
   					</Tab>
 					</Tabs>
+					<hr className="p-0 m-0"></hr>
 				</React.Fragment>
 			) 
   }

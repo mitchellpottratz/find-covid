@@ -7,30 +7,29 @@ class LiveSearchInput extends React.Component {
     super(props);
 
     this.state = {
-      searchInput: '',
-      isSearching: false,
-      searchPredictions: ['prediction 1', 'prediction 2']
+      searchInput: this.props.inputValue,
+      searchPredictions: this.props.searchPredictions,
+      isSearching: false
     }
   }
 
   handleChange = (e) => {
-    this.setState({ searchInput: e.target.value });
+    this.props.handleChange(e.target.value);
 
     // shows the search predictions if there is atleast 2 characters typed
-    if (this.state.searchInput.length > 1) {
+    if (this.props.inputValue.length > 1) {
+      this.props.getSearchPredictionResults();
       this.showSearchPredictionsBox();
     } else {
       this.hideSearchPredictionsBox();
     }
   }
 
-  handleSearchPredictionClick = (prediction) => {
-    console.log('prediction clicked:', prediction);
-    this.hideSearchPredictionsBox();
-  }
 
   hideSearchPredictionsBox = () => {
-    this.setState({ isSearching: false });
+    setTimeout(() => {
+      this.setState({ isSearching: false });
+    }, 200);
   }
 
   showSearchPredictionsBox = () => {
@@ -44,7 +43,7 @@ class LiveSearchInput extends React.Component {
         <Form.Control 
           type="text" 
           placeholder={ this.props.placeholder } 
-          value={ this.state.searchInput }
+          value={ this.props.inputValue }
           onChange={ this.handleChange } 
           onBlur={ this.hideSearchPredictionsBox } />
 
@@ -52,14 +51,13 @@ class LiveSearchInput extends React.Component {
           <ListGroup 
             id="live-search-box"
             variant="flush">
-            {this.state.searchPredictions.map((prediction, i) => {
+            {this.props.searchPredictions.map((prediction, i) => {
               return (
                 <ListGroup.Item 
                   key={i}
                   action
-                  onClick={ () => this.handleSearchPredictionClick(prediction) }
-                  >
-                  prediction
+                  onClick={ () => this.props.handleSearchPredictionClick(prediction) }>
+                  { prediction.description }
                 </ListGroup.Item>
               )
             })}

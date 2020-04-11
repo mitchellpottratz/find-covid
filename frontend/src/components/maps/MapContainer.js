@@ -133,7 +133,7 @@ class MapContainer extends React.Component {
 				</Container> */}
 
 
-				{this.state.mapIsLoading === false & this.state.locationBlocked ? (
+				{/* {this.state.mapIsLoading === false & this.state.locationBlocked ? (
 					<div className="text-center mt-4">
 						<p className="text-danger">
 							<FontAwesomeIcon icon={ faExclamationCircle } className="mr-2" />
@@ -160,7 +160,7 @@ class MapContainer extends React.Component {
 								placesOnMap={ this.props.placesOnMap }
 								mapZoom={ this.state.mapZoom } />
 						</div>
-					)} 
+					)}  */}
 			</React.Fragment>
     )
 	}

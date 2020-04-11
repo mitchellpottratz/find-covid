@@ -35,6 +35,7 @@ def autocomplete_city_search():
             '&types=(cities)&key=' + os.environ['GOOGLE_MAPS_API_KEY']
         )
         parsed_response = response.json()
+        print('autocomplete city response:', parsed_response)
 
         return jsonify(
             data=parsed_response,
