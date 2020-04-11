@@ -21,17 +21,27 @@ class LocationSearch extends React.Component {
     this.setState({ location: value });
   }
 
-  handleSearchPredictionClick = (prediction) => {
+  handleSearchPredictionClick = async (prediction) => {
     console.log('prediction:', prediction);
 
     this.setState({
       location: prediction.description,
       selected: prediction
     }); 
+
+    // gets the latitude and longitude of the city
+    const location = await this.getCityInfo(prediction.place_id);
+    console.log('location:', location);
+
+    if (location) {
+      // updates the location on the map
+      this.props.setMapsLocation(location);
+    }
   }
 
   getSearchPredictionResults = async () => {
-    const url = process.env.REACT_APP_API_URL + 'maps/autocomplete/city?search_input=' + this.state.location;
+    const url = process.env.REACT_APP_API_URL + 'maps/autocomplete/city?search_input=' +
+                this.state.location;
 
     const response = await fetch(url);
     const parsedResponse = await response.json();
@@ -40,6 +50,22 @@ class LocationSearch extends React.Component {
     this.setState({ 
       searchPredictions: searchPredictions 
     });
+  }
+
+  getCityInfo = async (googlePlaceId) => {
+    const url = process.env.REACT_APP_API_URL + 'maps/places/location?google_place_id=' +
+                googlePlaceId;
+
+    try {
+      const response = await fetch(url);
+      const parsedResponse = await response.json();
+
+      const location = parsedResponse.data.result.geometry.location; 
+      return location;
+
+    } catch (error) {
+      return;
+    }
   }
 
   render() {

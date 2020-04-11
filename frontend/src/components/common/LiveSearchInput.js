@@ -25,6 +25,9 @@ class LiveSearchInput extends React.Component {
     }
   }
 
+  handleClick = (prediction) => {
+    this.props.handleSearchPredictionClick(prediction);
+  }
 
   hideSearchPredictionsBox = () => {
     setTimeout(() => {
@@ -42,6 +45,7 @@ class LiveSearchInput extends React.Component {
         <Form.Label> { this.props.label } </Form.Label>
         <Form.Control 
           type="text" 
+          name="search"
           placeholder={ this.props.placeholder } 
           value={ this.props.inputValue }
           onChange={ this.handleChange } 
@@ -56,7 +60,7 @@ class LiveSearchInput extends React.Component {
                 <ListGroup.Item 
                   key={i}
                   action
-                  onClick={ () => this.props.handleSearchPredictionClick(prediction) }>
+                  onClick={ () => this.handleClick(prediction) }>
                   { prediction.description }
                 </ListGroup.Item>
               )

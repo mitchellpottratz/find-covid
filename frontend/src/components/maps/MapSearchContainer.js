@@ -22,7 +22,8 @@ class MapSearchContainer extends React.Component {
 							className="py-1"
 							eventKey="location-search" 
 							title="Location">
-    					<LocationSearch />
+    					<LocationSearch 
+							  setMapsLocation={ this.props.setMapsLocation } />
   					</Tab>
 						<Tab 
 							className="py-1"

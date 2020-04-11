@@ -70,7 +70,7 @@ class MapContainer extends React.Component {
 	setMapsLocation = (coordinates) => {
 		this.setState({ 
 			mapsLocation: coordinates,
-			mapZoom: 18 
+			mapZoom: 12
 		});
 	}
 
@@ -98,7 +98,8 @@ class MapContainer extends React.Component {
 				)}
 
 				<Container className="pt-3">
-					<MapSearchContainer />
+					<MapSearchContainer 
+					  setMapsLocation={ this.setMapsLocation } />
 				</Container>
 
 				{/* <Container className="mb-2">
@@ -133,7 +134,7 @@ class MapContainer extends React.Component {
 				</Container> */}
 
 
-				{/* {this.state.mapIsLoading === false & this.state.locationBlocked ? (
+				{this.state.mapIsLoading === false & this.state.locationBlocked ? (
 					<div className="text-center mt-4">
 						<p className="text-danger">
 							<FontAwesomeIcon icon={ faExclamationCircle } className="mr-2" />
@@ -160,7 +161,7 @@ class MapContainer extends React.Component {
 								placesOnMap={ this.props.placesOnMap }
 								mapZoom={ this.state.mapZoom } />
 						</div>
-					)}  */}
+					)} 
 			</React.Fragment>
     )
 	}
