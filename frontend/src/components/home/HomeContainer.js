@@ -17,10 +17,24 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandsHelping, faHeart } from "@fortawesome/free-solid-svg-icons";
 
+// modals
+import Tutorial from "../modals/Tutorial";
+
 class HomeContainer extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = { showModal: false };
   }
+
+  // toggles modal
+  showModal = (e) => {
+    this.setState({ showModal: true });
+  };
+
+  closeModal = (e) => {
+    this.setState({ showModal: false });
+  };
 
   render() {
     return (
@@ -42,7 +56,15 @@ class HomeContainer extends React.Component {
               </Link>
               <br />
               <br />
-              <Button className="btn btn-sm btn-primary">Tutorial</Button>
+              <Button
+                onClick={(e) => {
+                  this.showModal();
+                }}
+                className="btn btn-sm btn-primary"
+              >
+                Tutorial
+              </Button>
+              <Tutorial showModal={this.state.showModal} />
             </div>
           </Container>
         </Jumbotron>
