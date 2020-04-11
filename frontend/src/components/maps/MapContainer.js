@@ -110,6 +110,17 @@ class MapContainer extends React.Component {
 					null
 				)}
 
+				{!this.props.isLoggedIn ? (
+					<Link 
+						id="fixed-sign-up-button"
+						className="btn btn-primary"
+						to="/register">
+						Sign up
+					</Link>
+				) : (
+					null	
+				)}
+
 				<Container className="py-1">
 					<Row>
 						<Col lg={5} md={6} sm={14} className="m-auto">

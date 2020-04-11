@@ -99,9 +99,17 @@ button {
 }
 
 #live-search-box {
-  z-index: 100;
+  z-index: 2;
   position: absolute;
   width: 100%;
+}
+
+#fixed-sign-up-button {
+  position: fixed;
+  padding: 5px;
+  bottom: 10px; 
+  left: 10px;
+  z-index: 2;
 }
 
 .btn-primary {
