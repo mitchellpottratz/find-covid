@@ -8,7 +8,7 @@ import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 import GoogleMap from './GoogleMap.js';
 import MapSearchContainer from './MapSearchContainer.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
-import { Container, Row, Col, Card, Spinner, Button, Badge } from 'react-bootstrap';
+import { Container, Row, Col, Spinner,  Badge } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 // icons 
@@ -47,6 +47,7 @@ class MapContainer extends React.Component {
 		if (navigator.geolocation) {
 			let location;
 			navigator.geolocation.getCurrentPosition((position) => {
+
 				location = {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude
@@ -54,13 +55,14 @@ class MapContainer extends React.Component {
 
 				this.setState({ 
 					mapsLocation: location,
-					mapIsLoading: false 
+					mapIsLoading: false,
+					mapsCityName: 'Current Location'
 				});	
 
 			// if the user has current location disabled a default initial map position 
 			// is set to Iowa City
 			}, (error) => {
-
+				
 				const mapsInitialLocation = {
 					lat: 41.6611,
 					lng: -91.5302
@@ -110,6 +112,7 @@ class MapContainer extends React.Component {
 					null
 				)}
 
+				{/* shows the sign up button if the user is not logged in */}
 				{!this.props.isLoggedIn ? (
 					<Link 
 						id="fixed-sign-up-button"
@@ -130,7 +133,7 @@ class MapContainer extends React.Component {
 									mapsCurrentLocation={ this.state.mapsLocation }
 									setMapsCityName={ this.setMapsCityName } />
 
-								<div class="text-center">
+								<div className="text-center">
 									<Badge pill variant="primary">
 										{ this.state.mapsCityName }
 									</Badge>

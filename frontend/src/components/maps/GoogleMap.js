@@ -89,18 +89,7 @@ class GoogleMap extends React.Component {
 					{ lat: this.props.mapsLocation.lat, lng: this.props.mapsLocation.lng }
 				}
 				>
-
-				{/* users location marker */}
-				<Marker 
-					title={ "Current Location" }
-					position={
-						{lat: this.state.mapsLatitude, lng: this.state.mapsLongitude}
-					}
-					icon={{
-      			url: UserMapMarker,
-      			scaledSize: new this.props.google.maps.Size(20,20)
-    			}}
-				/>
+				
 
 				{/* places where people with symptoms have visited */}
 				{this.props.placesOnMap.map((place, i) => {
