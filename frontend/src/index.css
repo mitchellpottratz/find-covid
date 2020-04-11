@@ -107,9 +107,7 @@ button {
   z-index: 2;
   position: absolute;
   width: 100%;
-  display: none;
 }
-
 
 .btn-primary {
   background-color: #8fbcff!important;
