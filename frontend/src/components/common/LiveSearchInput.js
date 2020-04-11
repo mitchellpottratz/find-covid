@@ -40,12 +40,13 @@ class LiveSearchInput extends React.Component {
   render() {
     return (
       <div id="live-search-container">
-        <Form.Label> {this.props.label} </Form.Label>
+        <Form.Label> { this.props.label } </Form.Label>
         <Form.Control 
           type="text" 
-          placeholder={this.props.placeholder} 
+          placeholder={ this.props.placeholder } 
           value={ this.state.searchInput }
-          onChange={ this.handleChange } />
+          onChange={ this.handleChange } 
+          onBlur={ this.hideSearchPredictionsBox } />
 
         {this.state.isSearching ? (
           <ListGroup 
