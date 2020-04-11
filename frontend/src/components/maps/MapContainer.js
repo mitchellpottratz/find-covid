@@ -7,9 +7,8 @@ import { getPlacesOnMap } from '../../actions/placesVisitedActions.js';
 // components
 import GoogleMap from './GoogleMap.js';
 import MapSearchContainer from './MapSearchContainer.js';
-import PlaceSearchForm from './PlaceSearchForm.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
-import { Container, Row, Col, Card, Spinner, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Spinner, Button, Badge } from 'react-bootstrap';
 import ReportSymptomsButton from '../common/ReportSymptomsButton.js';
 import { Link } from 'react-router-dom';
 
@@ -70,6 +69,7 @@ class MapContainer extends React.Component {
 
 				this.setState({
 					mapsLocation: mapsInitialLocation,
+					mapsCityName: 'Iowa City, IA, USA',
 					mapIsLoading: false,
 				  locationBlocked: true
 				});
@@ -111,46 +111,18 @@ class MapContainer extends React.Component {
 					null
 				)}
 
-				<Container className="py-2">
+				<Container className="py-1">
 					<MapSearchContainer 
 					  setMapsLocation={ this.setMapsLocation } 
 						mapsCurrentLocation={ this.state.mapsLocation }
 						setMapsCityName={ this.setMapsCityName } />
 
-					<p>{ this.state.mapsCityName }</p>
+					<div class="text-center">
+						<Badge pill variant="primary">
+							{ this.state.mapsCityName }
+						</Badge>
+					</div> 
 				</Container>
-
-				{/* <Container className="mb-2">
-					<Card>
-						<Card.Body>
-				  		<Row>
-								<Col md={6} sm={12}>
-									<PlaceSearchForm 
-										setMapsLocation={ this.setMapsLocation } 
-										mapsCurrentLocation={ this.state.mapsLocation } />
-								</Col>
-								<Col md={6} sm={12}>
-							
-									{this.props.isLoggedIn ? (
-										<div class="d-flex d-flex flex-row-reverse">
-											<ReportSymptomsButton 
-												userHasCase={ this.props.usersCase } 
-												showModal={ this.showModal } />
-										</div>
-
-									// if the user isnt logged in they are shown a link to register
-									) : (
-										<p className="text-center mt-4">
-											Feeling Symptoms? <br></br>
-											<Link to="/register">Sign up here</Link> to report your symptoms
-										</p>
-									)}
-								</Col>
-							</Row>
-						</Card.Body>
-					</Card>					
-				</Container> */}
-
 			
 				{this.state.mapIsLoading ? (
 					<div className="text-center text-primary mt-4">
