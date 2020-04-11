@@ -9,7 +9,6 @@ import GoogleMap from './GoogleMap.js';
 import MapSearchContainer from './MapSearchContainer.js';
 import ReportCaseModal from '../modals/ReportCaseModal.js';
 import { Container, Row, Col, Card, Spinner, Button, Badge } from 'react-bootstrap';
-import ReportSymptomsButton from '../common/ReportSymptomsButton.js';
 import { Link } from 'react-router-dom';
 
 // icons 
@@ -112,16 +111,23 @@ class MapContainer extends React.Component {
 				)}
 
 				<Container className="py-1">
-					<MapSearchContainer 
-					  setMapsLocation={ this.setMapsLocation } 
-						mapsCurrentLocation={ this.state.mapsLocation }
-						setMapsCityName={ this.setMapsCityName } />
+					<Row>
+						<Col lg={5} md={6} sm={14} className="m-auto">
+							<div id="map-search-container">
+								<MapSearchContainer 
+					  			setMapsLocation={ this.setMapsLocation } 
+									mapsCurrentLocation={ this.state.mapsLocation }
+									setMapsCityName={ this.setMapsCityName } />
 
-					<div class="text-center">
-						<Badge pill variant="primary">
-							{ this.state.mapsCityName }
-						</Badge>
-					</div> 
+								<div class="text-center">
+									<Badge pill variant="primary">
+										{ this.state.mapsCityName }
+									</Badge>
+								</div> 
+							</div>
+						</Col>
+
+					</Row>
 				</Container>
 			
 				{this.state.mapIsLoading ? (

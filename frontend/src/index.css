@@ -98,6 +98,12 @@ button {
   background-color: lightgrey;
 }
 
+#map-search-container {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 80px;
+}
+
 #live-search-container {
   position: relative;
   width: 100%;
