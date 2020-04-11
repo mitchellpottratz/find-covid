@@ -40,7 +40,39 @@ class PlaceSearch extends React.Component {
 	}
   
 
-  handleSearchPredictionClick = () => {}
+  handleSearchPredictionClick = async (prediction) => {
+    console.log('place:', prediction);
+    this.setState({ 
+      place: prediction.description,
+      selected: prediction
+    });
+    
+	
+		// makes request to get the latitude and longitude of the place
+    const googlePlaceId = prediction.place_id;
+    const location = await this.getPlacesInfo(googlePlaceId);
+    console.log('location:', location);
+
+    if (location) {
+      // changes the position of the map to whatever place was searched
+		  this.props.setMapsLocation(location);
+    }
+  }
+
+  getPlacesInfo = async (googlePlaceId) => {
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + 'maps/places/location?google_place_id=' + googlePlaceId
+      );
+      const parsedResponse = await response.json();
+
+      const location = parsedResponse.data.result.geometry.location;
+      return location;
+
+    } catch (error) {
+      return;
+    } 
+  }
 
   render() {
     return (
