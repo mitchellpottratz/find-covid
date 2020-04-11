@@ -8,7 +8,8 @@ class LiveSearchInput extends React.Component {
 
     this.state = {
       searchInput: '',
-      isSearching: false
+      isSearching: false,
+      searchPredictions: ['prediction 1', 'prediction 2']
     }
   }
 
@@ -21,6 +22,11 @@ class LiveSearchInput extends React.Component {
     } else {
       this.hideSearchPredictionsBox();
     }
+  }
+
+  handleSearchPredictionClick = (prediction) => {
+    console.log('prediction clicked:', prediction);
+    this.hideSearchPredictionsBox();
   }
 
   hideSearchPredictionsBox = () => {
@@ -45,10 +51,17 @@ class LiveSearchInput extends React.Component {
           <ListGroup 
             id="live-search-box"
             variant="flush">
-            <ListGroup.Item action> Cras justo odio </ListGroup.Item>
-            <ListGroup.Item action> Dapibus ac facilisis in </ListGroup.Item>
-            <ListGroup.Item> Morbi leo risus </ListGroup.Item>
-            <ListGroup.Item> Porta ac consectetur ac </ListGroup.Item>
+            {this.state.searchPredictions.map((prediction, i) => {
+              return (
+                <ListGroup.Item 
+                  key={i}
+                  action
+                  onClick={ () => this.handleSearchPredictionClick(prediction) }
+                  >
+                  prediction
+                </ListGroup.Item>
+              )
+            })}
           </ListGroup>  
         ) : (
           null
