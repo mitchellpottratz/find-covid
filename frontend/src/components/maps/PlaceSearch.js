@@ -37,7 +37,6 @@ class PlaceSearch extends React.Component {
 
 		}	catch (error) {}
 	}
-  
 
   handleSearchPredictionClick = async (prediction) => {
     this.setState({ 

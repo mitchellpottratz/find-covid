@@ -20,8 +20,10 @@ class LocationSearch extends React.Component {
   }
 
   handleSearchPredictionClick = async (prediction) => {
+    const cityName = prediction.description;
+
     this.setState({
-      location: prediction.description,
+      location: cityName,
       selected: prediction
     }); 
 
@@ -29,8 +31,9 @@ class LocationSearch extends React.Component {
     const location = await this.getCityInfo(prediction.place_id);
 
     if (location) {
-      // updates the location on the map
+      // updates the location on the map and the city name currently displayed
       this.props.setMapsLocation(location, 12);
+      this.props.setMapsCityName(cityName);
     }
   }
 

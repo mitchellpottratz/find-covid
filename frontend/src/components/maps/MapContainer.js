@@ -30,6 +30,7 @@ class MapContainer extends React.Component {
 				lat: 0,
 				lng: 0
 			},
+			mapsCityName: '',
 			mapZoom: 13,
 			showModal: false,
 			showViewPlaceModal: false,
@@ -83,6 +84,10 @@ class MapContainer extends React.Component {
 		});
 	}
 
+	setMapsCityName = (cityName) => {
+		this.setState({ mapsCityName: cityName });
+	}
+
 	showModal = () => {
 		this.setState({ showModal: true });
 	}
@@ -109,7 +114,10 @@ class MapContainer extends React.Component {
 				<Container className="py-2">
 					<MapSearchContainer 
 					  setMapsLocation={ this.setMapsLocation } 
-						mapsCurrentLocation={ this.state.mapsLocation } />
+						mapsCurrentLocation={ this.state.mapsLocation }
+						setMapsCityName={ this.setMapsCityName } />
+
+					<p>{ this.state.mapsCityName }</p>
 				</Container>
 
 				{/* <Container className="mb-2">
