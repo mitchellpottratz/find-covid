@@ -3,6 +3,7 @@ import React from 'react';
 // components
 import { Tabs, Tab } from 'react-bootstrap';
 import LocationSearch from './LocationSearch.js';
+import PlaceSearch from './PlaceSearch.js';
 
 
 class MapSearchContainer extends React.Component {
@@ -29,10 +30,9 @@ class MapSearchContainer extends React.Component {
 							className="py-1"
 							eventKey="place-search"
 							title="Place">
-    					<p>Place search</p>
+    					<PlaceSearch />
   					</Tab>
 					</Tabs>
-					<hr className="p-0 m-0"></hr>
 				</React.Fragment>
 			) 
   }

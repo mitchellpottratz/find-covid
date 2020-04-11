@@ -42,8 +42,9 @@ class MapContainer extends React.Component {
 		this.props.getPlacesOnMap();
 	}
 
-	// uses the google maps api to get the users current location 
 	setUsersLocation = () => {
+
+		// trys to get the users current location
 		if (navigator.geolocation) {
 			let location;
 			navigator.geolocation.getCurrentPosition((position) => {
@@ -57,11 +58,19 @@ class MapContainer extends React.Component {
 					mapIsLoading: false 
 				});	
 
-			// if the user blocked google accessing their current location
+			// if the user has current location disabled a default initial map position 
+			// is set to Iowa City
 			}, (error) => {
+
+				const mapsInitialLocation = {
+					lat: 41.6611,
+					lng: -91.5302
+				}
+
 				this.setState({
+					mapsLocation: mapsInitialLocation,
 					mapIsLoading: false,
-					locationBlocked: true
+				  locationBlocked: true
 				});
 			});
 		} 
@@ -97,7 +106,7 @@ class MapContainer extends React.Component {
 					null
 				)}
 
-				<Container className="pt-3">
+				<Container className="py-2">
 					<MapSearchContainer 
 					  setMapsLocation={ this.setMapsLocation } />
 				</Container>
@@ -133,27 +142,15 @@ class MapContainer extends React.Component {
 					</Card>					
 				</Container> */}
 
-
-				{this.state.mapIsLoading === false & this.state.locationBlocked ? (
-					<div className="text-center mt-4">
-						<p className="text-danger">
-							<FontAwesomeIcon icon={ faExclamationCircle } className="mr-2" />
-							You blocked Google from acessing your current location
-						</p>
-						<small>
-							In order to use our map, you must allow Google to access your current location 
-							in your browser settings.
-						</small>	
+			
+				{/* {this.state.mapIsLoading ? (
+					<div className="text-center text-primary mt-4">
+						<Spinner
+							animation="border"
+						 	variant="primary" />
+						<p className="mt-1 mb-2">Loading the Map</p>
 					</div>
-				) : 
-					this.state.mapIsLoading ? (
-						<div className="text-center text-primary mt-4">
-							<Spinner
-								animation="border"
-						 		variant="primary" />
-						 		<p className="mt-1 mb-2">Loading the Map</p>
-						</div>
-					) : (
+				) : (
 						<div id="map-container">
 							<GoogleMap 
 								mapIsLoading={ this.state.mapIsLoading }
@@ -161,7 +158,7 @@ class MapContainer extends React.Component {
 								placesOnMap={ this.props.placesOnMap }
 								mapZoom={ this.state.mapZoom } />
 						</div>
-					)} 
+				)} */}
 			</React.Fragment>
     )
 	}

@@ -43,13 +43,17 @@ class LocationSearch extends React.Component {
     const url = process.env.REACT_APP_API_URL + 'maps/autocomplete/city?search_input=' +
                 this.state.location;
 
-    const response = await fetch(url);
-    const parsedResponse = await response.json();
+    try {
+      const response = await fetch(url);
+      const parsedResponse = await response.json();
     
-    const searchPredictions = parsedResponse.data.predictions;
-    this.setState({ 
-      searchPredictions: searchPredictions 
-    });
+      const searchPredictions = parsedResponse.data.predictions;
+
+      this.setState({ 
+        searchPredictions: searchPredictions 
+      });
+      
+    } catch (error) {}
   }
 
   getCityInfo = async (googlePlaceId) => {
@@ -73,7 +77,7 @@ class LocationSearch extends React.Component {
       <React.Fragment>
         <LiveSearchInput
           label="Set your location on the map"
-          placeholder="Start typing..."
+          placeholder="Start searching for a city..."
           searchPredictions={ this.state.searchPredictions }
           inputValue={ this.state.location }
           selected={ this.state.selected }
