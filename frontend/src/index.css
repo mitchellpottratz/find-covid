@@ -28,11 +28,6 @@ code {
   box-shadow: 0 0 0 1px rgba(0,0,0,.05)  
 }
 
-#covid-stats-card {
-  height: 400px!important;
-  overflow: scroll!important;
-}
-
 p,
 label, 
 li,
@@ -98,19 +93,13 @@ button {
   background-color: lightgrey;
 }
 
-#map-search-container {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 80px;
-}
-
 #live-search-container {
   position: relative;
   width: 100%;
 }
 
 #live-search-box {
-  z-index: 2;
+  z-index: 100;
   position: absolute;
   width: 100%;
 }
