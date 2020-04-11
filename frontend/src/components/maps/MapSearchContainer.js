@@ -30,7 +30,9 @@ class MapSearchContainer extends React.Component {
 							className="py-1"
 							eventKey="place-search"
 							title="Place">
-    					<PlaceSearch />
+    					<PlaceSearch 
+							mapsCurrentLocation={ this.props.mapsCurrentLocation } 
+							setMapsLocation={ this.props.setMapsLocation } />
   					</Tab>
 					</Tabs>
 				</React.Fragment>

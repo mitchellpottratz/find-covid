@@ -1,7 +1,5 @@
 import React from 'react';
 
-// components
-import { Form } from 'react-bootstrap';
 import LiveSearchInput from '../common/LiveSearchInput.js';
 
 
@@ -12,7 +10,7 @@ class LocationSearch extends React.Component {
 
     this.state = {
       location: '',
-      searchPredictions: ['Test'],
+      searchPredictions: [],
       selected: {}
     }
   }
@@ -22,8 +20,6 @@ class LocationSearch extends React.Component {
   }
 
   handleSearchPredictionClick = async (prediction) => {
-    console.log('prediction:', prediction);
-
     this.setState({
       location: prediction.description,
       selected: prediction
@@ -31,7 +27,6 @@ class LocationSearch extends React.Component {
 
     // gets the latitude and longitude of the city
     const location = await this.getCityInfo(prediction.place_id);
-    console.log('location:', location);
 
     if (location) {
       // updates the location on the map
@@ -40,10 +35,10 @@ class LocationSearch extends React.Component {
   }
 
   getSearchPredictionResults = async () => {
-    const url = process.env.REACT_APP_API_URL + 'maps/autocomplete/city?search_input=' +
-                this.state.location;
-
     try {
+      const url = process.env.REACT_APP_API_URL + 'maps/autocomplete/city?search_input=' +
+                  this.state.location;
+
       const response = await fetch(url);
       const parsedResponse = await response.json();
     
@@ -52,15 +47,15 @@ class LocationSearch extends React.Component {
       this.setState({ 
         searchPredictions: searchPredictions 
       });
-      
+
     } catch (error) {}
   }
 
   getCityInfo = async (googlePlaceId) => {
-    const url = process.env.REACT_APP_API_URL + 'maps/places/location?google_place_id=' +
-                googlePlaceId;
-
     try {
+      const url = process.env.REACT_APP_API_URL + 'maps/places/location?google_place_id=' +
+                  googlePlaceId;
+
       const response = await fetch(url);
       const parsedResponse = await response.json();
 

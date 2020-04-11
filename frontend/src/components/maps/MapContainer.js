@@ -108,7 +108,8 @@ class MapContainer extends React.Component {
 
 				<Container className="py-2">
 					<MapSearchContainer 
-					  setMapsLocation={ this.setMapsLocation } />
+					  setMapsLocation={ this.setMapsLocation } 
+						mapsCurrentLocation={ this.state.mapsLocation } />
 				</Container>
 
 				{/* <Container className="mb-2">
