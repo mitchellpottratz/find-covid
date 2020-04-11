@@ -18,10 +18,16 @@ class MapSearchContainer extends React.Component {
 						className="d-flex justify-content-center"
 						defaultActiveKey="location-search"
 						transition={false}>
-  					<Tab eventKey="location-search" title="Location">
+						<Tab 
+							className="py-1"
+							eventKey="location-search" 
+							title="Location">
     					<LocationSearch />
   					</Tab>
-  					<Tab eventKey="place-search" title="Place">
+						<Tab 
+							className="py-1"
+							eventKey="place-search"
+							title="Place">
     					<p>Place search</p>
   					</Tab>
 					</Tabs>

@@ -29,6 +29,7 @@
     "react-dom": "^16.13.1",
     "react-google-autocomplete": "^1.1.2",
     "react-google-location": "^1.2.2",
+    "react-live-search": "^1.0.2",
     "react-phone-number-input": "^3.0.22",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
