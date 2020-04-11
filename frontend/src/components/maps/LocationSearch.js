@@ -30,7 +30,7 @@ class LocationSearch extends React.Component {
 
     if (location) {
       // updates the location on the map
-      this.props.setMapsLocation(location);
+      this.props.setMapsLocation(location, 12);
     }
   }
 

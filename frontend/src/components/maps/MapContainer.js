@@ -76,10 +76,10 @@ class MapContainer extends React.Component {
 		} 
 	}
 
-	setMapsLocation = (coordinates) => {
+	setMapsLocation = (coordinates, mapZoom) => {
 		this.setState({ 
 			mapsLocation: coordinates,
-			mapZoom: 12
+			mapZoom: mapZoom
 		});
 	}
 

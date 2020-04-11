@@ -30,7 +30,6 @@ class PlaceSearch extends React.Component {
 			);
 			const parsedResponse = await response.json();
 			const googleApiResponse = parsedResponse.data;
-      console.log('prediction:', googleApiResponse);
 
 			if (googleApiResponse.status === 'OK') {
 				this.setState({ searchPredictions: googleApiResponse.predictions });
@@ -41,7 +40,6 @@ class PlaceSearch extends React.Component {
   
 
   handleSearchPredictionClick = async (prediction) => {
-    console.log('place:', prediction);
     this.setState({ 
       place: prediction.description,
       selected: prediction
@@ -54,8 +52,8 @@ class PlaceSearch extends React.Component {
     console.log('location:', location);
 
     if (location) {
-      // changes the position of the map to whatever place was searched
-		  this.props.setMapsLocation(location);
+      // changes the position of the map to whatever place was clicked
+		  this.props.setMapsLocation(location, 18);
     }
   }
 
