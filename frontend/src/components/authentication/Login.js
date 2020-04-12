@@ -7,9 +7,9 @@ import { loginUser } from '../../actions/userActions.js';
 
 // components
 import { Container, Row, Col, Card, Form, Image } from 'react-bootstrap';
+import PhoneInput from 'react-phone-number-input';
 import FormButton from '../common/FormButton.js';
 import { Link, Redirect } from 'react-router-dom';
-
 
 
 class Login extends React.Component {
@@ -27,7 +27,11 @@ class Login extends React.Component {
 	
 	handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-	}
+  }
+  
+  handlePhoneNumberChange = (value) => {
+    this.setState({ phone_number: value });
+  }
 	
 	handleSubmit = async (e) => {
 		e.preventDefault();
@@ -35,9 +39,18 @@ class Login extends React.Component {
 		this.setState({ 
 			formErrorMessages: [],
 			isLoading: true 
-		});
+    });
+    
+    // removes the + and country code from the phone number 
+    const formattedPhoneNumber = this.formatPhoneNumber();
 
-		const response = await this.props.loginUser(this.state);
+    // copies the state so the formatted phone number can be set as the phone number 
+    // without changing the state and so when a user fails to login their unformatted 
+    // phone number wont be lost
+    const loginInfo = this.makeACopyOfState();
+    loginInfo.phone_number = formattedPhoneNumber;
+
+    const response = await this.props.loginUser(loginInfo);
 
     // if the server encountered an error the message is displayed to the client
     if (response.status.code === 404) {
@@ -47,7 +60,19 @@ class Login extends React.Component {
     }
 
     this.setState({ isLoading: false });
-	}
+  }
+  
+  formatPhoneNumber = () => {
+    const phoneNumberArray = this.state.phone_number.split('');
+    phoneNumberArray.splice(0, 2);
+    const formattedPhoneNumber = phoneNumberArray.join('');
+    return formattedPhoneNumber;
+  } 
+
+  makeACopyOfState = () => {
+    const clonedState = Object.assign({}, this.state);
+    return clonedState;
+  }
 
   render() {
 
@@ -93,17 +118,14 @@ class Login extends React.Component {
 								<Form 
 									className="py-3"
                   onSubmit={ this.handleSubmit } >
-
 									<Form.Group>
 										<Form.Label>Phone Number</Form.Label>
-										<Form.Control 
-                      required 
-                      type="text"
-                      placeholder="Phone Number" 
-                      name="phone_number"
-                      value={ this.state.phone_number }
-											onChange={ this.handleChange } 
-                      />
+										<Form.Label>Phone Number</Form.Label>
+                      <PhoneInput 
+                        placeholder="Enter your phone number"
+                        value={ this.state.phone_number }
+                        defaultCountry="US"
+                        onChange={ (value) => this.handlePhoneNumberChange(value) } />
 									</Form.Group>	
 									<Form.Group className="mb-4">
 										<Form.Label>Password</Form.Label>
