@@ -39,8 +39,11 @@ export const deleteUsersCase = (userId) => async (dispatch) => {
         dispatch({
             type: DELETE_ALL_USERS_PLACES_VISITED,
             payload: {}
-        })
+        });
 
+        toast('Deleted your case');
+    } else {
+        toast.error('Something went wrong...')
     }
     
     return response;
