@@ -214,6 +214,42 @@ def confirm_phone_number():
         )
 
 
+@users.route('/update-phone-number', methods=['PUT'])
+@login_required
+def update_users_phone_number():
+    try:
+        data = request.get_json()
+
+        raw_phone_number = data['phone_number']
+        phone_number = User.format_phone_number(raw_phone_number)
+
+        # updates the users phone number and confirmation code
+        current_user.phone_number = phone_number
+        sms_confirmation_code = User.generate_sms_confirmation_code()
+        current_user.sms_confirmation_code = sms_confirmation_code
+        current_user.save()
+
+        # sends a new confirmation code to the phone number
+        current_user.send_confirmation_sms()
+
+        response_message = 'Resent confirmation text message to ' + current_user.phone_number
+        return jsonify(
+            data={},
+            status={
+                'code': 204,
+                'message': response_message
+            }
+        )
+
+    except KeyError:
+        return jsonify(
+            data={},
+            status={
+                'code': 422,
+                'message': 'Invalid request body'
+            }
+        )
+
 # Send New Text Message Confirmation Route
 # this is where a user can request to send another email confirmation code
 @users.route('/new-confirmation-code', methods=['PUT'])
