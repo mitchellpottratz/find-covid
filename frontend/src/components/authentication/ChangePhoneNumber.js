@@ -2,7 +2,7 @@ import React from 'react';
 
 // redux
 import { connect } from "react-redux";
-import { confirmPhoneNumber } from "../../actions/userActions.js";
+import { changeUsersPhoneNumber } from "../../actions/userActions.js";
 
 // components
 import { Container, Row, Col, Card, Form } from 'react-bootstrap'; 
@@ -26,9 +26,14 @@ class ChangePhoneNumber extends React.Component {
     this.setState({ phone_number: value });
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('phone number:', this.state.phone_number);
+
+    this.setState({ isLoading: true });
+
+    const response = await this.props.changeUsersPhoneNumber(this.state.phone_number);
+
+    this.setState({ isLoading: false });
   }
 
   render() {
@@ -80,5 +85,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {})(ChangePhoneNumber);
+export default connect(mapStateToProps, { changeUsersPhoneNumber })(ChangePhoneNumber);
 

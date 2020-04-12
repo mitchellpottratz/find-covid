@@ -214,7 +214,7 @@ def confirm_phone_number():
         )
 
 
-@users.route('/update-phone-number', methods=['PUT'])
+@users.route('/update-number', methods=['PUT'])
 @login_required
 def update_users_phone_number():
     try:
@@ -232,9 +232,12 @@ def update_users_phone_number():
         # sends a new confirmation code to the phone number
         current_user.send_confirmation_sms()
 
-        response_message = 'Resent confirmation text message to ' + current_user.phone_number
+        new_phone_number = current_user.phone_number
+        response_message = 'Resent confirmation text message to ' + new_phone_number
         return jsonify(
-            data={},
+            data={
+                'phone_number': new_phone_number
+            },
             status={
                 'code': 204,
                 'message': response_message

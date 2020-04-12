@@ -67,6 +67,30 @@ export default {
         }
     },
 
+    // makes a request to update a users phone number
+    changeUsersPhoneNumber: async (newPhoneNumber) => {
+        const requestBody = {
+            'phone_number': newPhoneNumber
+        }
+
+        try {
+            const response = await fetch(apiURL + 'users/update-number', {
+                headers: {
+		            'Content-Type': 'application/json'
+		        },
+                method: 'PUT',
+                body: JSON.stringify(requestBody),
+                credentials: 'include',
+            });
+            const parsedResponse = await response.json(requestBody);
+            return parsedResponse;
+
+        } catch (error) {
+            // TODO - handle this error
+            console.log('error occurred during changing users phone number:', error);
+        }
+    },
+
     // makes a request to logout a user
     logoutUser: async () => {
         try {

@@ -6,6 +6,7 @@ import {
     DELETE_ALL_USERS_PLACES_VISITED,
     LOGOUT_USER,
     CONFIRM_PHONE_NUMBER,
+    CHANGE_PHONE_NUMBER
 } from '../constants/actionTypes.js';
 
 import usersAPI from '../api/usersApi.js';
@@ -64,6 +65,20 @@ export const confirmPhoneNumber = (confirmationCode) => async (dispatch) => {
         dispatch({
             type: CONFIRM_PHONE_NUMBER,
             payload: {}
+        });
+    }
+
+    return response;
+}
+
+
+export const changeUsersPhoneNumber = (newPhoneNumber) => async (dispatch) => {
+    const response = await usersAPI.changeUsersPhoneNumber(newPhoneNumber);
+
+    if (response.status.code === 204) {
+        dispatch({
+            type: CHANGE_PHONE_NUMBER,
+            payload: response.data.phone_number
         });
     }
 
