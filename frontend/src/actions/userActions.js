@@ -53,6 +53,10 @@ export const loginUser = (loginInfo) => async (dispatch) => {
             type: LOGIN_USER,
             payload: response.data
         });
+
+        // shows welcome message to the user
+        const usersFirstName = response.data.first_name;
+        toast('Welcome back, ' + usersFirstName)
     }
 
     return response;

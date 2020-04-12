@@ -10,7 +10,6 @@ import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import PhoneInput from 'react-phone-number-input';
 import { Link, Redirect } from 'react-router-dom';
 import FormButton from "../common/FormButton.js";
-import { toast } from "react-toastify";
 
 
 class ChangePhoneNumber extends React.Component {
