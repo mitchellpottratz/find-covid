@@ -33,8 +33,13 @@ class ChangePhoneNumber extends React.Component {
 
     const response = await this.props.changeUsersPhoneNumber(this.state.phone_number);
 
+    if (response.status.code === 204) {
+     
+    }
+
     this.setState({ isLoading: false });
   }
+
 
   render() {
     return (
