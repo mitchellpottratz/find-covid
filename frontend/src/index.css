@@ -149,11 +149,6 @@ button {
   opacity: 0.7;
 }
 
-.alert {
-  position: fixed!important;
-  z-index: 3;
-}
-
 @media only screen and (max-width: 767px) {
   #users-case-card {
     margin-top: 30px;

@@ -23,6 +23,7 @@ import PrivacyPolicy from './components/common/PrivacyPolicy';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-phone-number-input/style.css';
 import "react-datepicker/dist/react-datepicker.css";
+import "react-toastify/dist/ReactToastify.css";
 import './App.css';
 
 
@@ -36,7 +37,7 @@ class App extends React.Component {
 
           {/* for showing notifications */}
           <ToastContainer 
-            autoClose={ 1500 } 
+            autoClose={ 3000 } 
             position={ toast.POSITION.TOP_CENTER } />
 
           <Switch>

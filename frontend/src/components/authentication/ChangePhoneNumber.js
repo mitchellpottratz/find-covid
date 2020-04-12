@@ -5,10 +5,12 @@ import { connect } from "react-redux";
 import { changeUsersPhoneNumber } from "../../actions/userActions.js";
 
 // components
+import AuthCheck from "../common/AuthCheck.js";
 import { Container, Row, Col, Card, Form } from 'react-bootstrap'; 
 import PhoneInput from 'react-phone-number-input';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import FormButton from "../common/FormButton.js";
+import { toast } from "react-toastify";
 
 
 class ChangePhoneNumber extends React.Component {
@@ -18,12 +20,9 @@ class ChangePhoneNumber extends React.Component {
 
     this.state = {
       phone_number: '',
-      isLoading: false
+      isLoading: false,
+      successfullyChangedNumber: false
     }
-  }
-
-  componentDidMount() {
-   
   }
 
   handlePhoneNumberChange = (value) => {
@@ -38,14 +37,26 @@ class ChangePhoneNumber extends React.Component {
     const response = await this.props.changeUsersPhoneNumber(this.state.phone_number);
 
     if (response.status.code === 204) {
-     
+        // will redirect the user to the confirmation code form
+        this.setState({ successfullyChangedNumber: true })
     }
 
-    this.setState({ isLoading: false });
+    this.setState({ 
+      phone_number: '',
+      isLoading: false
+    });
   }
 
-
   render() {
+    
+    // redirects the user to the confirm number form after they successfully
+    // change their phone number
+    if (this.state.successfullyChangedNumber) {
+      return (
+        <Redirect to="/confirm-number" /> 
+      )
+    }
+
     return (
       <Container>
         <Row className="py-4">

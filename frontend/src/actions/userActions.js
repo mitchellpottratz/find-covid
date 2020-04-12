@@ -10,6 +10,7 @@ import {
 } from '../constants/actionTypes.js';
 
 import usersAPI from '../api/usersApi.js';
+import { toast } from 'react-toastify';
 
 
 export const registerUser = (registrationInfo) => async (dispatch) => {
@@ -79,6 +80,15 @@ export const changeUsersPhoneNumber = (newPhoneNumber) => async (dispatch) => {
         dispatch({
             type: CHANGE_PHONE_NUMBER,
             payload: response.data.phone_number
+        });
+
+        toast(response.status.message, {
+            position: toast.POSITION.TOP_CENTER
+        });
+
+    } else {
+        toast.error('Something went wrong...', {
+            position: toast.POSITION.TOP_CENTER
         });
     }
 
