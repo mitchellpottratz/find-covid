@@ -14,9 +14,6 @@ const casesReducer = (state = initialState, action) => {
     switch(action.type) {
         
         case SET_USERS_CASE:
-            console.log('SET_USERS_CASE');
-            console.log('payload:', action.payload);
-            
             return {
                 ...state,
                 usersCase: {...action.payload}

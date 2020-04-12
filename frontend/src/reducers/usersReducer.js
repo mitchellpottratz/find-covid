@@ -1,6 +1,7 @@
 import { 
     LOGIN_USER, 
     LOGOUT_USER, 
+    CHANGE_PHONE_NUMBER,
     CONFIRM_PHONE_NUMBER
 } from '../constants/actionTypes.js';
 
@@ -30,6 +31,15 @@ const usersReducer = (state = initialState, action) => {
                     phone_number_confirmed: true
                 }
             }
+    
+        case CHANGE_PHONE_NUMBER:
+           return {
+               ...state,
+               userInfo: {
+                   ...state.userInfo,
+                   phone_number: action.payload
+               }
+           }
 
         case LOGOUT_USER:
             return {
