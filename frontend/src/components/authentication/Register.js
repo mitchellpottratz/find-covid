@@ -152,6 +152,7 @@ class Register extends React.Component {
                     <PhoneInput 
                       placeholder="Enter your phone number"
                       value={ this.state.phone_number }
+                      defaultCountry="US"
                       onChange={ (value) => this.handlePhoneNumberChange(value) } />
                   </Form.Group>
 
