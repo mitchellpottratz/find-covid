@@ -53,7 +53,6 @@ class ConfirmPhoneNumber extends React.Component {
   };
 
   render() {
-
     // if the users phone number is confirmed
     if (this.props.userInfo.phone_number_confirmed) {
       return <Redirect to="/map" />;
@@ -61,10 +60,10 @@ class ConfirmPhoneNumber extends React.Component {
 
     return (
       <Container>
+
         <AuthCheck
           isLoggedIn={this.props.isLoggedIn}
-          phoneNumberConfirmed={this.props.phoneNumberConfirmed}
-        />
+          phoneNumberConfirmed={this.props.userInfo.phone_number_confirmed} />
 
         <Row className="py-4">
           <Col></Col>

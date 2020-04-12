@@ -57,8 +57,20 @@ class ChangePhoneNumber extends React.Component {
       )
     }
 
+    // redirects user to map if they have already confirmed their phone number
+    if (this.props.userInfo.phone_number_confirmed) {
+      return (
+        <Redirect to="/map" />
+      )
+    }
+
     return (
       <Container>
+
+        <AuthCheck 
+          isLoggedIn={this.props.isLoggedIn}
+          phoneNumberConfirmed={this.props.userInfo.phone_number_confirmed} />
+
         <Row className="py-4">
           <Col></Col>
           <Col md={6} sm={12}>
