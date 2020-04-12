@@ -5,6 +5,7 @@ import {
 } from '../constants/actionTypes.js';
 
 import casesAPI from '../api/casesApi.js';
+import { toast } from 'react-toastify';
 
 
 export const createUsersCase = (caseInfo) => async (dispatch) => {
@@ -15,6 +16,9 @@ export const createUsersCase = (caseInfo) => async (dispatch) => {
             type: SET_USERS_CASE,
             payload: response.data
         });
+        toast('Your case has been reported');
+    } else {
+        toast.error('Something went wrong...');
     }
     
     return response;

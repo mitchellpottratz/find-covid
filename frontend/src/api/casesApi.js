@@ -42,7 +42,6 @@ export default {
     // makes and api call to delete a users case
     deleteUsersCase: async (userId) => {
         try {
-            console.log('user id before request:', userId);
             const response = await fetch(apiURL + 'cases/' + userId, {
                 method: 'DELETE',
                 credentials: 'include',

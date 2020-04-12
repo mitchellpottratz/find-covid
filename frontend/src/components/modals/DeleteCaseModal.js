@@ -22,6 +22,7 @@ class DeleteCaseModal extends React.Component {
 	
 	render() {
 		const usersCase = this.props.usersCase;
+		const symptomsDate = new Date(usersCase.symptoms_date);
 
 		return (
 			<Modal 
@@ -38,7 +39,7 @@ class DeleteCaseModal extends React.Component {
 						<strong>Tested Positive: </strong> 
 					</p>
 					<p>
-						<strong>Symptoms Date: </strong> { usersCase.symptoms_date } 
+						<strong>Symptoms Date: </strong> { symptomsDate.toDateString() } 
 					</p>
 					<p>
 						<strong>Age: </strong> { usersCase.age } 
