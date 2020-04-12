@@ -1,9 +1,12 @@
 import React from 'react';
 
-// libraries
+// redux
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { Provider } from 'react-redux'
 import store from './store';
+
+// for notifications
+import { ToastProvider } from 'react-toast-notifications'
 
 // custom components
 import NavigationBar from './components/common/NavigationBar.js';
@@ -28,6 +31,7 @@ class App extends React.Component {
   render() {
     return (
       <Provider store={ store }>
+        <ToastProvider>
         <NavigationBar />
         <BrowserRouter>
           <Switch>
@@ -74,6 +78,7 @@ class App extends React.Component {
 
           </Switch>
         </BrowserRouter>
+        </ToastProvider>
       </Provider>
     )
   }
