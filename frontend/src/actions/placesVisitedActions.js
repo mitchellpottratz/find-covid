@@ -6,6 +6,7 @@ import {
 } from '../constants/actionTypes.js';
 
 import placesVisitedAPI from '../api/placesVisitedApi.js';
+import { toast } from 'react-toastify';
 
 
 export const getPlacesOnMap = () => async (dispatch) => {
@@ -29,7 +30,11 @@ export const createUsersPlaceVisited = (placeVisitedInfo) => async (dispatch) =>
             type: ADD_USERS_PLACE_VISITED,
             payload: response.data
         });
-    } 
+        toast('Reported your place visited');
+
+    } else {
+        toast.error('Something went wrong...');
+    }
 
     return response;
 }
@@ -44,7 +49,11 @@ export const deleteUsersPlaceVisited = (placeVisitedId) => async (dispatch) => {
             type: DELETE_USERS_PLACE_VISITED,
             payload: placeVisitedId
         });
-    }    
+        toast('Deleted your place visited');
+
+    } else {
+        toast.error('Something went wrong...');
+    }
 
     return response;
 }

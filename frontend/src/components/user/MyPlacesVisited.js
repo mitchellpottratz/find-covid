@@ -65,7 +65,7 @@ class MyPlacesVisited extends React.Component {
   			<div className="mt-4">  
 					<h5>Places Visited</h5>
 					<p>
-						Please report all of the places you have visited within the last 7 of when you started 
+						Please report all of the places you have visited within the last 7 days of when you started 
 						to show symptoms
 					</p>
 					<Button 

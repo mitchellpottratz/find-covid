@@ -23,6 +23,7 @@ class DeletePlaceVisitedModal extends React.Component {
 	
 	render() {
 		const placeVisited = this.props.placeVisited;
+		const placeVisitedDate = new Date(placeVisited.date_visited);
 
 		// so the modal is not returned if the user is not trying to delete a place
 		// they have visited
@@ -50,7 +51,7 @@ class DeletePlaceVisitedModal extends React.Component {
 						<strong>Address: </strong> { placeVisited.address || '' }
 					</p>
 					<p>
-						<strong>Date Visited: </strong> { placeVisited.date_visited || '' }
+						<strong>Date Visited: </strong> { placeVisitedDate.toDateString() || '' }
 					</p>
 				</Modal.Body>
 				<Modal.Footer>
