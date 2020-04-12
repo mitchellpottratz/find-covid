@@ -6,7 +6,7 @@ import { Provider } from 'react-redux'
 import store from './store';
 
 // for notifications
-
+import { ToastContainer, toast } from "react-toastify";
 
 // custom components
 import NavigationBar from './components/common/NavigationBar.js';
@@ -33,8 +33,13 @@ class App extends React.Component {
       <Provider store={ store }>
         <NavigationBar />
         <BrowserRouter>
-          <Switch>
 
+          {/* for showing notifications */}
+          <ToastContainer 
+            autoClose={ 1500 } 
+            position={ toast.POSITION.TOP_CENTER } />
+
+          <Switch>
           {/* Privacy Policy */}
           <Route 
             path="/privacy-policy"
