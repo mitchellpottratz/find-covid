@@ -11,6 +11,7 @@ import HomeContainer from './components/home/HomeContainer.js';
 import Register from './components/authentication/Register.js';
 import Login from './components/authentication/Login.js';
 import ConfirmPhoneNumber from './components/authentication/ConfirmPhoneNumber.js';
+import ChangePhoneNumber from './components/authentication/ChangePhoneNumber.js';
 import MapContainer from './components/maps/MapContainer.js';
 import MyCase from './components/user/MyCase.js';
 import PrivacyPolicy from './components/common/PrivacyPolicy';
@@ -31,6 +32,11 @@ class App extends React.Component {
         <BrowserRouter>
           <Switch>
 
+          {/* Privacy Policy */}
+          <Route 
+            path="/privacy-policy"
+            component={ PrivacyPolicy } />
+
             {/* Registration */}
             <Route 
               path="/register"
@@ -46,6 +52,11 @@ class App extends React.Component {
               path="/confirm-number"
               component={ ConfirmPhoneNumber } />
 
+            {/* Change Phone Number */}
+            <Route 
+              path="/change-number" 
+              component={ ChangePhoneNumber } />
+
             {/* Map */}
             <Route 
               path="/map"  
@@ -55,10 +66,6 @@ class App extends React.Component {
             <Route
               path="/my-case"
               component={ MyCase } />
-
-            <Route 
-              path="/privacy-policy"
-              component={ PrivacyPolicy } />
 
             {/* Home */}
             <Route 

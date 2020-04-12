@@ -81,7 +81,7 @@ class ConfirmPhoneNumber extends React.Component {
                   <strong>{this.props.userInfo.phone_number}</strong>
                 </p>
 
-								<Link to="/change-phone-number">
+								<Link to="/change-number">
 									Wrong phone number?
 								</Link>
 
@@ -128,7 +128,7 @@ const mapStateToProps = state => {
   return {
     isLoggedIn: state.user.isLoggedIn,
     userInfo: state.user.userInfo
-  };
+  }
 };
 
 export default connect(mapStateToProps, { confirmPhoneNumber })(
