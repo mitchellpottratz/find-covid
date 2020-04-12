@@ -9,7 +9,6 @@ import { Container, Row, Col, Card, Form } from 'react-bootstrap';
 import PhoneInput from 'react-phone-number-input';
 import { Link } from 'react-router-dom';
 import FormButton from "../common/FormButton.js";
-import { addToast } from 'react-toast-notifications';
 
 
 class ChangePhoneNumber extends React.Component {
@@ -21,6 +20,10 @@ class ChangePhoneNumber extends React.Component {
       phone_number: '',
       isLoading: false
     }
+  }
+
+  componentDidMount() {
+   
   }
 
   handlePhoneNumberChange = (value) => {
