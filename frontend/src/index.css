@@ -51,11 +51,13 @@ textarea,
   padding: .375rem .75rem!important;
 }
 
-input:focus,
+
 textarea:focus, 
+button:focus,
+a:focus,
 .location-box:focus,
 .react-date-picker__wrapper:focus {
-  outline: 0;
+  outline: none!important;
 }
 
 button {
