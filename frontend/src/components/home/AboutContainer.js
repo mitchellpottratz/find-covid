@@ -7,7 +7,7 @@ import TinderCard from 'react-tinder-card';
 
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestion, faHandsHelping } from "@fortawesome/free-solid-svg-icons";
+import { faQuestion, faArrowsAltH } from "@fortawesome/free-solid-svg-icons";
 
 
 class AboutContainer extends React.Component {
@@ -33,7 +33,9 @@ class AboutContainer extends React.Component {
             <Card.Body>
               <div className="d-flex justify-content-between text-primary">
                 <Image src={ Logo } rounded width="25px" height="25px" />
-                <FontAwesomeIcon className="large-icon" icon={ faQuestion } />
+                <FontAwesomeIcon 
+                  className="large-icon" 
+                  icon={ faQuestion } />
                 <span></span>
               </div>
               <Card.Title className="mt-3">What is Sympto+Map?</Card.Title>
@@ -46,6 +48,10 @@ class AboutContainer extends React.Component {
                 Sympto+Map should be used to bring awareness to the exposed locations in your area. Check the map 
                 next time you have to leave your home.
               </p>
+              <FontAwesomeIcon 
+                className="large-icon text-primary" 
+                icon={ faArrowsAltH } />
+                <h5 className="text-primary">Swipe</h5>
             </Card.Body>
           </Card>
 
