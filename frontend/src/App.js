@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 // custom components
 import NavigationBar from './components/common/NavigationBar.js';
 import HomeContainer from './components/home/HomeContainer.js';
+import AboutContainer from './components/home/AboutContainer.js';
 import Register from './components/authentication/Register.js';
 import Login from './components/authentication/Login.js';
 import ConfirmPhoneNumber from './components/authentication/ConfirmPhoneNumber.js';
@@ -42,6 +43,10 @@ class App extends React.Component {
 
           <Switch>
           {/* Privacy Policy */}
+          <Route 
+            path="/about"
+            component={ AboutContainer } />
+
           <Route 
             path="/privacy-policy"
             component={ PrivacyPolicy } />

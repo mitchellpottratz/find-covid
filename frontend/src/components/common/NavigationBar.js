@@ -30,7 +30,7 @@ class NavigationBar extends React.Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/map">Map</Nav.Link>
-            <Nav.Link href="/home">About</Nav.Link>
+            <Nav.Link href="/about">About</Nav.Link>
           </Nav>
           <Nav>
             {this.props.isLoggedIn ? (
@@ -45,7 +45,7 @@ class NavigationBar extends React.Component {
             ) : (
               <React.Fragment>
                 <Nav.Link href="/login">Sign In</Nav.Link>
-                <Nav.Link href="/register">Get Started</Nav.Link>
+                <Nav.Link href="/register">Sign Up</Nav.Link>
               </React.Fragment>
             )}
           </Nav>
