@@ -11,12 +11,15 @@ class ViewPlaceModal extends React.Component {
 		
 		this.state = {
 			cases: [],
+			symptomCasesCount: 0,
+			testedPositiveCasesCount: 0,
 			isLoading: true
 		}
 	}
 	
-	componentDidMount() {
-		this.getAllCases();
+	async componentDidMount() {
+		await this.getAllCases();
+		this.getSymptomCasesCount();
 	}
 
 	// gets all of the reported cases for this place
@@ -30,6 +33,20 @@ class ViewPlaceModal extends React.Component {
 			cases: parsedResponse.data,
 			isLoading: false 
 		});
+	}
+
+	getSymptomCasesCount = () => {
+		const count = this.state.cases.reduce((caseCount, currentCase) => {
+			console.log('case:', currentCase);
+			if (!currentCase.case.has_tested) {
+				return ++caseCount;
+			}
+		}, 0); 
+		this.setState({ symptomCasesCount: count });
+	}
+
+	getTestedPositiveCasesCount = () => {
+
 	}
 
   render() {
@@ -53,6 +70,12 @@ class ViewPlaceModal extends React.Component {
 					) : (
 						<React.Fragment>
 							<h6 class="pb-3">{ place.address }</h6>
+
+							<div className="d-flex justify-content-center">
+								<p>{ this.state.symptomCasesCount }</p>
+								<p>dfdf</p>
+							</div>
+
 							<h5>Reported Cases</h5>
 							<p>
 								The reports below are from users who have tested positive or have shown symptoms of 
