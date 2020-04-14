@@ -13,17 +13,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 class AboutContainer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      index: 0
-    };
-  }
-
-  setIndex = (selectedIndex, e) => {
-    this.setState({ index: selectedIndex });
-  };
 
   render() {
     return (
