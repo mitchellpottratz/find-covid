@@ -2,11 +2,15 @@ import React from "react";
 import Logo from "../../logo.png";
 
 // components
-import { Container, CardDeck, Card, Image } from "react-bootstrap";
+import { Container, CardDeck, Col, Row, Card, Image } from "react-bootstrap";
 
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faQuestion } from "@fortawesome/free-solid-svg-icons";
+import {
+  faQuestion,
+  faHandsHelping,
+  faUserSecret
+} from "@fortawesome/free-solid-svg-icons";
 
 class AboutContainer extends React.Component {
   constructor(props) {
@@ -26,49 +30,78 @@ class AboutContainer extends React.Component {
       <Container className="py-4">
         <CardDeck>
           <Card className="mb-4 text-center">
-              <Card.Body>
-                <div className="d-flex justify-content-between text-primary">
-                  <Image src={Logo} rounded width="25px" height="25px" />
-                  <FontAwesomeIcon className="large-icon" icon={faQuestion} />
-                  <span></span>
-                </div>
-                <h4 className="mt-3">What is Sympto+Map?</h4>
-                <p>
-                  Sympto+Map is a web-based application that allows you to know
-                  your risk of exposure to COVID-19 when you visit any location.
-                  Users who have been experiencing symptoms, been in contact
-                  with someone who has symptoms, or have been tested positive
-                  can post their recently visited locations.
-                </p>
-                <p>
-                  Sympto+Map should be used to bring awareness to the exposed
-                  locations in your area. Check the map next time you have to
-                  leave your home.
-                </p>
-              </Card.Body>
-            </Card>
+            <Card.Body>
+              <div className="d-flex justify-content-between text-primary">
+                <Image src={Logo} rounded width="25px" height="25px" />
+                <FontAwesomeIcon className="large-icon" icon={faQuestion} />
+                <span></span>
+              </div>
+              <Card.Title className="mt-3">What is Sympto+Map?</Card.Title>
+              <p>
+                Sympto+Map is a web-based application that allows you to know
+                your risk of exposure to COVID-19 when you visit any location.
+                Users who have been experiencing symptoms, been in contact with
+                someone who has symptoms, or have been tested positive can post
+                their recently visited locations.
+              </p>
+              <p>
+                Sympto+Map should be used to bring awareness to the exposed
+                locations in your area. Check the map next time you have to
+                leave your home.
+              </p>
+            </Card.Body>
+          </Card>
+          <Card className="mb-4 text-center">
+            <Card.Body>
+              <div className="d-flex justify-content-between text-primary">
+                <Image src={Logo} rounded width="25px" height="25px" />
+                <FontAwesomeIcon className="large-icon" icon={faHandsHelping} />
+                <span></span>
+              </div>
+              <Card.Title className="mt-3">Keeping you Safe</Card.Title>
+              <p>
+                Sympto+Map relies on exposed user to post their visited
+                locations. Locations visited by users who have been exposed, or
+                tested positive for COVID-19 are marked with a
+                <span className="text-danger"> red marker </span>.Sympto+Map
+                helps you understand the risk of visiting a location.
+              </p>
+              <p>
+                <strong>Be Safe. Be Aware.</strong>
+              </p>
+            </Card.Body>
+          </Card>
+        </CardDeck>
+
+        <Row>
+          <Col md={2} sm={0}></Col>
+          <Col md={8} sm={12}>
             <Card className="mb-4 text-center">
               <Card.Body>
                 <div className="d-flex justify-content-between text-primary">
                   <Image src={Logo} rounded width="25px" height="25px" />
-                  <FontAwesomeIcon className="large-icon" icon={faQuestion} />
+                  <FontAwesomeIcon className="large-icon" icon={faUserSecret} />
                   <span></span>
                 </div>
-                <h4 className="mt-3">Keeping you Safe</h4>
+                <Card.Title className="mt-3">Your Privacy</Card.Title>
                 <p>
-                  Sympto+Map relies on exposed user to post their visited
-                  locations. Locations visited by users who have been exposed,
-                  or tested positive for COVID-19 are marked with a
-                  <span className="text-danger"> red marker </span>.Sympto+Map
-                  helps you understand the risk of visiting a location.
+                  We only ask for your location to set the city displayed on your map 
+                  for searching for relevent places in your area. We offer our users 
+                  the option to enter their city manually instead of using their current
+                  location. Without a set current location or city set on the map; the 
+                  places you search for could be halfway around the world.
                 </p>
                 <p>
-                  <strong>Be Safe. Be Aware.</strong>
+                  <strong>
+                    Sympto+Map allows you to save lives and slow the spread in your community
+                  </strong>
                 </p>
               </Card.Body>
             </Card>
-          </CardDeck>
-       
+          </Col>
+          <Col md={2} sm={0}></Col>
+        </Row>
+
       </Container>
     );
   }
