@@ -1,6 +1,9 @@
 import React from "react";
 import Logo from "../../logo.png";
 
+// redux 
+import { connect } from 'react-redux';
+
 // components
 import { Container, CardDeck, Col, Row, Card, Image } from "react-bootstrap";
 
@@ -16,6 +19,9 @@ class AboutContainer extends React.Component {
 
   render() {
     return (
+
+      
+
       <Container className="py-4">
         <CardDeck>
           <Card className="mb-4 text-center">
@@ -96,4 +102,14 @@ class AboutContainer extends React.Component {
   }
 }
 
-export default AboutContainer;
+
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.user.isLoggedIn,
+    usersCase: state.cases.usersCase
+  }
+}
+
+export default connect(mapStateToProps, {})(AboutContainer);
+
+
