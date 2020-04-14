@@ -68,22 +68,24 @@ class ViewPlaceModal extends React.Component {
 							<Spinner 
 								animation="border"
 								variant="primary" />
-								<p class="text-primary mt-2">Collecting Cases...</p>
+								<p className="text-primary mt-2">Collecting Cases...</p>
 						</div>
 					) : (
 						<React.Fragment>
-							<h6 class="pb-3">{ place.address }</h6>
+							<h6 class="pb-3 text-center">{ place.address }</h6>
 
-							<div className="d-flex justify-content-center">
-								<p>{ this.state.symptomCasesCount }</p>
-								<p>{ this.state.testedPositiveCasesCount }</p>
+							<div className="d-flex justify-content-center text-center">
+								<div className="w-50 text-warning">
+									<p className="large-text mb-0">{ this.state.symptomCasesCount }</p>
+									<p>Symptoms/In Contact</p>
+								</div>
+								<div className="w-50 text-danger">
+									<p className="large-text mb-0">{ this.state.testedPositiveCasesCount }</p>
+									<p>Tested Positive</p>
+								</div>
 							</div>
 
-							<h5>Reported Cases</h5>
-							<p>
-								The reports below are from users who have tested positive or have shown symptoms of 
-								COVID-19 and visited <strong>{ place.name }</strong>
-							</p>							
+							<h5>Reported Cases</h5>						
 							<ListGroup>
 							{this.state.cases.map((userCase, i) => {
 							
@@ -121,7 +123,7 @@ class ViewPlaceModal extends React.Component {
 											key={i}
 											variant="warning">
 											<div>
-												<Badge variant="warning">Symptoms</Badge>
+												<Badge variant="warning">Symptoms/In Contact</Badge>
 											</div>
 
 											<div>
