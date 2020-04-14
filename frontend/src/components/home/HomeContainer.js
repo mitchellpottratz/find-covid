@@ -26,14 +26,17 @@ class HomeContainer extends React.Component {
             </h3>
             <h4 className="mb-4">to COVID-19 the next time you</h4>
             <h4>leave your house...</h4>
-            <div class="d-block justify-content-center mt-4">
+            <div class="d-block justify-content-center mt-4 mb-3">
               <Link className="btn btn-sm btn-primary mr-4" to="/map">
                 View Map
               </Link>
-              <Link className="btn btn-sm btn-primary" to="/register">
-                Get Started
+              <Link className="btn btn-sm btn-primary" to="/about">
+                Learn More
               </Link>
             </div>
+            <Link className="btn btn-sm btn-primary my-auto" to="/register">
+              Get Started
+            </Link>
           </Container>
         </Jumbotron>
 
@@ -88,7 +91,7 @@ class HomeContainer extends React.Component {
               <Card.Body>
                 <div class="text-primary text-center pb-2">
                   <FontAwesomeIcon icon={ faHeart } />
-                  <Card.Title className="text-center">Be Aware. Be Safe</Card.Title>
+                  <Card.Title className="text-center">Be Safe. Be Aware</Card.Title>
                   <hr class="bg-primary"></hr>
                 </div>
                 
