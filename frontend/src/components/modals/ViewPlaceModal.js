@@ -19,7 +19,7 @@ class ViewPlaceModal extends React.Component {
 	
 	async componentDidMount() {
 		await this.getAllCases();
-		this.getSymptomCasesCount();
+		this.getCasesCount();
 	}
 
 	// gets all of the reported cases for this place
@@ -35,18 +35,21 @@ class ViewPlaceModal extends React.Component {
 		});
 	}
 
-	getSymptomCasesCount = () => {
-		const count = this.state.cases.reduce((caseCount, currentCase) => {
-			console.log('case:', currentCase);
-			if (!currentCase.case.has_tested) {
-				return ++caseCount;
+	getCasesCount = () => {
+		let symptomsCount = 0;
+		let testedCount = 0;
+		this.state.cases.forEach((currentCase) => {
+			if (currentCase.case.has_tested) {
+				testedCount++;
+			} else {
+				symptomsCount++;
 			}
-		}, 0); 
-		this.setState({ symptomCasesCount: count });
-	}
+		});
 
-	getTestedPositiveCasesCount = () => {
-
+		this.setState({ 
+			symptomCasesCount: symptomsCount,
+			testedPositiveCasesCount: testedCount
+		});
 	}
 
   render() {
@@ -73,7 +76,7 @@ class ViewPlaceModal extends React.Component {
 
 							<div className="d-flex justify-content-center">
 								<p>{ this.state.symptomCasesCount }</p>
-								<p>dfdf</p>
+								<p>{ this.state.testedPositiveCasesCount }</p>
 							</div>
 
 							<h5>Reported Cases</h5>
