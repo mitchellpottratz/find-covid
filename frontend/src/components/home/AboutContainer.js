@@ -15,14 +15,34 @@ import {
   faUserSecret
 } from "@fortawesome/free-solid-svg-icons";
 
+
 class AboutContainer extends React.Component {
 
+  doesNotHaveCase = () => {
+    const usersCase = this.props.usersCase;
+    for(var key in usersCase) {
+      if (usersCase.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
+    }
+  
+  
   render() {
     return (
-
-      
-
       <Container className="py-4">
+
+        {this.props.isLoggedIn && this.doesNotHaveCase() ? (
+          <Card id="fixed-report-case-card">
+            <Card.Body>
+              <Card.Title></Card.Title>
+            </Card.Body>
+          </Card>
+        ) : (
+          null
+        )}
+
         <CardDeck>
           <Card className="mb-4 text-center">
             <Card.Body>
