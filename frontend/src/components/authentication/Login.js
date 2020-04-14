@@ -120,7 +120,6 @@ class Login extends React.Component {
                   onSubmit={ this.handleSubmit } >
 									<Form.Group>
 										<Form.Label>Phone Number</Form.Label>
-										<Form.Label>Phone Number</Form.Label>
                       <PhoneInput 
                         placeholder="Enter your phone number"
                         value={ this.state.phone_number }
