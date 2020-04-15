@@ -129,10 +129,11 @@ class MyCase extends React.Component {
 								// if the user has not reported a case yet
 								) : (
 								<div className="text-center">
-									<p className="mb-1"><strong>Have you:</strong></p>
-									<p className="mb-0">Been experiencing symptoms of COVID-19?</p>
-									<p className="mb-0"><strong>or</strong></p>
-									<p>Tested positive for COVID-19?</p>
+									<p>
+										Have you been experiencing symptoms, been in contact with
+                		someone who has symptoms, or have been tested positive for
+										COVID-19?
+									</p>
 									<Button
 				  					variant="primary"
 										onClick={ this.showReportCaseModal }>
