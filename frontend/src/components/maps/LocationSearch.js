@@ -74,7 +74,7 @@ class LocationSearch extends React.Component {
     return (
       <React.Fragment>
         <LiveSearchInput
-          label="Set your location on the map"
+          label="Search for a city"
           placeholder="Start searching for a city..."
           searchPredictions={ this.state.searchPredictions }
           inputValue={ this.state.location }
