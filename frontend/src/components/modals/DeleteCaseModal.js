@@ -37,6 +37,11 @@ class DeleteCaseModal extends React.Component {
 					</p>
 					<p>
 						<strong>Tested Positive: </strong> 
+						{usersCase.has_tested ? (
+							<span>Yes</span>
+						) : (
+							<span>No</span>
+						)}
 					</p>
 					<p>
 						<strong>Symptoms Date: </strong> { symptomsDate.toDateString() } 
