@@ -64,7 +64,7 @@ class ViewPlaceModal extends React.Component {
 				</Modal.Header>
 				<Modal.Body>
 					{this.state.isLoading ? (
-						<div class="text-center py-4">
+						<div className="text-center py-4">
 							<Spinner 
 								animation="border"
 								variant="primary" />
