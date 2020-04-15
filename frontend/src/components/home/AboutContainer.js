@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 // components
 import { Container, CardDeck, Col, Row, Card, Image } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
 // icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,12 +32,18 @@ class AboutContainer extends React.Component {
   
   render() {
     return (
-      <Container className="py-4">
+      <Container className="about-page-padding">
 
         {this.props.isLoggedIn && this.doesNotHaveCase() ? (
-          <Card id="fixed-report-case-card">
+          <Card className="text-center" id="fixed-report-case-card">
             <Card.Body>
-              <Card.Title></Card.Title>
+              <Card.Title>Report Your Case</Card.Title>
+              <p className="mb-1">
+                Think you may have you may have, or have been exposed, to COVID-19?
+              </p>
+              <Link to="/my-case">
+                Report Now
+              </Link>
             </Card.Body>
           </Card>
         ) : (

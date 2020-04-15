@@ -158,14 +158,38 @@ button {
   font-size: 2em;
 }
 
+.about-page-padding {
+  padding-top: 40px;
+  padding-bottom: 150px;
+}
+
 #fixed-report-case-card {
-  
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 20%;
+  z-index: 2;
+}
+
+@media only screen and (max-width: 960px) {
+  #fixed-report-case-card {
+    width: 30%;
+  }
 }
 
 @media only screen and (max-width: 767px) {
   #users-case-card {
     margin-top: 30px;
     margin-bottom: 15px;
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .about-page-padding {
+    padding-bottom: 200px;
+  }
+  #fixed-report-case-card {
+    width: 50%;
   }
 }
 
