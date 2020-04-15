@@ -23,6 +23,26 @@ def ping():
     )
 
 
+# Index Route
+@cases.route('/', methods=['GET'])
+def get_all_cases():
+    cases = Case.select()
+
+    case_dicts = []
+    for case in cases:
+        case_dict = model_to_dict(case)
+        del case_dict['user']['password']
+        case_dicts.append(case_dict)
+
+    return jsonify(
+        data=case_dicts,
+        status={
+            'code': 200,
+            'message': 'Successfully got resources'
+        }
+    )
+
+
 # Show Route
 # this route is where a user can view a case they have reported
 @cases.route('/<user_id>', methods=['GET'])

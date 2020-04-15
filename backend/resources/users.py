@@ -32,7 +32,6 @@ def get_all_users():
 
     user_dicts = []
     for user in users:
-        print('user', user)
         user_dict = model_to_dict(user)
         del user_dict['password']
         user_dicts.append(user_dict)
