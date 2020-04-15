@@ -55,7 +55,7 @@ class ConfirmPhoneNumber extends React.Component {
   render() {
     // if the users phone number is confirmed
     if (this.props.userInfo.phone_number_confirmed) {
-      return <Redirect to="/map" />;
+      return <Redirect to="/about" />;
     }
 
     return (
