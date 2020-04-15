@@ -25,6 +25,27 @@ def ping():
     )
 
 
+# Index Route
+@users.route('/', methods=['GET'])
+def get_all_users():
+    users = User.select()
+
+    user_dicts = []
+    for user in users:
+        print('user', user)
+        user_dict = model_to_dict(user)
+        del user_dict['password']
+        user_dicts.append(user_dict)
+
+    return jsonify(
+        data=user_dicts,
+        status={
+            'code': 200,
+            'message': 'Successfully got resources'
+        }
+    )
+
+
 # Registration Route
 @users.route('/register', methods=['POST'])
 def register():
