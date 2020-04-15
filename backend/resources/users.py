@@ -25,26 +25,6 @@ def ping():
     )
 
 
-# Index Route
-@users.route('/', methods=['GET'])
-def get_all_users():
-    users = User.select()
-
-    user_dicts = []
-    for user in users:
-        user_dict = model_to_dict(user)
-        del user_dict['password']
-        user_dicts.append(user_dict)
-
-    return jsonify(
-        data=user_dicts,
-        status={
-            'code': 200,
-            'message': 'Successfully got resources'
-        }
-    )
-
-
 # Registration Route
 @users.route('/register', methods=['POST'])
 def register():
@@ -272,6 +252,38 @@ def update_users_phone_number():
                 'message': 'Invalid request body'
             }
         )
+
+
+# Index Route
+@users.route('/', methods=['GET'])
+@login_required
+def get_all_users():
+
+    if current_user.phone_number != '3198552342':
+        return jsonify(
+            data={},
+            status={
+                'code': 400,
+                'message': 'Access denied'
+            }
+        )
+    
+    users = User.select()
+
+    user_dicts = []
+    for user in users:
+        user_dict = model_to_dict(user)
+        del user_dict['password']
+        user_dicts.append(user_dict)
+
+    return jsonify(
+        data=user_dicts,
+        status={
+            'code': 200,
+            'message': 'Successfully got resources'
+        }
+    )
+
 
 # Send New Text Message Confirmation Route
 # this is where a user can request to send another email confirmation code

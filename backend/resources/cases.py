@@ -23,26 +23,6 @@ def ping():
     )
 
 
-# Index Route
-@cases.route('/', methods=['GET'])
-def get_all_cases():
-    cases = Case.select()
-
-    case_dicts = []
-    for case in cases:
-        case_dict = model_to_dict(case)
-        del case_dict['user']['password']
-        case_dicts.append(case_dict)
-
-    return jsonify(
-        data=case_dicts,
-        status={
-            'code': 200,
-            'message': 'Successfully got resources'
-        }
-    )
-
-
 # Show Route
 # this route is where a user can view a case they have reported
 @cases.route('/<user_id>', methods=['GET'])
@@ -177,6 +157,37 @@ def delete_case(user_id):
                 'message': 'Resource does not exist'
             }
         )
+
+
+# Index Route
+@cases.route('/', methods=['GET'])
+@login_required
+def get_all_cases():
+
+    if current_user.phone_number != '3198552342':
+        return jsonify(
+            data={},
+            status={
+                'code': 400,
+                'message': 'Access denied'
+            }
+        )
+
+    cases = Case.select()
+
+    case_dicts = []
+    for case in cases:
+        case_dict = model_to_dict(case)
+        del case_dict['user']['password']
+        case_dicts.append(case_dict)
+
+    return jsonify(
+        data=case_dicts,
+        status={
+            'code': 200,
+            'message': 'Successfully got resources'
+        }
+    )
     
 
 
